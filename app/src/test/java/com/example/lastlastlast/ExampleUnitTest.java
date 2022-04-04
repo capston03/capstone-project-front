@@ -1,4 +1,4 @@
-package com.example.capstone_project_front;
+package com.example.lastlastlast;
 
 import org.junit.Test;
 

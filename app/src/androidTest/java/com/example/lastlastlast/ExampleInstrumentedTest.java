@@ -1,7 +1,6 @@
-package com.example.capstone_project_front;
+package com.example.lastlastlast;
 
 import android.content.Context;
-
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -21,6 +20,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.capstone_project_front", appContext.getPackageName());
+        assertEquals("com.example.lastlastlast", appContext.getPackageName());
     }
 }
