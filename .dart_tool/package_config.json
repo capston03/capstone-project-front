@@ -86,10 +86,22 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_kakao_map",
+      "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_kakao_map-0.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_plugin_android_lifecycle",
+      "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
     },
     {
       "name": "flutter_screenutil",
@@ -141,39 +153,21 @@
     },
     {
       "name": "permission_handler",
-      "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-9.2.0",
+      "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-5.1.0+2",
       "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
-      "name": "permission_handler_android",
-      "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_android-9.0.2+1",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
-      "name": "permission_handler_apple",
-      "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_apple-9.0.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
+      "languageVersion": "2.7"
     },
     {
       "name": "permission_handler_platform_interface",
-      "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_platform_interface-3.7.0",
+      "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_platform_interface-2.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "permission_handler_windows",
-      "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_windows-0.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.6"
     },
     {
       "name": "plugin_platform_interface",
-      "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.1.2",
+      "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-1.0.3",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.1"
     },
     {
       "name": "protobuf",
@@ -212,6 +206,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "stream_transform",
+      "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/stream_transform-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
       "name": "string_scanner",
       "rootUri": "file:///Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.1.0",
       "packageUri": "lib/",
@@ -248,7 +248,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-04-08T11:15:10.252114Z",
+  "generated": "2022-04-08T11:46:14.459755Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }

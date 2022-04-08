@@ -2,7 +2,6 @@
 beacons_plugin=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/beacons_plugin-2.0.7/
 flutter_beacon=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_beacon-0.5.1/
 flutter_blue=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue-0.8.0/
-permission_handler=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-9.2.0/
-permission_handler_android=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_android-9.0.2+1/
-permission_handler_apple=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_apple-9.0.4/
-permission_handler_windows=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_windows-0.1.0/
+flutter_kakao_map=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_kakao_map-0.0.4/
+flutter_plugin_android_lifecycle=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11/
+permission_handler=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-5.1.0+2/

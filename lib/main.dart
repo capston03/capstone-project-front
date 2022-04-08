@@ -1,4 +1,5 @@
 import 'package:capstone_android/ble.dart';
+import 'package:capstone_android/kakaomap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
             initialRoute: '/',
             routes: {
               // '/' : (context) => const MyApp(),
-              '/':(context) => LoginPage(),
+              '/':(context) => kMapPage(),
             },
             title: 'TRACER',
             theme: ThemeData(
