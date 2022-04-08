@@ -1,0 +1,214 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.capstone_android"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+9        android:targetSdkVersion="31" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/debug/AndroidManifest.xml:6:5-66
+14-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/debug/AndroidManifest.xml:6:22-64
+15    <uses-permission
+15-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:4:5-68
+16        android:name="android.permission.BLUETOOTH"
+16-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:4:22-65
+17        android:required="false" />
+17-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:12:9-33
+18    <uses-permission
+18-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:5:5-74
+19        android:name="android.permission.BLUETOOTH_ADMIN"
+19-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:5:22-71
+20        android:required="false" />
+20-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:15:9-33
+21    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+21-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:6:5-80
+21-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:6:22-78
+22    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+22-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:9:5-79
+22-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:9:22-76
+23    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+23-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-77
+23-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:11:22-74
+24    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+24-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-81
+24-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:12:22-78
+25    <uses-permission android:name="android.permission.WAKE_LOCK" />
+25-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-68
+25-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:13:22-65
+26
+27    <uses-feature
+27-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:15:5-17:35
+28        android:name="android.hardware.bluetooth_le"
+28-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:16:9-53
+29        android:required="true" />
+29-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:17:9-32
+30
+31    <application
+32        android:name="android.app.Application"
+33        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+33-->[androidx.core:core:1.6.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/122df2e57d294d1a53db26bbc3b813c1/core-1.6.0/AndroidManifest.xml:24:18-86
+34        android:debuggable="true"
+35        android:icon="@mipmap/ic_launcher"
+36        android:label="capstone_android" >
+37        <activity
+38            android:name="com.example.capstone_android.MainActivity"
+39            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+40            android:exported="true"
+41            android:hardwareAccelerated="true"
+42            android:launchMode="singleTop"
+43            android:theme="@style/LaunchTheme"
+44            android:windowSoftInputMode="adjustResize" >
+45
+46            <!--
+47                 Specifies an Android theme to apply to this Activity as soon as
+48                 the Android process has started. This theme is visible to the user
+49                 while the Flutter UI initializes. After that, this theme continues
+50                 to determine the Window background behind the Flutter UI.
+51            -->
+52            <meta-data
+53                android:name="io.flutter.embedding.android.NormalTheme"
+54                android:resource="@style/NormalTheme" />
+55
+56            <intent-filter>
+57                <action android:name="android.intent.action.MAIN" />
+58
+59                <category android:name="android.intent.category.LAUNCHER" />
+60            </intent-filter>
+61        </activity>
+62        <!--
+63             Don't delete the meta-data below.
+64             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+65        -->
+66        <meta-data
+67            android:name="flutterEmbedding"
+68            android:value="2" />
+69
+70        <receiver
+70-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:20:9-23:39
+71            android:name="com.umair.beacons_plugin.BeaconsBroadcastReceiver"
+71-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:21:13-77
+72            android:enabled="true"
+72-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:22:13-35
+73            android:exported="true" />
+73-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:23:13-36
+74        <receiver
+74-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:24:9-31:20
+75            android:name="com.umair.beacons_plugin.RebootBroadcastReceiver"
+75-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:25:13-76
+76            android:enabled="true"
+76-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:26:13-35
+77            android:exported="true" >
+77-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:27:13-36
+78            <intent-filter>
+78-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:28:13-30:29
+79                <action android:name="android.intent.action.BOOT_COMPLETED" />
+79-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:29:17-79
+79-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:29:25-76
+80            </intent-filter>
+81        </receiver>
+82
+83        <service
+83-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:33:9-35:39
+84            android:name="com.umair.beacons_plugin.BeaconsDiscoveryService"
+84-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:34:13-76
+85            android:exported="true" />
+85-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:35:13-36
+86        <service
+86-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:36:9-40:38
+87            android:name="org.altbeacon.beacon.service.BeaconService"
+87-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:37:13-70
+88            android:enabled="true"
+88-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:38:13-35
+89            android:exported="false"
+89-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:33:13-37
+90            android:isolatedProcess="false"
+90-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:39:13-44
+91            android:label="beacon" />
+91-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:40:13-35
+92        <service
+92-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:41:9-43:38
+93            android:name="org.altbeacon.beacon.BeaconIntentProcessor"
+93-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:42:13-70
+94            android:enabled="true"
+94-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:43:13-35
+95            android:exported="false" />
+95-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:39:13-37
+96
+97        <receiver
+97-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:20:9-28:20
+98            android:name="org.altbeacon.beacon.startup.StartupBroadcastReceiver"
+98-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:21:13-81
+99            android:exported="false" >
+99-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:22:13-37
+100            <intent-filter>
+100-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:23:13-27:29
+101                <action android:name="android.intent.action.BOOT_COMPLETED" />
+101-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:29:17-79
+101-->[:beacons_plugin] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/beacons_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:29:25-76
+102                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+102-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:25:17-87
+102-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:25:25-84
+103                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+103-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:26:17-90
+103-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:26:25-87
+104            </intent-filter>
+105        </receiver>
+106
+107        <service
+107-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:40:9-50:19
+108            android:name="org.altbeacon.beacon.service.ScanJob"
+108-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:41:13-64
+109            android:exported="false"
+109-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:42:13-37
+110            android:permission="android.permission.BIND_JOB_SERVICE" >
+110-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:43:13-69
+111            <meta-data
+111-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:44:13-46:45
+112                android:name="immediateScanJobId"
+112-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:45:17-50
+113                android:value="208352939" />
+113-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:46:17-42
+114            <meta-data
+114-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:47:13-49:45
+115                android:name="periodicScanJobId"
+115-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:48:17-49
+116                android:value="208352940" />
+116-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:49:17-42
+117        </service>
+118        <service
+118-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:51:9-58:19
+119            android:name="org.altbeacon.bluetooth.BluetoothTestJob"
+119-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:52:13-68
+120            android:exported="false"
+120-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:53:13-37
+121            android:permission="android.permission.BIND_JOB_SERVICE" >
+121-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:54:13-69
+122            <meta-data
+122-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:55:13-57:46
+123                android:name="jobId"
+123-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:56:17-37
+124                android:value="1799803768" />
+124-->[org.altbeacon:android-beacon-library:2.19] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ef39523f0bf6d9fe2c4a203edcf32fc4/jetified-android-beacon-library-2.19/AndroidManifest.xml:57:17-43
+125        </service>
+126
+127        <uses-library
+127-->[androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+128            android:name="androidx.window.extensions"
+128-->[androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+129            android:required="false" />
+129-->[androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+130        <uses-library
+130-->[androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+131            android:name="androidx.window.sidecar"
+131-->[androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+132            android:required="false" />
+132-->[androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+133    </application>
+134
+135</manifest>

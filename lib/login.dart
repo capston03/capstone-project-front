@@ -1,3 +1,4 @@
+import 'package:capstone_android/ble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -32,7 +33,9 @@ class LoginPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: controller.increment,
+        onPressed: (){
+          Get.to(BLEPage());
+          },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
