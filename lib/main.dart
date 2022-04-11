@@ -1,10 +1,12 @@
-import 'package:capstone_android/ble.dart';
-import 'package:capstone_android/kakaomap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-import 'login.dart';
+import 'login/Login.dart';
+import 'testlogin.dart';
+
+
 
 
 Future<void> main() async {
@@ -23,27 +25,29 @@ class MyApp extends StatelessWidget {
         designSize: Size(360,640),
         minTextAdapt: true,
         builder: (){
-          return GetMaterialApp(
-            initialRoute: '/',
-            routes: {
-              // '/' : (context) => const MyApp(),
-              '/':(context) => kMapPage(),
-            },
-            title: 'TRACER',
-            theme: ThemeData(
-              primarySwatch: Colors.green,
-            ),
-            builder: (context,widget){
-              ScreenUtil.setContext(context);
-              return MediaQuery(
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: widget!,
-              );
-            },
-            // home: LoginPage(),
+                return GetMaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  initialRoute: '/',
+                  routes: {
+                    // '/' : (context) => const MyApp(),
+                    '/':(context) => SignInDemo(),
+                  },
+                  title: 'TRACER',
+                  theme: ThemeData(
+                    primarySwatch: Colors.green,
+                  ),
+                  builder: (context,widget){
+                    ScreenUtil.setContext(context);
+                    return MediaQuery(
+                      data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                      child: widget!,
+                    );
+                  },
+                  // home: LoginPage(),
+                );
+              }
           );
         }
-    );
+
   }
 
-}
