@@ -6,33 +6,46 @@
 
 import 'dart:async';
 import 'dart:convert' show json;
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
-
 import 'googleLogin.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
-
-class SignInDemo extends StatefulWidget{
+class SignInDemo extends StatefulWidget {
   @override
   State createState() => _SignInDemo();
-
 }
-class _SignInDemo extends State<SignInDemo>{
-  GoogleSignInAccount? _currentUser;
-  Future signIn() async{
-    final user = await GoogleSignInApi.login();
-    if(user==null){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Sign in Failed')));
 
-    }else{
+class _SignInDemo extends State<SignInDemo> {
+  GoogleSignInAccount? _currentUser;
+
+  Future signIn() async {
+    final user = await GoogleSignInApi.login();
+    if (user == null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Sign in Failed')));
+    } else {
+      setState(() {
+        _currentUser = user;
+      });
+      /*
+        로그인 성공 시 작업.
+       */
       print("success");
       print(user.displayName);
       print(user.email);
     }
-
   }
+
+  Future logout() async {
+    await GoogleSignInApi.logout();
+    setState(() {
+      _currentUser = null;
+    });
+  }
+
   Widget _buildBody() {
     final GoogleSignInAccount? user = _currentUser;
     if (user != null) {
@@ -48,8 +61,8 @@ class _SignInDemo extends State<SignInDemo>{
           ),
           const Text('Signed in successfully.'),
           ElevatedButton(
-            child: const Text('SIGN OUT'),
-            onPressed: null,
+            child: Text('SIGN OUT'),
+            onPressed: () async => await logout(),
           ),
           ElevatedButton(
             child: const Text('REFRESH'),
@@ -59,31 +72,36 @@ class _SignInDemo extends State<SignInDemo>{
       );
     } else {
       return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Text('You are not currently signed in.'),
-          ElevatedButton(
-            child: const Text('SIGN IN'),
-            onPressed: ()async => await signIn(),
-      ),
-      ],
-    );
-    }
-    }
+          Padding(padding: EdgeInsets.only(top:100.h)),
+          SizedBox(child: Text("소셜 로그인",style: TextStyle(fontSize: 40,color: Colors.lightGreen),),),
+          Padding(padding: EdgeInsets.only(bottom: 100.h)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
 
+              Container(child: SignInButton(
+                  Buttons.GoogleDark, onPressed: () async => await signIn()),
+                width: 200.w,
+                height: 40.h,
+              ),
+
+            ],),
+        ],
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ConstrainedBox(
-          constraints: const BoxConstraints.expand(),
+        backgroundColor: Colors.white,
+        body: Container(
           child: _buildBody(),
         ));
-
   }
-
 }
-
 
 // GoogleSignIn _googleSignIn = GoogleSignIn(
 //   // Optional clientId
