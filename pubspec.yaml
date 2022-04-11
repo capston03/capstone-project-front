@@ -31,6 +31,9 @@ dependencies:
     sdk: flutter
   flutter_screenutil:
   get:
+  google_sign_in:
+  http:
+  flutter_signin_button:
 
 
   # The following adds the Cupertino Icons font to your application.

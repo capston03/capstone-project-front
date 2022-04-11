@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-import 'login.dart';
+import 'login/Login.dart';
+import 'testlogin.dart';
+
+
 
 
 Future<void> main() async {
@@ -22,10 +26,11 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         builder: (){
                 return GetMaterialApp(
+                  debugShowCheckedModeBanner: false,
                   initialRoute: '/',
                   routes: {
                     // '/' : (context) => const MyApp(),
-                    '/':(context) => LoginPage(),
+                    '/':(context) => SignInDemo(),
                   },
                   title: 'TRACER',
                   theme: ThemeData(
