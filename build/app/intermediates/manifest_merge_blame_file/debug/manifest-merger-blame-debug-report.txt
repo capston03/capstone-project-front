@@ -1,0 +1,89 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.capstone_android"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+9        android:targetSdkVersion="31" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/debug/AndroidManifest.xml:6:5-66
+14-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/debug/AndroidManifest.xml:6:22-64
+15    <uses-permission android:name="android.permission.BLUETOOTH" />
+15-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:4:5-68
+15-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:4:22-65
+16    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+16-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:5:5-74
+16-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:5:22-71
+17    <uses-permission android:name="anoroid.permission.INTERNET" />
+17-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:6:5-66
+17-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:6:22-64
+18    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+18-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:7:5-78
+18-->/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:7:22-76
+19
+20    <application
+21        android:name="android.app.Application"
+22        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+22-->[androidx.core:core:1.6.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/122df2e57d294d1a53db26bbc3b813c1/core-1.6.0/AndroidManifest.xml:24:18-86
+23        android:debuggable="true"
+24        android:icon="@mipmap/ic_launcher"
+25        android:label="capstone_android"
+26        android:networkSecurityConfig="@xml/network_security_config" >
+27        <meta-data
+28            android:name="com.kakao.sdk.AppKey"
+29            android:value="555a0df6d52dd0667fcdd303760e6cf4" />
+30
+31        <activity
+32            android:name="com.example.capstone_android.MainActivity"
+33            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+34            android:exported="true"
+35            android:hardwareAccelerated="true"
+36            android:launchMode="singleTop"
+37            android:theme="@style/LaunchTheme"
+38            android:windowSoftInputMode="adjustResize" >
+39
+40            <!--
+41                 Specifies an Android theme to apply to this Activity as soon as
+42                 the Android process has started. This theme is visibl e to the user
+43                 while the Flutter UI initializes. After that, this theme continues
+44                 to determine the Window background behind the Flutter UI.
+45            -->
+46            <meta-data
+47                android:name="io.flutter.embedding.android.NormalTheme"
+48                android:resource="@style/NormalTheme" />
+49
+50            <intent-filter>
+51                <action android:name="android.intent.action.MAIN" />
+52
+53                <category android:name="android.intent.category.LAUNCHER" />
+54            </intent-filter>
+55        </activity>
+56        <!--
+57             Don't delete the meta-data below.
+58             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+59        -->
+60        <meta-data
+61            android:name="flutterEmbedding"
+62            android:value="2" />
+63
+64        <uses-library
+64-->[androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+65            android:name="androidx.window.extensions"
+65-->[androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+66            android:required="false" />
+66-->[androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+67        <uses-library
+67-->[androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+68            android:name="androidx.window.sidecar"
+68-->[androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+69            android:required="false" />
+69-->[androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+70    </application>
+71
+72</manifest>
