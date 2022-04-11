@@ -32,8 +32,6 @@ dependencies:
   flutter_screenutil:
   get:
   permission_handler:
-  flutter_beacon:
-  beacons_plugin:
   flutter_blue:
   flutter_kakao_map:
 

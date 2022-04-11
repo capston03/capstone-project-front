@@ -26,5 +26,9 @@
     {
         "merged": "/Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/app/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
         "source": "/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/app/intermediates/res/merged/debug/xml_network_security_config.xml.flat",
+        "source": "/Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/res/xml/network_security_config.xml"
     }
 ]
