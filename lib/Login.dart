@@ -6,6 +6,7 @@
 
 import 'dart:async';
 import 'dart:convert' show json;
+import 'package:capstone_android/sameArea/bottomBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -97,6 +98,7 @@ class _SignInDemo extends State<SignInDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
+        bottomNavigationBar: BottomBar(1),
         body: Container(
           child: _buildBody(),
         ));
