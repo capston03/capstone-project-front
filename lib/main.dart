@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import 'Login.dart';
+import 'login/Login.dart';
 import 'testlogin.dart';
 
 

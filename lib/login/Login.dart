@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
-import 'googleLogin.dart';
+import '../googleLogin.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class SignInDemo extends StatefulWidget {
@@ -24,6 +24,7 @@ class _SignInDemo extends State<SignInDemo> {
 
   Future signIn() async {
     final user = await GoogleSignInApi.login();
+
     if (user == null) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Sign in Failed')));
