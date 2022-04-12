@@ -5,13 +5,16 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="anoroid.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
    <application
         android:label="capstone_android"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:networkSecurityConfig="@xml/network_security_config">
-       <meta-data android:name="com.kakao.sdk.AppKey" android:value="555a0df6d52dd0667fcdd303760e6cf4"/>
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="true"
+   >
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -28,6 +31,7 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -37,7 +41,11 @@
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
             android:name="flutterEmbedding"
-            android:value="2" />
-
+            android:value="2"
+            />
+       <meta-data
+               android:name="com.kakao.sdk.AppKey"
+               android:value="555a0df6d52dd0667fcdd303760e6cf4"/>
+       <!-- key check -->
     </application>
 </manifest>

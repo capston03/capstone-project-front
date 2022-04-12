@@ -2,4 +2,7 @@
 flutter_blue=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue-0.8.0/
 flutter_kakao_map=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_kakao_map-0.0.4/
 flutter_plugin_android_lifecycle=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11/
+google_sign_in=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-5.2.4/
+google_sign_in_web=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_web-0.10.0+5/
 permission_handler=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-5.1.0+2/
+webview_flutter=/Users/seuyoonjoo/Applications/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter-2.0.14/

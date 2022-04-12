@@ -5,5 +5,4 @@
     -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <meta-data android:name="com.kakao.sdk.AppKey" android:value="555a0df6d52dd0667fcdd303760e6cf4"/>
 </manifest>
