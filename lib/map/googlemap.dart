@@ -17,6 +17,7 @@ class _GMapSample extends State<GMapSample> {
   late Future<LatLng> currentLocation;
   late LatLng temp;
   final List<Marker> bMarkers = [];
+  double rangeData = 500;
 
   Future<LatLng> getLocation() async {
     LocationPermission permission;
@@ -79,7 +80,21 @@ class _GMapSample extends State<GMapSample> {
                   top: 10.h,
                   right: 20.w,
                 ),
-
+                Positioned(
+                  child: Slider(
+                    activeColor: Colors.green,
+                    inactiveColor: Color(0xff8fb0c6),
+                    max: 1500, value: rangeData,min: 500,divisions: 2,
+                    label:  rangeData.round().toString(),
+                    onChanged: (double val){
+                      setState(() {
+                        rangeData = val;
+                      });
+                    },
+                  ),
+                  right: 10.w,
+                  top: 50.h,
+                )
               ],
 
             );
