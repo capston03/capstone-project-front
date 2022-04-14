@@ -81,7 +81,7 @@ class _SignInDemo extends State<SignInDemo> {
               },
               child: const Text("닫기"))
         ],
-      ));
+      ),barrierDismissible: false);
     } else if (result == LoginEnum.Login.USER_ACCOUNT_IS_NOT_EXISTED.value) {
       //user 계정이 없는 경우
       await logout();
@@ -91,7 +91,8 @@ class _SignInDemo extends State<SignInDemo> {
       //TODO 후에 서버에서 연결을 취소하고, 여기선 로그아웃 후 로그인을 보낸다(다이얼로그로 확인 요망)
       //지금은 임시로 성공이라고하겠다
       await storage.write(key: 'id', value: email);
-      Get.dialog(AlertDialog(
+      Get.dialog(
+          AlertDialog(
         title: const Text('성공'),
         content: const Text('로그인 성공'),
         actions: [
@@ -102,7 +103,7 @@ class _SignInDemo extends State<SignInDemo> {
               },
               child: const Text("닫기"))
         ],
-      ));
+      ),barrierDismissible: false);
     } else {
       Get.dialog(AlertDialog(
         title: const Text('Error'),

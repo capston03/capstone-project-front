@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'login/login.dart';
+import 'map/googlemap.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
               // '/' : (context) => const MyApp(),
               '/': (context) => SignInDemo(),
               '/signup': (context) => SignUp(),
+              '/map': (context) => GMapSample(),
             },
             title: 'TRACER',
             theme: ThemeData(
