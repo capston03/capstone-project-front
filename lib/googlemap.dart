@@ -16,11 +16,8 @@ class _GMapSample extends State<GMapSample> {
   Completer<GoogleMapController> _controller = Completer();
   late Future<LatLng> currentLocation;
   late LatLng temp;
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.503617624592685, 126.95704083575833),
-      tilt: 59.440717697143555,
-      zoom: 18);
+  final List<Marker> bMarkers = [];
+
 
   Future<LatLng> getLocation() async{
     LocationPermission permission;
@@ -40,6 +37,11 @@ class _GMapSample extends State<GMapSample> {
   @override
   void initState(){
     currentLocation = getLocation();
+    bMarkers.add(Marker(
+        markerId: MarkerId("1"),
+        draggable: true,
+        onTap: () => print("Marker!"),
+        position: LatLng(37.50359, 126.95708)));
   }
 
   @override
@@ -60,9 +62,12 @@ class _GMapSample extends State<GMapSample> {
               target: snapshot.data!,
               zoom: 18.0
               ),
+            markers: Set.from(bMarkers),
             onMapCreated: (GoogleMapController controller){
               _controller.complete(controller);
-              });
+              }
+            );
+
             }else if(snapshot.hasError){
               return SafeArea(
                 child: Center(child:Column(
