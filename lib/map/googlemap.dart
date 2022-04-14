@@ -5,7 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class GMapSample extends StatefulWidget {
   @override
@@ -20,17 +22,40 @@ class _GMapSample extends State<GMapSample> {
   final List<Marker> bMarkers = [];
   double rangeData = 100;
 
-  Future<LatLng> getLocation() async {
-    LocationPermission permission;
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.deniedForever) {
-        return Future.error('Location Not Available');
+  Future<bool> checkPermission() async { //권한설정 물어보기
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.location,
+    ].request(); //여러가지 퍼미션을하고싶으면 []안에 추가하면된다. (팝업창이뜬다)
+
+    bool per = true;
+
+    statuses.forEach((permission, permissionStatus) {
+      if (!permissionStatus.isGranted) {
+        Get.dialog(AlertDialog(
+          title: const Text('경고'),
+          content: Text(
+              '${permission.toString()}권한을 거부 하셨습니다. \n추후 실행이 안되는 기능이 있을 수 있습니다.'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Get.back();
+                  Get.to(GMapSample());
+                },
+                child: const Text("닫기"))
+          ],
+        ));
+        per = false; //하나라도 허용이안됐으면 false
       }
-    }
+    });
+    return per;
+  }
+
+
+  Future<LatLng> getLocation() async {
+
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
+    _getCurrentLocation();
     setState(() {
       my_latitude = position.latitude;
       my_longitude = position.longitude;
@@ -46,6 +71,7 @@ class _GMapSample extends State<GMapSample> {
 
   @override
   void initState() {
+    checkPermission();
     currentLocation = getLocation();
 
   }
@@ -160,5 +186,15 @@ class _GMapSample extends State<GMapSample> {
     controller.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(target: await getLocation(), zoom: 18.0)));
     print('kkkk');
+  }
+
+  void _getCurrentLocation() {
+    Future.delayed(Duration(seconds: 10)).then((_) {
+      setState(() {
+        currentLocation = getLocation();
+        print("user current location changed");
+      });
+      _getCurrentLocation();
+    });
   }
 }
