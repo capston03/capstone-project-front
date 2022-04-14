@@ -178,6 +178,7 @@ com/google/android/gms/common/util/RetainForClient.class
 com/google/android/gms/common/util/Strings.class
 com/google/android/gms/common/util/VisibleForTesting.class
 com/google/android/gms/internal/auth/zzbv.class
+com/google/android/gms/location/ActivityTransition$SupportedActivityTransition.class
 com/google/common/annotations/Beta.class
 com/google/common/annotations/GwtCompatible.class
 com/google/common/annotations/GwtIncompatible.class

@@ -1,12 +1,20 @@
 -- Merging decision tree log ---
 application
 INJECTED from /Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:10:4-47:19
+MERGED from [:geolocator_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:9:5-15:19
+MERGED from [:geolocator_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:9:5-15:19
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:30:5-36:19
 MERGED from [com.google.android.gms:play-services-auth:20.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/dd3805d3c16996e3816e94ab5d78e349/jetified-play-services-auth-20.0.1/AndroidManifest.xml:22:5-38:19
 MERGED from [com.google.android.gms:play-services-auth:20.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/dd3805d3c16996e3816e94ab5d78e349/jetified-play-services-auth-20.0.1/AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/cb96bb2c73a9a359ac6db36b67e75b6a/jetified-play-services-location-17.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/cb96bb2c73a9a359ac6db36b67e75b6a/jetified-play-services-location-17.0.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/642cc9e2632e586d1058ed231591ead4/jetified-play-services-base-18.0.1/AndroidManifest.xml:19:5-23:19
 MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/642cc9e2632e586d1058ed231591ead4/jetified-play-services-base-18.0.1/AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/2e4a85810cbfbcf1377eeb56b9a23e36/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/2e4a85810cbfbcf1377eeb56b9a23e36/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/c0dcb9670bd55e0a8304215ce9fef0db/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:5:5-20
 MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/c0dcb9670bd55e0a8304215ce9fef0db/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:5:5-20
 MERGED from [com.google.android.gms:play-services-basement:18.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/65c8b9154009d1931a3db50d7627d9e4/jetified-play-services-basement-18.0.0/AndroidManifest.xml:20:5-24:19
@@ -25,19 +33,26 @@ INJECTED from /Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/ma
 INJECTED from /Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:1:1-48:12
 INJECTED from /Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:1:1-48:12
 MERGED from /Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml:1:1-48:12
+MERGED from [:permission_handler_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/permission_handler_android/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:google_maps_flutter] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/google_maps_flutter/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_plugin_android_lifecycle] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/flutter_plugin_android_lifecycle/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:geolocator_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-17:12
+MERGED from [:geocoding] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geocoding/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:flutter_blue] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/flutter_blue/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:fluttertoast] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/fluttertoast/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
-MERGED from [:webview_flutter] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/webview_flutter/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
-MERGED from [:google_sign_in] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/google_sign_in/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
-MERGED from [:permission_handler] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/permission_handler/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:google_sign_in_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/google_sign_in_android/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:webview_flutter_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/webview_flutter_android/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/a2f650a70b204393ba1526e0273d563e/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ad201fac15a88598107ec645f351f5b4/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.webkit:webkit:1.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/385d6fc0f66ca457efb199b0b3a6ac61/webkit-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:17:1-38:12
 MERGED from [com.google.android.gms:play-services-auth:20.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/dd3805d3c16996e3816e94ab5d78e349/jetified-play-services-auth-20.0.1/AndroidManifest.xml:17:1-40:12
+MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/cb96bb2c73a9a359ac6db36b67e75b6a/jetified-play-services-location-17.0.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/a764a5d3b5164de72098a95521f7742e/jetified-play-services-auth-api-phone-18.0.1/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-auth-base:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/360022c61b5e20276e4094b219a9f715/jetified-play-services-auth-base-18.0.1/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/642cc9e2632e586d1058ed231591ead4/jetified-play-services-base-18.0.1/AndroidManifest.xml:16:1-24:12
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/2e4a85810cbfbcf1377eeb56b9a23e36/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/c0dcb9670bd55e0a8304215ce9fef0db/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-basement:18.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/65c8b9154009d1931a3db50d7627d9e4/jetified-play-services-basement-18.0.0/AndroidManifest.xml:16:1-26:12
 MERGED from [androidx.fragment:fragment:1.1.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/8601dd65e0c6893d5abc5ccde1e2cab3/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
@@ -102,16 +117,24 @@ uses-sdk
 INJECTED from /Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/main/AndroidManifest.xml
+MERGED from [:permission_handler_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/permission_handler_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:permission_handler_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/permission_handler_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:google_maps_flutter] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/google_maps_flutter/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:google_maps_flutter] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/google_maps_flutter/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/flutter_plugin_android_lifecycle/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/flutter_plugin_android_lifecycle/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:geolocator_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:geolocator_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:geocoding] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geocoding/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:geocoding] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geocoding/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:flutter_blue] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/flutter_blue/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:flutter_blue] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/flutter_blue/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:fluttertoast] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/fluttertoast/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:fluttertoast] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/fluttertoast/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [:webview_flutter] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/webview_flutter/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [:webview_flutter] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/webview_flutter/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [:google_sign_in] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/google_sign_in/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [:google_sign_in] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/google_sign_in/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [:permission_handler] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/permission_handler/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [:permission_handler] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/permission_handler/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:google_sign_in_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/google_sign_in_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:google_sign_in_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/google_sign_in_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:webview_flutter_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/webview_flutter_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:webview_flutter_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/webview_flutter_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/a2f650a70b204393ba1526e0273d563e/multidex-2.0.0/AndroidManifest.xml:20:5-43
 MERGED from [androidx.multidex:multidex:2.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/a2f650a70b204393ba1526e0273d563e/multidex-2.0.0/AndroidManifest.xml:20:5-43
 MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/ad201fac15a88598107ec645f351f5b4/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
@@ -120,14 +143,20 @@ MERGED from [androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/cach
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.webkit:webkit:1.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/385d6fc0f66ca457efb199b0b3a6ac61/webkit-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.webkit:webkit:1.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/385d6fc0f66ca457efb199b0b3a6ac61/webkit-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-auth:20.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/dd3805d3c16996e3816e94ab5d78e349/jetified-play-services-auth-20.0.1/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-auth:20.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/dd3805d3c16996e3816e94ab5d78e349/jetified-play-services-auth-20.0.1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/cb96bb2c73a9a359ac6db36b67e75b6a/jetified-play-services-location-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/cb96bb2c73a9a359ac6db36b67e75b6a/jetified-play-services-location-17.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/a764a5d3b5164de72098a95521f7742e/jetified-play-services-auth-api-phone-18.0.1/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/a764a5d3b5164de72098a95521f7742e/jetified-play-services-auth-api-phone-18.0.1/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-base:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/360022c61b5e20276e4094b219a9f715/jetified-play-services-auth-base-18.0.1/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-base:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/360022c61b5e20276e4094b219a9f715/jetified-play-services-auth-base-18.0.1/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/642cc9e2632e586d1058ed231591ead4/jetified-play-services-base-18.0.1/AndroidManifest.xml:18:5-43
 MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/642cc9e2632e586d1058ed231591ead4/jetified-play-services-base-18.0.1/AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/2e4a85810cbfbcf1377eeb56b9a23e36/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/2e4a85810cbfbcf1377eeb56b9a23e36/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/c0dcb9670bd55e0a8304215ce9fef0db/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:4:5-43
 MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/c0dcb9670bd55e0a8304215ce9fef0db/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:4:5-43
 MERGED from [com.google.android.gms:play-services-basement:18.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/65c8b9154009d1931a3db50d7627d9e4/jetified-play-services-basement-18.0.0/AndroidManifest.xml:18:5-43
@@ -172,10 +201,26 @@ INJECTED from /Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/de
 		INJECTED from /Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/debug/AndroidManifest.xml
 uses-permission#android.permission.INTERNET
 ADDED from /Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/debug/AndroidManifest.xml:6:5-66
-MERGED from [:google_sign_in] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/google_sign_in/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-67
-MERGED from [:google_sign_in] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/google_sign_in/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-67
+MERGED from [:google_sign_in_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/google_sign_in_android/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-67
+MERGED from [:google_sign_in_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/google_sign_in_android/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-67
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:24:5-67
 	android:name
 		ADDED from /Users/seuyoonjoo/IdeaProjects/capstone_flutter/android/app/src/debug/AndroidManifest.xml:6:22-64
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from [:geolocator_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-77
+	android:name
+		ADDED from [:geolocator_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:7:22-74
+service#com.baseflow.geolocator.GeolocatorLocationService
+ADDED from [:geolocator_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:10:9-14:56
+	android:enabled
+		ADDED from [:geolocator_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:12:13-35
+	android:exported
+		ADDED from [:geolocator_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-37
+	android:foregroundServiceType
+		ADDED from [:geolocator_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:14:13-53
+	android:name
+		ADDED from [:geolocator_android] /Users/seuyoonjoo/IdeaProjects/capstone_flutter/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-77
 uses-library#androidx.window.extensions
 ADDED from [androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
 	android:required
@@ -188,6 +233,22 @@ ADDED from [androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/cache
 		ADDED from [androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
 	android:name
 		ADDED from [androidx.window:window:1.0.0-beta04] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/03c633e46d75bfb21f082f0417f55161/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:23:5-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:23:22-76
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:28:9-32
+uses-library#org.apache.http.legacy
+ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:33:9-35:40
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/6f3daa1ca7d5f0cb334e07491a88b930/jetified-play-services-maps-17.0.0/AndroidManifest.xml:34:13-50
 activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
 ADDED from [com.google.android.gms:play-services-auth:20.0.1] /Users/seuyoonjoo/.gradle/caches/transforms-2/files-2.1/dd3805d3c16996e3816e94ab5d78e349/jetified-play-services-auth-20.0.1/AndroidManifest.xml:23:9-27:75
 	android:excludeFromRecents

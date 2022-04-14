@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import 'ble.dart';
 import 'login/Login.dart';
 import 'testlogin.dart';
 
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: Size(360,640),
         minTextAdapt: true,
-        builder: (){
+        builder: (context){
                 return GetMaterialApp(
                   debugShowCheckedModeBanner: false,
                   initialRoute: '/',
