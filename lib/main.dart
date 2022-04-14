@@ -1,3 +1,4 @@
+import 'package:capstone_android/ble.dart';
 import 'package:capstone_android/login/signUp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
               '/': (context) => SignInDemo(),
               '/signup': (context) => SignUp(),
               '/map': (context) => GMapSample(),
+              '/ble': (context) => BLEPage(),
             },
             title: 'TRACER',
             theme: ThemeData(
