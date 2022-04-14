@@ -19,6 +19,18 @@
       "filters": [
         {
           "filterType": "ABI",
+          "value": "x86_64"
+        }
+      ],
+      "versionCode": 1,
+      "versionName": "1.0.0",
+      "outputFile": "resources-x86_64Debug.ap_"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
           "value": "x86"
         }
       ],
@@ -37,18 +49,6 @@
       "versionCode": 1,
       "versionName": "1.0.0",
       "outputFile": "resources-armeabi-v7aDebug.ap_"
-    },
-    {
-      "type": "ONE_OF_MANY",
-      "filters": [
-        {
-          "filterType": "ABI",
-          "value": "x86_64"
-        }
-      ],
-      "versionCode": 1,
-      "versionName": "1.0.0",
-      "outputFile": "resources-x86_64Debug.ap_"
     }
   ]
 }

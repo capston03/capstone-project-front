@@ -1,8 +1,13 @@
+import 'dart:convert';
+
+import 'package:capstone_android/googlemap.dart';
 import 'package:capstone_android/kakaomap.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import 'login/Login.dart';
 import 'testlogin.dart';
@@ -31,7 +36,7 @@ class MyApp extends StatelessWidget {
                   initialRoute: '/',
                   routes: {
                     // '/' : (context) => const MyApp(),
-                    '/':(context) => KMapPage(),
+                    '/':(context) => GMapSample(),
                   },
                   title: 'TRACER',
                   theme: ThemeData(
@@ -49,6 +54,7 @@ class MyApp extends StatelessWidget {
               }
           );
         }
+
 
   }
 
