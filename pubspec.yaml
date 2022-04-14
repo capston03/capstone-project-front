@@ -29,6 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   flutter_screenutil:
   get:
   google_sign_in:
@@ -37,11 +38,15 @@ dependencies:
 
   permission_handler:
   flutter_blue:
-  flutter_kakao_map:
-
+  flutter_map:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  webview_flutter:
+  fluttertoast:
+  google_maps_flutter:
+  geolocator:
+  geocoding:
 
 dev_dependencies:
   flutter_test:
@@ -53,12 +58,16 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
+  build_runner:
+  build_web_compilers:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
+  assets:
+    - asset/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -1,45 +1,58 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_kakao_map/flutter_kakao_map.dart';
-import 'package:flutter_kakao_map/kakao_maps_flutter_platform_interface.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
-class kMapPage extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _kMapPage();
-  
-}
+class KmapPage extends StatelessWidget{
+  WebViewController? controller;
 
-class _kMapPage extends State<kMapPage>{
-  late KakaoMapController mapController;
-  MapPoint _visibleRegion = MapPoint(37.503572, 126.957104);
-  CameraPosition _kInitialPosition = CameraPosition(target: MapPoint(37.503572, 126.957104), zoom: 5);
-
-  void onMapCreated(KakaoMapController controller) async{
-    final MapPoint visibleRegion = await controller.getMapCenterPoint();
-    setState(() {
-      mapController = controller;
-      _visibleRegion = visibleRegion;
-    });
-  }
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Flutter KakaoMap Test')),
-      body:Column(
-        children: [
-          Center(
-            child: SizedBox(
-              width: 300.0,
-              height: 500.0,
-              child: KakaoMap(
-                onMapCreated: onMapCreated,
-                initialCameraPosition: _kInitialPosition,
-              )
-            ),
-          )
-        ],
-      ));
-
+      body: Column(children: [
+        Container(height: 600, child: Kmap(controller)),
+      ],),
+    );
   }
-  
+
+}
+
+
+class Kmap extends StatelessWidget {
+  String url = "";
+  Set<JavascriptChannel>? channel;
+  WebViewController? controller;
+
+  Kmap(this.controller){
+    channel = {JavascriptChannel(
+        name: 'map',
+        onMessageReceived: (message){
+          print('javascript run');
+        Fluttertoast.showToast(msg: message.message);
+    })
+    };
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WebView(
+      initialUrl: url,
+      onWebViewCreated: (controller){
+        this.controller = controller;
+        _onHTMLgetExample(controller, context);
+      },
+      javascriptChannels: channel,
+      javascriptMode: JavascriptMode.unrestricted,
+    );
+  }
+
+  void _onHTMLgetExample(WebViewController controller, BuildContext context) async {
+    String _fileText = await rootBundle.loadString('asset/Kakaomap.html');
+    final String contentBase64 = base64Encode(const Utf8Encoder().convert(_fileText));
+    await controller.loadUrl('data:text/html;base64,$contentBase64');
+    print("js get");
+  }
 }
