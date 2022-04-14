@@ -60,13 +60,28 @@ class _SignInDemo extends State<SignInDemo> {
     map['android_id'] = androidId; //이메일 앞글자만 보내기
     map['device_model'] = model; //이메일 앞글자만 보내기
     CallApi post = CallApi();
-    var response = await post.RequestHttp('/login', json.encode(map));
-    String result = response['result'];
-    loginAfter(id, result);
+    try {
+      var response = await post.RequestHttp('/login', json.encode(map));
+      String result = response['result'];
+      loginAfter(id, result);
+    }catch(e){
+      Get.dialog(AlertDialog(
+        title: const Text('오류'),
+        content: const Text('서버와의 연결이 끊겼습니다'),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text("닫기"))
+        ],
+      ));
+    }
 
   }
 
   Future<void> loginAfter(String email, String result) async {
+    print('result$result');
     if (result == LoginEnum.Login.LOGIN_SUCCESS.value) {
       await storage.write(key: 'id', value: email);
       //login success
@@ -90,20 +105,45 @@ class _SignInDemo extends State<SignInDemo> {
       //이미 로그인한경우
       //TODO 후에 서버에서 연결을 취소하고, 여기선 로그아웃 후 로그인을 보낸다(다이얼로그로 확인 요망)
       //지금은 임시로 성공이라고하겠다
-      await storage.write(key: 'id', value: email);
-      Get.dialog(
-          AlertDialog(
-        title: const Text('성공'),
-        content: const Text('로그인 성공'),
-        actions: [
-          TextButton(
-              onPressed: () {
-                Get.back();
-                Get.off(() => GMapSample());
-              },
-              child: const Text("닫기"))
-        ],
-      ),barrierDismissible: false);
+
+      CallApi post = CallApi();
+      var map = <String,dynamic>{};
+      map['gmail_id'] = email;
+      map['android_id'] = androidId;
+      map['device_model'] = model;
+      map['user_gmail_id'] = email;
+      try {
+        await post.RequestHttp('/logout', json.encode(map));
+        await post.RequestHttp('/login', json.encode(map));
+        await storage.write(key: 'id', value: email);
+        Get.dialog(
+            AlertDialog(
+              title: const Text('성공'),
+              content: const Text('로그인 성공'),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Get.back();
+                      Get.off(() => GMapSample());
+                    },
+                    child: const Text("닫기"))
+              ],
+            ),barrierDismissible: false);
+      }catch(e){
+        Get.dialog(AlertDialog(
+          title: const Text('오류'),
+          content: const Text('서버와의 연결이 끊겼습니다'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: const Text("닫기"))
+          ],
+        ));
+      }
+
+
     } else {
       Get.dialog(AlertDialog(
         title: const Text('Error'),
@@ -171,9 +211,23 @@ class _SignInDemo extends State<SignInDemo> {
       map['android_id'] = androidId; //이메일 앞글자만 보내기
       map['device_model'] = model; //이메일 앞글자만 보내기
       CallApi post = CallApi();
-      var response = await post.RequestHttp('/login', json.encode(map));
-      String result = response['result'];
-      loginAfter(email,result);
+      try {
+        var response = await post.RequestHttp('/login', json.encode(map));
+        String result = response['result'];
+        loginAfter(email, result);
+      }catch(e){
+        Get.dialog(AlertDialog(
+          title: const Text('오류'),
+          content: const Text('서버와의 연결이 끊겼습니다'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: const Text("닫기"))
+          ],
+        ));
+      }
     }
   }
 

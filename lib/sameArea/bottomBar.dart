@@ -21,7 +21,7 @@ class BottomBar extends StatelessWidget{
         child: Container(
           padding: EdgeInsets.fromLTRB(8.w, 6.h, 8.w, 6.h),
           child: IconButton(
-            constraints: BoxConstraints(),
+            constraints: const BoxConstraints(),
             padding: const EdgeInsets.all(0),
             icon: _category[kind]??const Icon(Icons.home), onPressed: null,
             iconSize: 50,
@@ -30,7 +30,19 @@ class BottomBar extends StatelessWidget{
           color: chose?Colors.lightGreenAccent:null,
         ),
         onTap: (){
+          if(kind=='map'){
+            if(!chose){
+              Get.toNamed('/map');
+            }
+          }else if(kind =='profile'){
+            if(!chose){
+              Get.toNamed('/ble');
+            }
+          }else if(kind == 'home'){
 
+          }else if(kind == 'camera'){
+
+          }
         },
 
       ),
@@ -44,7 +56,7 @@ class BottomBar extends StatelessWidget{
         children: [
           if(type==0) ...[
 
-            route == '/GMapSample'?makeButton("map",chose: true):makeButton("map",chose: false),
+            route == '/GMapSample'||route=='/map'?makeButton("map",chose: true):makeButton("map",chose: false),
             makeButton("profile"),
           ] else ...[
             makeButton("home"),

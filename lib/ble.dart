@@ -1,4 +1,5 @@
 
+import 'package:capstone_android/sameArea/bottomBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
@@ -93,6 +94,7 @@ class _BLEPageState extends State<BLEPage>{
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      bottomNavigationBar: BottomBar(0),
       body: Center(
         child: ListView.separated(
             itemBuilder: (context, index) {
