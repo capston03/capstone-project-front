@@ -16,7 +16,7 @@ class _GMapSample extends State<GMapSample> {
   Completer<GoogleMapController> _controller = Completer();
   late Future<LatLng> currentLocation;
   late LatLng temp;
-  double latitude=0,longitude=0;
+  double my_latitude=0,my_longitude=0;
   final List<Marker> bMarkers = [];
   double rangeData = 100;
 
@@ -32,9 +32,14 @@ class _GMapSample extends State<GMapSample> {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     setState(() {
-      latitude = position.latitude;
-      longitude = position.longitude;
+      my_latitude = position.latitude;
+      my_longitude = position.longitude;
     });
+    bMarkers.add(Marker(
+        markerId: MarkerId("1"),
+        draggable: true,
+        onTap: () => print("Marker!"),
+        position: LatLng(my_latitude, my_longitude)));
     temp = LatLng(position.latitude, position.longitude);
     return LatLng(position.latitude, position.longitude);
   }
@@ -42,11 +47,7 @@ class _GMapSample extends State<GMapSample> {
   @override
   void initState() {
     currentLocation = getLocation();
-    bMarkers.add(Marker(
-        markerId: MarkerId("1"),
-        draggable: true,
-        onTap: () => print("Marker!"),
-        position: LatLng(37.50359, 126.95708)));
+
   }
   //
   // Set<Circle> circles = Set.from([Circle(
@@ -79,15 +80,14 @@ class _GMapSample extends State<GMapSample> {
                     markers: Set.from(bMarkers),
                     onMapCreated: (GoogleMapController controller) {
                       _controller.complete(controller);
-
                     },
-                  circles: Set.from([Circle(
+                  circles: {Circle(
                     circleId: CircleId('currentCircle'),
-                    center: LatLng(latitude, longitude),
+                    center: LatLng(my_latitude, my_longitude),
                     radius: rangeData,
                     fillColor: Colors.blue.shade100.withOpacity(0.5),
                     strokeColor: Colors.blue.shade100.withOpacity(0.1),
-                  )]),
+                  )},
                 ),
                 Positioned(
                   child: FloatingActionButton.extended(
