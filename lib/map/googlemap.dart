@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'dart:collection';
+import 'dart:convert';
 
+import 'package:capstone_android/network/callApi.dart';
 import 'package:capstone_android/sameArea/bottomBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -60,13 +63,43 @@ class _GMapSample extends State<GMapSample> {
       my_latitude = position.latitude;
       my_longitude = position.longitude;
     });
+
     bMarkers.add(Marker(
-        markerId: MarkerId("1"),
+        markerId: MarkerId("0"),
         draggable: true,
-        onTap: () => print("Marker!"),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
+        onTap: () => print("User Marker Made"),
         position: LatLng(my_latitude, my_longitude)));
+
     temp = LatLng(position.latitude, position.longitude);
     return LatLng(position.latitude, position.longitude);
+  }
+
+  void addMarker(LinkedHashMap<String, dynamic> buildingList){
+
+    //print(buildingList);
+
+    for (final bBuilding in buildingList.values){
+        bMarkers.add(Marker(
+            markerId: MarkerId(bBuilding['id'].toString()),
+            draggable: false,
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueRed),
+            onTap: () => print(bBuilding['name']),
+            position: LatLng(bBuilding['latitude'], bBuilding['longitude']))
+        );
+    }
+
+    /*for (final bBuilding in buildingList) {
+      bMarkers.add(Marker(
+          markerId: MarkerId(bBuilding.get('id')),
+          draggable: false,
+          icon: BitmapDescriptor.defaultMarkerWithHue(
+              BitmapDescriptor.hueRed),
+          onTap: () => print(bBuilding.get('name')),
+          position: LatLng(double.parse(bBuilding.get('latitude')), double.parse(bBuilding.get('longitude'))))
+      );
+    }*/
   }
 
   @override
@@ -114,6 +147,7 @@ class _GMapSample extends State<GMapSample> {
                     fillColor: Colors.blue.shade100.withOpacity(0.5),
                     strokeColor: Colors.blue.shade100.withOpacity(0.1),
                   )},
+
                 ),
                 Positioned(
                   child: FloatingActionButton.extended(
@@ -185,11 +219,25 @@ class _GMapSample extends State<GMapSample> {
         CameraPosition(target: await getLocation(), zoom: 18.0)));
   }
 
-  void _getCurrentLocation() {
-    Future.delayed(Duration(seconds: 10)).then((_) {
-      setState(() {
+  void _getCurrentLocation() async{
+
+    CallApi post = CallApi();
+    var userCurrentLocate = <String,dynamic>{};
+    var response;
+    Future.delayed(Duration(seconds: 10)).then((_) async {
+
+      userCurrentLocate['latitude'] = my_latitude;
+      userCurrentLocate['longitude'] = my_longitude;
+      userCurrentLocate['range_radius'] = rangeData;
+
+      response = await post.RequestHttp('/nearby_building', json.encode(userCurrentLocate));
+
+      addMarker(response);
+
+      setState(()  {
         currentLocation = getLocation();
-        print("user current location changed");
+        print("user current location changed, post server");
+        print(response);
       });
       _getCurrentLocation();
     });
