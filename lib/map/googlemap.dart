@@ -154,11 +154,8 @@ class _GMapSample extends State<GMapSample> {
   }
 
   Future<void> getCurrentPosition() async {
-    print('asda');
     final GoogleMapController controller = await _controller.future;
-    print('asdasdsd');
     controller.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(target: await getLocation(), zoom: 18.0)));
-    print('kkkk');
   }
 }
