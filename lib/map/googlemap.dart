@@ -5,7 +5,10 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 
 class GMapSample extends StatefulWidget {
   @override
@@ -18,26 +21,46 @@ class _GMapSample extends State<GMapSample> {
   late LatLng temp;
   final List<Marker> bMarkers = [];
 
-
   Future<LatLng> getLocation() async{
-    LocationPermission permission;
-    permission = await Geolocator.checkPermission();
-    if(permission == LocationPermission.denied){
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.deniedForever) {
-        return Future.error('Location Not Available');
-      }
-    }
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     temp = LatLng(position.latitude, position.longitude);
+    _userChangePosition();
     return LatLng(position.latitude, position.longitude);
   }
 
+  Future<bool> checkPermission() async { //권한설정 물어보기
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.location,
+    ].request(); //여러가지 퍼미션을하고싶으면 []안에 추가하면된다. (팝업창이뜬다)
+
+    bool per = true;
+
+    statuses.forEach((permission, permissionStatus) {
+      if (!permissionStatus.isGranted) {
+        Get.dialog(AlertDialog(
+          title: const Text('경고'),
+          content: Text(
+              '${permission.toString()}권한을 거부 하셨습니다. \n추후 실행이 안되는 기능이 있을 수 있습니다.'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Get.back();
+                  Get.to(GMapSample());
+                },
+                child: const Text("닫기"))
+          ],
+        ));
+        per = false; //하나라도 허용이안됐으면 false
+      }
+    });
+    return per;
+  }
 
   @override
   void initState(){
+    checkPermission();
     currentLocation = getLocation();
-    bMarkers.add(Marker(
+    bMarkers.add(Marker( //TODO 마커 처리
         markerId: MarkerId("1"),
         draggable: true,
         onTap: () => print("Marker!"),
@@ -58,14 +81,15 @@ class _GMapSample extends State<GMapSample> {
           print(snapshot);
           if(snapshot.hasData){
             return GoogleMap(
-              initialCameraPosition: CameraPosition(
+              initialCameraPosition:  CameraPosition(
               target: snapshot.data!,
               zoom: 18.0
               ),
             markers: Set.from(bMarkers),
             onMapCreated: (GoogleMapController controller){
               _controller.complete(controller);
-              }
+              },
+              onCameraMoveStarted: () {cameraMoved = true;},
             );
 
             }else if(snapshot.hasError){
@@ -95,25 +119,34 @@ class _GMapSample extends State<GMapSample> {
                 );
           }
       },
+    ),
 
-    )
-
-
-      /*GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: CameraPosition(target: getLocation(), zoom: 17),
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('To the University!'),
-        icon: Icon(Icons.directions_boat),
+        onPressed: getCurrentPosition,
+        label: Text('현재 위치'),
+        icon: Icon(Icons.directions_car),
       ),
-    ); */
     );
   }
 
+  Future<void> getCurrentPosition() async{
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(
+            target: await getLocation(),
+            zoom: 18.0
+        )
+    ));
+  }
+
+  _userChangePosition() {
+      Future.delayed(Duration(seconds: 3)).then((_){
+        setState(()  {
+          currentLocation =  getLocation() ;
+          print("user change position");
+          print(currentLocation);
+        });
+      });
+    }
 
 }
