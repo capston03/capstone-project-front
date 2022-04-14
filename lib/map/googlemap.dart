@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:capstone_android/sameArea/bottomBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -52,6 +53,7 @@ class _GMapSample extends State<GMapSample> {
         centerTitle: true,
         elevation: 0.0,
       ),
+      bottomNavigationBar: BottomBar(0),
       body: FutureBuilder<LatLng>(
         future: currentLocation,
         builder: (context, snapshot){
