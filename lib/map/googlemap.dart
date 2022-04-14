@@ -16,8 +16,9 @@ class _GMapSample extends State<GMapSample> {
   Completer<GoogleMapController> _controller = Completer();
   late Future<LatLng> currentLocation;
   late LatLng temp;
+  double latitude=0,longitude=0;
   final List<Marker> bMarkers = [];
-  double rangeData = 500;
+  double rangeData = 100;
 
   Future<LatLng> getLocation() async {
     LocationPermission permission;
@@ -30,6 +31,10 @@ class _GMapSample extends State<GMapSample> {
     }
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
+    setState(() {
+      latitude = position.latitude;
+      longitude = position.longitude;
+    });
     temp = LatLng(position.latitude, position.longitude);
     return LatLng(position.latitude, position.longitude);
   }
@@ -43,6 +48,14 @@ class _GMapSample extends State<GMapSample> {
         onTap: () => print("Marker!"),
         position: LatLng(37.50359, 126.95708)));
   }
+  //
+  // Set<Circle> circles = Set.from([Circle(
+  //   circleId: CircleId('currentCircle'),
+  //   center: LatLng(latitude, longitude),
+  //   radius: 4000,
+  //   fillColor: Colors.blue.shade100.withOpacity(0.5),
+  //   strokeColor: Colors.blue.shade100.withOpacity(0.1),
+  // )]);
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +79,16 @@ class _GMapSample extends State<GMapSample> {
                     markers: Set.from(bMarkers),
                     onMapCreated: (GoogleMapController controller) {
                       _controller.complete(controller);
-                    }),
+
+                    },
+                  circles: Set.from([Circle(
+                    circleId: CircleId('currentCircle'),
+                    center: LatLng(latitude, longitude),
+                    radius: rangeData,
+                    fillColor: Colors.blue.shade100.withOpacity(0.5),
+                    strokeColor: Colors.blue.shade100.withOpacity(0.1),
+                  )]),
+                ),
                 Positioned(
                   child: FloatingActionButton.extended(
                     onPressed: () async{
@@ -84,7 +106,7 @@ class _GMapSample extends State<GMapSample> {
                   child: Slider(
                     activeColor: Colors.green,
                     inactiveColor: Color(0xff8fb0c6),
-                    max: 1500, value: rangeData,min: 500,divisions: 2,
+                    max: 500, value: rangeData,min: 100,divisions: 4,
                     label:  rangeData.round().toString(),
                     onChanged: (double val){
                       setState(() {

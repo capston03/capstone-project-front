@@ -7,7 +7,7 @@
 *.lock
 # Files for the ART/Dalvik VM
 *.dex
-
+./.dart_tool
 # Java class files
 *.class
 
