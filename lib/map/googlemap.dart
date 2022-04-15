@@ -12,26 +12,26 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'googleMapCalculate.dart';
+
 class GMapSample extends StatefulWidget {
   @override
   State<GMapSample> createState() => _GMapSample();
 }
 
 class _GMapSample extends State<GMapSample> {
+  GoogleMapFunctions func =  GoogleMapFunctions();
   Completer<GoogleMapController> _controller = Completer();
   late Future<LatLng> currentLocation;
-  late LatLng temp;
-  double my_latitude=0,my_longitude=0;
-  final List<Marker> bMarkers = [];
-  double rangeData = 100;
+  var buildingList; //빌딩 건물들 받아와 리스트로 저장
 
-  Future<bool> checkPermission() async { //권한설정 물어보기
+
+  Future<bool> checkPermission() async {
+    //권한설정 물어보기
     Map<Permission, PermissionStatus> statuses = await [
       Permission.location,
     ].request(); //여러가지 퍼미션을하고싶으면 []안에 추가하면된다. (팝업창이뜬다)
-
     bool per = true;
-
     statuses.forEach((permission, permissionStatus) {
       if (!permissionStatus.isGranted) {
         Get.dialog(AlertDialog(
@@ -53,69 +53,41 @@ class _GMapSample extends State<GMapSample> {
     return per;
   }
 
-
   Future<LatLng> getLocation() async {
-
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-    _getCurrentLocation();
     setState(() {
-      my_latitude = position.latitude;
-      my_longitude = position.longitude;
+      func.my_latitude = position.latitude;
+      func.my_longitude = position.longitude;
+      func.start_my_latitude = func.my_latitude;
+      func.start_my_longitude = func.my_longitude;
     });
-
-    bMarkers.add(Marker(
+    func.bMarkers.add(Marker(
         markerId: MarkerId("0"),
         draggable: true,
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
         onTap: () => print("User Marker Made"),
-        position: LatLng(my_latitude, my_longitude)));
+        position: LatLng(func.my_latitude, func.my_longitude)));
 
-    temp = LatLng(position.latitude, position.longitude);
+    CallApi post = CallApi();
+    var userCurrentLocate = <String, dynamic>{};
+
+    userCurrentLocate['latitude'] = func.my_latitude;
+    userCurrentLocate['longitude'] = func.my_longitude;
+    userCurrentLocate['range_radius'] = func.rangeData;
+    buildingList = await post.RequestHttp(
+        '/nearby_building', json.encode(userCurrentLocate));
+    print('aaaaaaaaaaaaaaa$buildingList');
+    func.addMarker(buildingList);
+    _getCurrentLocation();
     return LatLng(position.latitude, position.longitude);
-  }
-
-  void addMarker(LinkedHashMap<String, dynamic> buildingList){
-
-    //print(buildingList);
-
-    for (final bBuilding in buildingList.values){
-        bMarkers.add(Marker(
-            markerId: MarkerId(bBuilding['id'].toString()),
-            draggable: false,
-            icon: BitmapDescriptor.defaultMarkerWithHue(
-                BitmapDescriptor.hueRed),
-            onTap: () => print(bBuilding['name']),
-            position: LatLng(bBuilding['latitude'], bBuilding['longitude']))
-        );
-    }
-
-    /*for (final bBuilding in buildingList) {
-      bMarkers.add(Marker(
-          markerId: MarkerId(bBuilding.get('id')),
-          draggable: false,
-          icon: BitmapDescriptor.defaultMarkerWithHue(
-              BitmapDescriptor.hueRed),
-          onTap: () => print(bBuilding.get('name')),
-          position: LatLng(double.parse(bBuilding.get('latitude')), double.parse(bBuilding.get('longitude'))))
-      );
-    }*/
   }
 
   @override
   void initState() {
     checkPermission();
     currentLocation = getLocation();
-
   }
-  //
-  // Set<Circle> circles = Set.from([Circle(
-  //   circleId: CircleId('currentCircle'),
-  //   center: LatLng(latitude, longitude),
-  //   radius: 4000,
-  //   fillColor: Colors.blue.shade100.withOpacity(0.5),
-  //   strokeColor: Colors.blue.shade100.withOpacity(0.1),
-  // )]);
 
   @override
   Widget build(BuildContext context) {
@@ -129,32 +101,34 @@ class _GMapSample extends State<GMapSample> {
       body: FutureBuilder<LatLng>(
         future: currentLocation,
         builder: (context, snapshot) {
-          print(snapshot);
           if (snapshot.hasData) {
             return Stack(
               children: [
                 GoogleMap(
-                    initialCameraPosition:
-                        CameraPosition(target: snapshot.data!, zoom: 18.0),
-                    markers: Set.from(bMarkers),
-                    onMapCreated: (GoogleMapController controller) {
-                      _controller.complete(controller);
-                    },
-                  circles: {Circle(
-                    circleId: CircleId('currentCircle'),
-                    center: LatLng(my_latitude, my_longitude),
-                    radius: rangeData,
-                    fillColor: Colors.blue.shade100.withOpacity(0.5),
-                    strokeColor: Colors.blue.shade100.withOpacity(0.1),
-                  )},
-
+                  initialCameraPosition:
+                      CameraPosition(target: snapshot.data!, zoom: 18.0),
+                  markers: Set.from(func.bMarkers),
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                  },
+                  circles: {
+                    Circle(
+                      circleId: CircleId('currentCircle'),
+                      center: LatLng(func.my_latitude, func.my_longitude),
+                      radius: func.rangeData,
+                      fillColor: Colors.blue.shade100.withOpacity(0.5),
+                      strokeColor: Colors.blue.shade100.withOpacity(0.1),
+                    )
+                  },
                 ),
                 Positioned(
                   child: FloatingActionButton.extended(
-                    onPressed: () async{
-                      final GoogleMapController controller = await _controller.future;
+                    onPressed: () async {
+                      final GoogleMapController controller =
+                          await _controller.future;
                       controller.animateCamera(CameraUpdate.newCameraPosition(
-                          CameraPosition(target: await getLocation(), zoom: 18.0)));
+                          CameraPosition(
+                              target: await getLocation(), zoom: 18.0)));
                     },
                     label: Text('현재 위치'),
                     icon: Icon(Icons.gps_fixed),
@@ -166,11 +140,15 @@ class _GMapSample extends State<GMapSample> {
                   child: Slider(
                     activeColor: Colors.green,
                     inactiveColor: Color(0xff8fb0c6),
-                    max: 500, value: rangeData,min: 100,divisions: 4,
-                    label:  rangeData.round().toString(),
-                    onChanged: (double val){
+                    max: 500,
+                    value: func.rangeData,
+                    min: 100,
+                    divisions: 4,
+                    label: func.rangeData.round().toString(),
+                    onChanged: (double val) {
                       setState(() {
-                        rangeData = val;
+                        func.rangeData = val;
+                        func.addMarker(buildingList);
                       });
                     },
                   ),
@@ -178,7 +156,6 @@ class _GMapSample extends State<GMapSample> {
                   top: 50.h,
                 )
               ],
-
             );
           } else if (snapshot.hasError) {
             return SafeArea(
@@ -209,7 +186,6 @@ class _GMapSample extends State<GMapSample> {
           }
         },
       ),
-
     );
   }
 
@@ -218,25 +194,31 @@ class _GMapSample extends State<GMapSample> {
     controller.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(target: await getLocation(), zoom: 18.0)));
   }
-
-  void _getCurrentLocation() async{
-
-    CallApi post = CallApi();
-    var userCurrentLocate = <String,dynamic>{};
-    var response;
-    Future.delayed(Duration(seconds: 10)).then((_) async {
-
-      userCurrentLocate['latitude'] = my_latitude;
-      userCurrentLocate['longitude'] = my_longitude;
-      userCurrentLocate['range_radius'] = rangeData;
-
-      response = await post.RequestHttp('/nearby_building', json.encode(userCurrentLocate));
-
-      addMarker(response);
-
-      setState(()  {
-        print("user current location changed, post server");
+  //실시간 자기위치 체크
+  void _getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double dis = func.calDistance(func.start_my_latitude, func.start_my_longitude, position.latitude, position.longitude);
+      setState(() {
+        func.my_latitude = position.latitude;
+        func.my_longitude = position.longitude;
+        if(dis>5000) {
+          func.start_my_longitude = position.longitude;
+          func.start_my_latitude = position.latitude;
+        }
       });
+      print('${position.latitude},${position.longitude}');
+    func.addMarker(buildingList);
+    if(dis>5000){ // 5KM벗어나면 다시 서버콜해서 빌딩 초기화
+      CallApi post = CallApi();
+      var userCurrentLocate = <String, dynamic>{};
+
+      userCurrentLocate['latitude'] = func.my_latitude;
+      userCurrentLocate['longitude'] = func.my_longitude;
+      buildingList = await post.RequestHttp(
+          '/nearby_building', json.encode(userCurrentLocate));
+    }
+    Future.delayed(Duration(seconds: 60)).then((_) async {
       _getCurrentLocation();
     });
   }
