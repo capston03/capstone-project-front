@@ -6,12 +6,13 @@ import 'package:capstone_android/network/callApi.dart';
 import 'package:capstone_android/sameArea/bottomBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
-
+import 'blefind.dart';
 import 'googleMapCalculate.dart';
 
 class GMapSample extends StatefulWidget {
@@ -22,6 +23,10 @@ class GMapSample extends StatefulWidget {
 class _GMapSample extends State<GMapSample> {
   GoogleMapFunctions func =  GoogleMapFunctions();
   Completer<GoogleMapController> _controller = Completer();
+  FlutterBlue flutterBlue = FlutterBlue.instance;
+  List<ScanResult> scanResultList = [];
+  bool _isScanning = false;
+
   late Future<LatLng> currentLocation;
   var buildingList; //빌딩 건물들 받아와 리스트로 저장
 
@@ -29,7 +34,7 @@ class _GMapSample extends State<GMapSample> {
   Future<bool> checkPermission() async {
     //권한설정 물어보기
     Map<Permission, PermissionStatus> statuses = await [
-      Permission.location,
+      Permission.location,Permission.bluetoothScan
     ].request(); //여러가지 퍼미션을하고싶으면 []안에 추가하면된다. (팝업창이뜬다)
     bool per = true;
     statuses.forEach((permission, permissionStatus) {
@@ -87,8 +92,90 @@ class _GMapSample extends State<GMapSample> {
   void initState() {
     checkPermission();
     currentLocation = getLocation();
+    initBle();
+  }
+  void initBle() {
+    flutterBlue.isScanning.listen((isScanning) {
+      _isScanning = isScanning;
+      setState(() {});
+    });
   }
 
+  Future callBLECheck(List a) async {
+    print('asdasd');
+    CallApi post = CallApi();
+    var data = <String, dynamic>{};
+    int cnt = 0;
+    for(var i in a){
+      var map = <String, dynamic>{};
+      map['mac_addr'] = i;
+      data[cnt.toString()] = map;
+      cnt++;
+    }
+    var request = await post.RequestHttp('/get_all_nearby_authorized_beacons', json.encode(data));
+    if(request['result']==null){
+      Get.dialog(AlertDialog(
+        title: Text('정보'),
+        content: Text('근처 건물의 비콘을 찾았습니다.\n${request['0']['detail_location']}\n건물에 들어가시겠습니까?'),
+        actions: [
+          TextButton(onPressed: () => Get.back(), child: const Text("확인")),
+          TextButton(onPressed: () => Get.back(), child: const Text("닫기"))
+        ],
+      ));
+    }
+  }
+  void infiniteScan() async{
+    await scan();
+    List<String> candidateBeacon = [];
+    /// TODO
+    /// 나중에 [0]이 메인 맥주소
+    /// 이걸 기준으로 벤 or do something
+    Future.delayed(const Duration(seconds: 3)).then((_) async {
+      for(ScanResult beacon in scanResultList){
+        String name = beacon.device.name.isNotEmpty?beacon.device.name:beacon.advertisementData.localName.isNotEmpty?beacon.advertisementData.localName:'N/A';
+        String mac = beacon.device.id.id;
+        if(name.startsWith('trc')){
+          candidateBeacon.add(mac);
+        }
+      }
+      if(candidateBeacon.isNotEmpty){
+        await callBLECheck(candidateBeacon);
+      }
+    });
+    //
+    // Future.delayed(const Duration(seconds: 3),() async {
+    //   for(ScanResult beacon in scanResultList){
+    //     String name = beacon.device.name.isNotEmpty?beacon.device.name:beacon.advertisementData.localName.isNotEmpty?beacon.advertisementData.localName:'N/A';
+    //     String mac = beacon.device.id.id;
+    //     if(name.startsWith('trc')){
+    //       candidateBeacon.add(mac);
+    //     }
+    //   }
+    //   if(candidateBeacon.isNotEmpty){
+    //     await callBLECheck(candidateBeacon);
+    //   }
+    // });
+  }
+
+  /*스캔 시작/정지 */
+  scan() async{
+    if (!_isScanning){
+      print('start');
+      scanResultList.clear();
+      flutterBlue.startScan(timeout: const Duration(seconds: 2));
+        flutterBlue.scanResults.listen((results) {
+          scanResultList = results;
+          // if(mounted) {
+          // print(results);
+            setState(() {
+            });
+          // }
+        });
+    }else{
+      print('stop');
+      flutterBlue.stopScan();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,7 +241,11 @@ class _GMapSample extends State<GMapSample> {
                   ),
                   right: 10.w,
                   top: 50.h,
-                )
+                ),
+                 FloatingActionButton(
+                  onPressed: infiniteScan,
+                  child: Icon(_isScanning ? Icons.stop : Icons.search),
+                ),
               ],
             );
           } else if (snapshot.hasError) {

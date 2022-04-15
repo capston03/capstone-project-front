@@ -22,7 +22,10 @@ class _BLEPageState extends State<BLEPage>{
     super.initState();
     initBle();
   }
-
+  @override
+  void dispose(){
+    super.dispose();
+  }
   void initBle() {
     flutterBlue.isScanning.listen((isScanning) {
       _isScanning = isScanning;
