@@ -235,7 +235,6 @@ class _GMapSample extends State<GMapSample> {
       addMarker(response);
 
       setState(()  {
-        currentLocation = getLocation();
         print("user current location changed, post server");
         print(response);
       });
