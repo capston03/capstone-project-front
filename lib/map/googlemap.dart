@@ -47,7 +47,7 @@ class _GMapSample extends State<GMapSample> {
             TextButton(
                 onPressed: () {
                   Get.back();
-                  Get.to(GMapSample());
+                  // Get.to(GMapSample());
                 },
                 child: const Text("닫기"))
           ],
@@ -103,7 +103,6 @@ class _GMapSample extends State<GMapSample> {
   }
 
   Future callBLECheck(List a) async {
-    print('asdasd');
     CallApi post = CallApi();
     var data = <String, dynamic>{};
     int cnt = 0;
@@ -168,20 +167,31 @@ class _GMapSample extends State<GMapSample> {
 
   /*스캔 시작/정지 */
   scan() async {
-    if (!_isScanning) {
-      print('start');
-      scanResultList.clear();
-      flutterBlue.startScan(timeout: const Duration(seconds: 2));
-      flutterBlue.scanResults.listen((results) {
-        scanResultList = results;
-        // if(mounted) {
-        // print(results);
-        setState(() {});
-        // }
-      });
-    } else {
-      print('stop');
-      flutterBlue.stopScan();
+    bool bluetooth = await flutterBlue.isOn;
+    if(bluetooth) {
+      if (!_isScanning) {
+        print('start');
+        scanResultList.clear();
+        flutterBlue.startScan(timeout: const Duration(seconds: 2));
+        flutterBlue.scanResults.listen((results) {
+          scanResultList = results;
+          // if(mounted) {
+          // print(results);
+          setState(() {});
+          // }
+        });
+      } else {
+        print('stop');
+        flutterBlue.stopScan();
+      }
+    }else{
+      Get.dialog(AlertDialog(
+        title: const Text('경고'),
+        content: const Text('블루투스가 꺼져있습니다.\n블루투스를 켜주시기 바랍니다.'),
+        actions: [
+          TextButton(onPressed: () => Get.back(), child: const Text("닫기"))
+        ],
+      ));
     }
   }
 
@@ -219,6 +229,7 @@ class _GMapSample extends State<GMapSample> {
                 ),
                 Positioned(
                   child: FloatingActionButton.extended(
+                    heroTag: "btn2",
                     onPressed: () async {
                       final GoogleMapController controller =
                           await _controller.future;
@@ -253,6 +264,7 @@ class _GMapSample extends State<GMapSample> {
                 ),
                 Positioned(
                   child: FloatingActionButton(
+                    heroTag: "btn3",
                     onPressed: infiniteScan,
                     child:
                         Icon(_isScanning ? Icons.stop : Icons.bluetooth_audio),
