@@ -1,15 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools" package="com.example.capstone_android">
 
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"/>
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="anoroid.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera.ar" />
+    <uses-feature android:name="android.hardware.camera.ar"/>
+
     <application
             android:label="capstone_android"
             android:name="${applicationName}"
@@ -45,7 +44,6 @@
                 android:name="flutterEmbedding"
                 android:value="2" />
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAkNrF19XDH0Pud87251OcTzOGn9fduCtw"/>
-
-        <!--       <meta-data android:name="com.google.ar.core" android:value="required" />-->
+        <meta-data android:name="com.google.ar.core" android:value="optional" />
     </application>
 </manifest>
