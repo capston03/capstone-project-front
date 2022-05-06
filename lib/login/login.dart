@@ -293,10 +293,114 @@ class _SignInDemo extends State<SignInDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        // bottomNavigationBar: BottomBar(1),
-        body: Container(
-          child: _buildBody(),
-        ));
+      // bottomNavigationBar: BottomBar(1),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Stack(
+            children: [
+              Center(
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.lightGreen.shade400,
+                            Colors.greenAccent,
+                            Colors.teal.shade400,
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 620),
+                      child: const Text(
+                        'Tracer',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 60,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            '구글 계정으로 로그인 및 회원가입을 진행해 주세요.',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w100,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                            onPressed: () async => await signIn(),
+                            style: ButtonStyle(
+                              elevation: MaterialStateProperty.all(2),
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.black12),
+                              shadowColor: MaterialStateProperty.all(
+                                  Colors.green.shade50),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50))),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.white),
+                              fixedSize: MaterialStateProperty.all(
+                                  const Size(412, 60)),
+                            ),
+                            child: Row(
+                              children: [
+                                ImageIcon(
+                                  AssetImage('asset/g_logo.png'),
+                                  size: 30,
+                                  color: Colors.black87,
+                                ),
+                                const Spacer(),
+                                Text(
+                                  'Sign In with Google',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const Spacer(),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 60,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    //Container(
+    //  child: _buildBody(),
+    //));
   }
 }
