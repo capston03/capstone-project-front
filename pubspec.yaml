@@ -58,6 +58,9 @@ dependencies:
   screenshot:
   path_provider:
   image_gallery_saver: ^1.6.9
+  flutter_svg:
+  image_picker:
+  flutter_svg_provider:
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +82,7 @@ dev_dependencies:
 flutter:
   assets:
     - asset/
+    - asset/icons/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

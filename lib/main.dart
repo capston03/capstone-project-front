@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'ar/photoUpload.dart';
 import 'ar/test.dart';
 import 'login/login.dart';
 import 'map/googlemap.dart';
@@ -70,7 +71,7 @@ class _MyApp extends State<MyApp> {
               '/map': (context) => GMapSample(),
               '/ble': (context) => BLEPage(),
               '/test':(context)=>ScreenshotWidget(),
-
+              '/upload':(context)=>PhotoUpload(),
             },
             title: 'TRACER',
             theme: ThemeData(

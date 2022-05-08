@@ -41,7 +41,9 @@ class BottomBar extends StatelessWidget{
           }else if(kind == 'home'){
 
           }else if(kind == 'camera'){
-
+            if(!chose){
+              Get.toNamed('/upload');
+            }
           }
         },
 
@@ -60,7 +62,7 @@ class BottomBar extends StatelessWidget{
             makeButton("profile"),
           ] else ...[
             makeButton("home"),
-            makeButton("camera"),
+            route == '/upload'?makeButton("camera",chose: true):makeButton("camera",chose: false),
             makeButton("profile"),
           ]
 
