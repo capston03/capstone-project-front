@@ -12,8 +12,10 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'BuildingTile.dart';
 import 'blefind.dart';
 import 'googleMapCalculate.dart';
+import 'HeaderTile.dart';
 
 class GMapSample extends StatefulWidget {
   @override
@@ -112,19 +114,60 @@ class _GMapSample extends State<GMapSample> {
       data[cnt.toString()] = map;
       cnt++;
     }
-    var request = await post.RequestHttp(
+    Map<String, dynamic> request = await post.RequestHttp(
         '/get_all_nearby_authorized_beacons', json.encode(data));
+    print(request);
+    print(request.length);
     if (request['result'] == null) {
       Get.dialog(AlertDialog(
+
         title: Text('정보'),
         content: Text(
             '근처 건물의 비콘을 찾았습니다.\n${request['0']['detail_location']}\n건물에 들어가시겠습니까?'),
         actions: [
-          TextButton(onPressed: () => Get.back(), child: const Text("확인")),
+          TextButton(
+              onPressed: () => Get.offNamed('/test', arguments: request['0']),
+              child: const Text("확인")),
+          if (request.length > 1) ...[
+            TextButton(
+                onPressed: () {
+                  Get.back();
+                  printBuildingList(request);
+                },
+                child: const Text("다른 리스트 확인"))
+          ],
           TextButton(onPressed: () => Get.back(), child: const Text("닫기"))
         ],
-      ));
+      ),barrierDismissible: false);
     }
+  }
+
+  void printBuildingList(Map<String, dynamic> request) {
+    Get.dialog(
+      AlertDialog(
+        // title: Text('정보')
+        content: Container(
+          child:ListView.builder(
+          padding: const EdgeInsets.all(8),
+          itemCount: request.length+1,
+          itemBuilder: (BuildContext context, int index) {
+            if (index == 0) return HeaderTile();
+            return BuildingTile( title: '${request[(index-1).toString()]['detail_location']}',info: request[(index-1).toString()]);
+          },
+        ),
+          height: 400.h,
+          width: 300.w,
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 1.w,
+              color: Colors.green
+            )
+          ),
+        ),
+
+      ),
+      barrierDismissible: false,
+    );
   }
 
   void infiniteScan() async {
@@ -168,7 +211,7 @@ class _GMapSample extends State<GMapSample> {
   /*스캔 시작/정지 */
   scan() async {
     bool bluetooth = await flutterBlue.isOn;
-    if(bluetooth) {
+    if (bluetooth) {
       if (!_isScanning) {
         print('start');
         scanResultList.clear();
@@ -184,7 +227,7 @@ class _GMapSample extends State<GMapSample> {
         print('stop');
         flutterBlue.stopScan();
       }
-    }else{
+    } else {
       Get.dialog(AlertDialog(
         title: const Text('경고'),
         content: const Text('블루투스가 꺼져있습니다.\n블루투스를 켜주시기 바랍니다.'),
@@ -199,7 +242,7 @@ class _GMapSample extends State<GMapSample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Google Map with Beacon"),
+        title: const Text("Google Map with Beacon"),
         centerTitle: true,
         elevation: 0.0,
       ),
@@ -263,15 +306,14 @@ class _GMapSample extends State<GMapSample> {
                   top: 50.h,
                 ),
                 Positioned(
-                  child: FloatingActionButton(
-                    heroTag: "btn3",
-                    onPressed: infiniteScan,
-                    child:
-                        Icon(_isScanning ? Icons.stop : Icons.bluetooth_audio),
-                  ),
-                  left: 20.w,
-                  top:  5.h
-                ),
+                    child: FloatingActionButton(
+                      heroTag: "btn3",
+                      onPressed: infiniteScan,
+                      child: Icon(
+                          _isScanning ? Icons.stop : Icons.bluetooth_audio),
+                    ),
+                    left: 20.w,
+                    top: 5.h),
               ],
             );
           } else if (snapshot.hasError) {
@@ -288,13 +330,13 @@ class _GMapSample extends State<GMapSample> {
                     child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+              children: const [
                 SizedBox(
                   child: CircularProgressIndicator(),
                   width: 60,
                   height: 60,
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Text('구글 맵 데이터 불러오는 중...'),
                 )

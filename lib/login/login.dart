@@ -157,8 +157,8 @@ class _SignInDemo extends State<SignInDemo> {
 
   Future<bool> checkPermission() async { //권한설정 물어보기
     Map<Permission, PermissionStatus> statuses = await [
-      Permission.location,
       Permission.bluetoothScan,
+      Permission.location,
       Permission.bluetoothConnect
     ].request(); //여러가지 퍼미션을하고싶으면 []안에 추가하면된다. (팝업창이뜬다)
 
