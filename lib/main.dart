@@ -77,7 +77,7 @@ class _MyApp extends State<MyApp> {
               primarySwatch: Colors.green,
             ),
             builder: (context, widget) {
-              ScreenUtil.setContext(context);
+              // ScreenUtil.defaultSize(context);
               return MediaQuery(
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
                 child: widget!,

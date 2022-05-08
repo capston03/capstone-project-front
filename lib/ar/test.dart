@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:ar_flutter_plugin/managers/ar_location_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_session_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_object_manager.dart';
@@ -10,10 +12,18 @@ import 'package:ar_flutter_plugin/datatypes/node_types.dart';
 import 'package:ar_flutter_plugin/datatypes/hittest_result_types.dart';
 import 'package:ar_flutter_plugin/models/ar_node.dart';
 import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:vector_math/vector_math_64.dart';
 import 'package:screenshot/screenshot.dart';
+import 'dart:ui' as ui;
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 import 'dart:math';
+
+import '../sameArea/bottomBar.dart';
 
 class ScreenshotWidget extends StatefulWidget {
   ScreenshotWidget({Key? key}) : super(key: key);
@@ -25,6 +35,10 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
   late ARSessionManager arSessionManager;
   late ARObjectManager arObjectManager;
   late ARAnchorManager arAnchorManager;
+  //Screenshot Controller
+  ScreenshotController screenshotController = ScreenshotController();
+  static GlobalKey previewContainer = GlobalKey();
+  late Uint8List _imageFile;
 
   List<ARNode> nodes = [];
   List<ARAnchor> anchors = [];
@@ -34,19 +48,22 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
     super.dispose();
     arSessionManager.dispose();
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Screenshots'),
         ),
+        bottomNavigationBar: BottomBar(1),
         body: Container(
             child: Stack(children: [
-              ARView(
+                Screenshot(
+                controller: screenshotController,
+                child: ARView(
                 onARViewCreated: onARViewCreated,
                 planeDetectionConfig: PlaneDetectionConfig.horizontalAndVertical,
-              ),
+              )),
               Align(
                 alignment: FractionalOffset.bottomCenter,
                 child: Row(
@@ -56,12 +73,16 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
                           onPressed: onRemoveEverything,
                           child: Text("Remove Everything")),
                       ElevatedButton(
-                          onPressed: onTakeScreenshot,
-                          child: Text("Take Screenshot")),
+                          onPressed: () async {
+                            onTakeScreenshot();
+                            }, child: Text("Take Screenshot"),
+                      ),
                     ]),
               )
             ])));
   }
+
+
 
   void onARViewCreated(
       ARSessionManager arSessionManager,
@@ -96,7 +117,20 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
 
   Future<void> onTakeScreenshot() async {
     var image = await arSessionManager.snapshot();
-    await showGeneralDialog(
+    await showDialog(
+        context: context,
+        builder: (_) => Dialog(
+          child: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(image: image, fit: BoxFit.cover)),
+          ),
+        ));
+  }
+
+  Future<dynamic> ShowCapturedWidget(
+      BuildContext context, Uint8List capturedImage) async {
+    print("sadjflkjsdalkfjlsdajfljsdlakfj$capturedImage");
+    return await showGeneralDialog(
         context: context,
         // transitionDuration: Duration(seconds: 0),
         // transitionBuilder: (context, animation, secondaryAnimation, child){
@@ -107,23 +141,40 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Center(
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(image: image, fit: BoxFit.cover),
-                ),
-              )
-            ),
+                child: capturedImage != null
+                    ? Image.memory(capturedImage)
+                    : Container(child: Text('씨발'),)),
           ));
         }
-        // }=> Dialog(
-        //     child: Container(
-        //       decoration: BoxDecoration(
-        //           image: DecorationImage(image: image, fit: BoxFit.cover)),
-        //       width: double.infinity,
-        //       height: double.infinity,
-        //     ),
-        //   )
-        );
+    );
+    // return showDialog(
+    //   useSafeArea: false,
+    //   context: context,
+    //   builder: (context) => Scaffold(
+    //     appBar: AppBar(
+    //       title: Text("Captured widget screenshot"),
+    //     ),
+    //     body:
+    //
+    //
+    //     Center(
+    //         child: capturedImage != null
+    //             ? Image.memory(capturedImage)
+    //             : Container(child: Text('씨발'),)),
+    //   ),
+    // );
+  }
+
+
+  Future<String> saveImage(Uint8List bytes) async{
+    await [Permission.storage].request();
+    final time = DateTime.now()
+          .toIso8601String()
+          .replaceAll('.','-')
+          .replaceAll(':', '-');
+    final name = 'screenshot_$time';
+    final result = await ImageGallerySaver.saveImage(bytes, name: name);
+    return result['filePath'];
   }
 
   Future<void> onNodeTapped(List<String> nodes) async {
