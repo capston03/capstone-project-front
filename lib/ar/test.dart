@@ -5,6 +5,7 @@ import 'package:ar_flutter_plugin/managers/ar_session_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_object_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_anchor_manager.dart';
 import 'package:ar_flutter_plugin/models/ar_anchor.dart';
+import 'package:capstone_android/map/HeaderTile.dart';
 import 'package:flutter/material.dart';
 import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
 import 'package:ar_flutter_plugin/datatypes/config_planedetection.dart';
@@ -14,6 +15,9 @@ import 'package:ar_flutter_plugin/models/ar_node.dart';
 import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vector_math/vector_math_64.dart';
@@ -23,6 +27,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:math';
 
+import 'showList.dart';
 import '../sameArea/bottomBar.dart';
 
 class ScreenshotWidget extends StatefulWidget {
@@ -43,6 +48,33 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
   List<ARNode> nodes = [];
   List<ARAnchor> anchors = [];
 
+  void printPhotoList(Map<String, dynamic> request){
+    Get.dialog(
+        AlertDialog(
+          content: Container(
+            child: ListView.builder(
+                padding: const EdgeInsets.all(10),
+                itemCount: request.length + 1,
+                itemBuilder: (BuildContext context, int index){
+                  if(index == 0) return HeaderTile();
+                  //return showList();
+                  //TODO showList datas need to add
+                }),
+            height: 400.h,
+            width: 300.w,
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 1.w,
+                //color: Colors.green
+                //TODO color add
+              )
+            ),
+          ),
+        ),
+        barrierDismissible: false,
+    );
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -53,8 +85,19 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Screenshots'),
-        ),
+          title: Text("Screenshot"),
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: IconButton(
+                icon: Icon(Icons.menu),
+                onPressed: (){
+                    //printPhotoList(request)
+                },
+              ),
+            ),
+          ],
+          ),
         bottomNavigationBar: BottomBar(1),
         body: Container(
             child: Stack(children: [
