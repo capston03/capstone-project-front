@@ -48,17 +48,18 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
   List<ARNode> nodes = [];
   List<ARAnchor> anchors = [];
 
-  void printPhotoList(Map<String, dynamic> request){
+  void printPhotoList(){
+    //TODO: 나중에 정보 넣기
     Get.dialog(
         AlertDialog(
           content: Container(
             child: ListView.builder(
                 padding: const EdgeInsets.all(10),
-                itemCount: request.length + 1,
+                itemCount: 10,
                 itemBuilder: (BuildContext context, int index){
                   if(index == 0) return HeaderTile();
                   //return showList();
-                  //TODO showList datas need to add
+                  return const showList(title: "제목", info: "내용");
                 }),
             height: 400.h,
             width: 300.w,
@@ -66,7 +67,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
               border: Border.all(
                 width: 1.w,
                 //color: Colors.green
-                //TODO color add
+                color: Color(0xFFF633)
               )
             ),
           ),
@@ -92,7 +93,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
               child: IconButton(
                 icon: Icon(Icons.menu),
                 onPressed: (){
-                    //printPhotoList(request)
+                    printPhotoList();
                 },
               ),
             ),
