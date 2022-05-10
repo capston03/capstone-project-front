@@ -12,6 +12,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../photo/photoDetail.dart';
 import 'BuildingTile.dart';
 import 'blefind.dart';
 import 'googleMapCalculate.dart';
@@ -28,6 +29,7 @@ class _GMapSample extends State<GMapSample> {
   FlutterBlue flutterBlue = FlutterBlue.instance;
   List<ScanResult> scanResultList = [];
   bool _isScanning = false;
+  PhotoDetail aa = PhotoDetail(); // TODO 삭제좀해라
 
   late Future<LatLng> currentLocation;
   var buildingList; //빌딩 건물들 받아와 리스트로 저장
@@ -132,7 +134,8 @@ class _GMapSample extends State<GMapSample> {
             TextButton(
                 onPressed: () {
                   Get.back();
-                  printBuildingList(request);
+                  // printBuildingList(request);
+                  aa.showPhotoDetail();
                 },
                 child: const Text("다른 리스트 확인"))
           ],
