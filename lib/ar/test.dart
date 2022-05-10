@@ -132,10 +132,6 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
     print("sadjflkjsdalkfjlsdajfljsdlakfj$capturedImage");
     return await showGeneralDialog(
         context: context,
-        // transitionDuration: Duration(seconds: 0),
-        // transitionBuilder: (context, animation, secondaryAnimation, child){
-        //   return FadeTransition(opacity:animation, child: ScaleTransition(scale: animation,child: child,),);
-        // },
         pageBuilder: (context, animation, secondaryAnimation) {
           return SafeArea(child: Container(
             width: MediaQuery.of(context).size.width,

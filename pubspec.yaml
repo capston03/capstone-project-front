@@ -61,7 +61,7 @@ dependencies:
   flutter_svg:
   image_picker:
   flutter_svg_provider:
-
+  flutter_archive:
 dev_dependencies:
   flutter_test:
     sdk: flutter

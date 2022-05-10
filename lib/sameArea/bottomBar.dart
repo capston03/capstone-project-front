@@ -36,7 +36,7 @@ class BottomBar extends StatelessWidget{
             }
           }else if(kind =='profile'){
             if(!chose){
-              Get.toNamed('/test');
+              Get.toNamed('/local');
             }
           }else if(kind == 'home'){
 
