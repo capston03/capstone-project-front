@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class showList extends StatelessWidget {
-  const showList({Key? key, required this.title,required this.info}) : super(key: key);
+  const showList({required this.title, required this.info});
   final String title;
-  final Map<String,dynamic> info;
+  final String info;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class showList extends StatelessWidget {
           )
       ),
       onTap: (){
-
+        Get.offNamed('/test', arguments: info);
       },
     );
   }
