@@ -19,12 +19,13 @@ class ProfileMenu extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: TextButton(
         style: TextButton.styleFrom(
-          primary: Colors.lightGreen,
+          primary: Colors.black45,
           padding: EdgeInsets.all(20),
           shape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           backgroundColor: Color(0xFFF5F6F9),
           textStyle: TextStyle(fontSize: 20.0,),
+
         ),
         onPressed: press,
         child: Row(
