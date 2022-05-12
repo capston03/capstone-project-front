@@ -29,7 +29,7 @@ class _GMapSample extends State<GMapSample> {
   FlutterBlue flutterBlue = FlutterBlue.instance;
   List<ScanResult> scanResultList = [];
   bool _isScanning = false;
-  PhotoDetail aa = PhotoDetail(); // TODO 삭제좀해라
+  // PhotoDetail aa = PhotoDetail(); // TODO 삭제좀해라
 
   late Future<LatLng> currentLocation;
   var buildingList; //빌딩 건물들 받아와 리스트로 저장
@@ -86,7 +86,7 @@ class _GMapSample extends State<GMapSample> {
     userCurrentLocate['range_radius'] = func.rangeData;
     buildingList = await post.RequestHttp(
         '/nearby_building', json.encode(userCurrentLocate));
-    print('aaaaaaaaaaaaaaa$buildingList');
+    // print('aaaaaaaaaaaaaaa$buildingList');
     func.addMarker(buildingList);
     _getCurrentLocation();
     return LatLng(position.latitude, position.longitude);
@@ -134,8 +134,8 @@ class _GMapSample extends State<GMapSample> {
             TextButton(
                 onPressed: () {
                   Get.back();
-                  // printBuildingList(request);
-                  aa.showPhotoDetail();
+                  printBuildingList(request);
+                  // aa.showPhotoDetail();
                 },
                 child: const Text("다른 리스트 확인"))
           ],

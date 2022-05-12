@@ -12,7 +12,8 @@ class BottomBar extends StatelessWidget{
       'camera' : Icon(Icons.camera_alt),
       'map' : Icon(Icons.map),
       'profile' : Icon(Icons.account_circle),
-      'home' : Icon(Icons.home)
+      'home' : Icon(Icons.home),
+      'stickerUpload' : Icon(Icons.work_outline)
     };
   BottomBar(this.type, {Key? key}) : super(key: key);
   Widget makeButton(String kind,{bool chose = false}){
@@ -32,17 +33,28 @@ class BottomBar extends StatelessWidget{
         onTap: (){
           if(kind=='map'){
             if(!chose){
-              Get.toNamed('/map');
+              Get.offAndToNamed('/map');
+              // Get.toNamed('/map');
             }
           }else if(kind =='profile'){
             if(!chose){
-              Get.toNamed('/local');
+              // Get.toNamed('/local');
             }
           }else if(kind == 'home'){
-
+            if(!chose){
+              Get.offAndToNamed('/test');
+              // Get.toNamed('/test');
+            }
           }else if(kind == 'camera'){
             if(!chose){
-              Get.toNamed('/upload');
+              Get.offAndToNamed('/upload');
+              // Get.toNamed('/upload');
+            }
+          }else if(kind =='stickerUpload'){
+            if(!chose){
+              Get.offAndToNamed('/stickerUpload');
+
+              // Get.toNamed('/stickerUpload');
             }
           }
         },
@@ -61,9 +73,10 @@ class BottomBar extends StatelessWidget{
             route == '/GMapSample'||route=='/map'?makeButton("map",chose: true):makeButton("map",chose: false),
             makeButton("profile"),
           ] else ...[
-            makeButton("home"),
+            route=='/test'?makeButton("home",chose: true):makeButton("home",chose: false),
             route == '/upload'?makeButton("camera",chose: true):makeButton("camera",chose: false),
             makeButton("profile"),
+            route == '/stickerUpload'?makeButton("stickerUpload",chose: true):makeButton("stickerUpload",chose: false),
           ]
 
         ],

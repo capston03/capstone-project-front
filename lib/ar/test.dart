@@ -48,6 +48,30 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
   List<ARNode> nodes = [];
   List<ARAnchor> anchors = [];
 
+  //핸드폰 뒤로가기 눌렀을 때 다이얼로그 표출 및 셋팅 저장
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("지도 화면으로 이동하시겠습니까?"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('아니오'),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.offAndToNamed('/map');
+            },
+            child: Text('네'),
+          ),
+        ],
+      ),
+    )) ??
+        false;
+  }
+
   void printPhotoList(){
     //TODO: 나중에 정보 넣기
     Get.dialog(
@@ -84,7 +108,8 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        child: Scaffold(
         appBar: AppBar(
           title: Text("Screenshot"),
           actions: <Widget>[
@@ -123,7 +148,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
                       ),
                     ]),
               )
-            ])));
+            ]))),onWillPop: _onWillPop,);
   }
 
 
@@ -139,10 +164,11 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
 
     this.arSessionManager.onInitialize(
       showFeaturePoints: false,
-      showPlanes: true,
+      showPlanes: false, //하얀색점
       customPlaneTexturePath: "Images/triangle.png",
-      showWorldOrigin: true,
+      showWorldOrigin: false,
     );
+
     this.arObjectManager.onInitialize();
 
     this.arSessionManager.onPlaneOrPointTap = onPlaneOrPointTapped;
@@ -187,22 +213,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
           ));
         }
     );
-    // return showDialog(
-    //   useSafeArea: false,
-    //   context: context,
-    //   builder: (context) => Scaffold(
-    //     appBar: AppBar(
-    //       title: Text("Captured widget screenshot"),
-    //     ),
-    //     body:
-    //
-    //
-    //     Center(
-    //         child: capturedImage != null
-    //             ? Image.memory(capturedImage)
-    //             : Container(child: Text('씨발'),)),
-    //   ),
-    // );
+   
   }
 
 
@@ -219,7 +230,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
 
   Future<void> onNodeTapped(List<String> nodes) async {
     var number = nodes.length;
-    this.arSessionManager.onError("Tapped $number node(s)");
+    // this.arSessionManager.onError("Tapped $number node(s)");
   }
 
   Future<void> onPlaneOrPointTapped(
@@ -245,10 +256,10 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
         if (didAddNodeToAnchor) {
           this.nodes.add(newNode);
         } else {
-          this.arSessionManager.onError("Adding Node to Anchor failed");
+          // this.arSessionManager.onError("Adding Node to Anchor failed");
         }
       } else {
-        this.arSessionManager.onError("Adding Anchor failed");
+        // this.arSessionManager.onError("Adding Anchor failed");
       }
       /*
       // To add a node to the tapped position without creating an anchor, use the following code (Please mind: the function onRemoveEverything has to be adapted accordingly!):
