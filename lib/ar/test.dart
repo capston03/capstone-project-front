@@ -138,6 +138,10 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+
+                      ElevatedButton(
+                          onPressed: onShufflePressed,
+                          child: Text("Test Scailing")),
                       ElevatedButton(
                           onPressed: onRemoveEverything,
                           child: Text("Remove Everything")),
@@ -199,7 +203,6 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
 
   Future<dynamic> ShowCapturedWidget(
       BuildContext context, Uint8List capturedImage) async {
-    print("sadjflkjsdalkfjlsdajfljsdlakfj$capturedImage");
     return await showGeneralDialog(
         context: context,
         pageBuilder: (context, animation, secondaryAnimation) {
@@ -213,7 +216,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
           ));
         }
     );
-   
+
   }
 
 
@@ -233,6 +236,31 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
     // this.arSessionManager.onError("Tapped $number node(s)");
   }
 
+  Future<void> onShufflePressed() async{
+    var newScale = Random().nextDouble() / 3;
+    var newTranslationAxis = Random().nextInt(3);
+    var newTranslationAmount = Random().nextDouble() / 3;
+    var newTranslation = Vector3(0, 0, 0);
+    newTranslation[newTranslationAxis] = newTranslationAmount;
+    var newRotationAxisIndex = Random().nextInt(3);
+    var newRotationAmount = Random().nextDouble();
+    var newRotationAxis = Vector3(0, 0, 0);
+    newRotationAxis[newRotationAxisIndex] = 1.0;
+
+    final newTransform = Matrix4.identity();
+
+    newTransform.setTranslation(newTranslation);
+    newTransform.rotate(newRotationAxis, newRotationAmount);
+    newTransform.scale(newScale);
+    print(nodes.length);
+    print(anchors.length);
+    for(ARNode i in nodes){
+      i.transform = newTransform;
+      // i.transformation = newTransform;
+    }
+    // this.localObjectNode.transform = newTransform;
+  }
+
   Future<void> onPlaneOrPointTapped(
       List<ARHitTestResult> hitTestResults) async {
     var singleHitTestResult = hitTestResults.firstWhere(
@@ -240,7 +268,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
     if (singleHitTestResult != null) {
       var newAnchor =
       ARPlaneAnchor(transformation: singleHitTestResult.worldTransform);
-      bool didAddAnchor = await this.arAnchorManager.addAnchor(newAnchor) ?? false;
+      bool didAddAnchor = await arAnchorManager.addAnchor(newAnchor) ?? false;
       if (didAddAnchor) {
         this.anchors.add(newAnchor);
         // Add note to anchor
@@ -251,11 +279,12 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
             scale: Vector3(0.2, 0.2, 0.2),
             position: Vector3(0.0, 0.0, 0.0),
             rotation: Vector4(1.0, 0.0, 0.0, 0.0));
-        bool didAddNodeToAnchor =
-        await this.arObjectManager.addNode(newNode, planeAnchor: newAnchor) ?? false;
-        if (didAddNodeToAnchor) {
-          this.nodes.add(newNode);
+        bool? didAddNodeToAnchor =
+        await this.arObjectManager.addNode(newNode, planeAnchor: newAnchor);
+        if (didAddNodeToAnchor!) {
+          nodes.add(newNode);
         } else {
+          nodes.add(newNode);
           // this.arSessionManager.onError("Adding Node to Anchor failed");
         }
       } else {
