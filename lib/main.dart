@@ -3,6 +3,7 @@ import 'package:capstone_android/ble.dart';
 import 'package:capstone_android/login/signUp.dart';
 import 'package:capstone_android/photo/photoDetail.dart';
 import 'package:capstone_android/sticker/stickerUpload.dart';
+import 'package:capstone_android/profile/profileMain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,10 +42,13 @@ class _MyApp extends State<MyApp> {
   void initState() {
     super.initState();
     initPlatformState();
-
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([]);
+  } // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
@@ -84,6 +88,7 @@ class _MyApp extends State<MyApp> {
               '/local' :(context)=>LocalAndWebObjectsWidget(),
               '/hmm' : (context) =>ObjectsOnPlanesWidget(),
               '/stickerUpload' : (context) =>StickerUpload(),
+              '/profile' : (context) => profileMain(),
               // '/photoDetail': (context)=>PhotoDetail(),
             },
             title: 'TRACER',
