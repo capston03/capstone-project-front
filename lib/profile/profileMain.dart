@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../sameArea/bottomBar.dart';
 import 'profile_menu.dart';
@@ -46,7 +47,7 @@ class body extends StatelessWidget {
           ProfileMenu(
             text: "My Sticker",
             icon: Icons.archive_rounded,
-            press: () {},
+            press: () {Get.toNamed('/photoGrid');},
           ),
           ProfileMenu(
             text: "Log Out",

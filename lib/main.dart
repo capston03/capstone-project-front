@@ -2,6 +2,7 @@ import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
 import 'package:capstone_android/ble.dart';
 import 'package:capstone_android/login/signUp.dart';
 import 'package:capstone_android/photo/photoDetail.dart';
+import 'package:capstone_android/sticker/photoGrid.dart';
 import 'package:capstone_android/sticker/stickerUpload.dart';
 import 'package:capstone_android/profile/profileMain.dart';
 import 'package:flutter/material.dart';
@@ -90,6 +91,7 @@ class _MyApp extends State<MyApp> {
               '/stickerUpload' : (context) =>StickerUpload(),
               '/profile' : (context) => profileMain(),
               // '/photoDetail': (context)=>PhotoDetail(),
+              '/photoGrid' : (context) => PhotoGrid(),
             },
             title: 'TRACER',
             theme: ThemeData(
