@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class showList extends StatelessWidget {
   const showList({required this.title, required this.info});
   final String title;
   final String info;
+
 
   @override
   Widget build(BuildContext context) {
