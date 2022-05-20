@@ -5,6 +5,7 @@ import 'package:ar_flutter_plugin/managers/ar_session_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_object_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_anchor_manager.dart';
 import 'package:ar_flutter_plugin/models/ar_anchor.dart';
+import 'package:capstone_android/ar/arManager.dart';
 import 'package:capstone_android/map/HeaderTile.dart';
 import 'package:flutter/material.dart';
 import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
@@ -16,11 +17,12 @@ import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:vector_math/vector_math_64.dart';
+import 'package:vector_math/vector_math_64.dart' as vector;
 import 'package:screenshot/screenshot.dart';
 import 'dart:ui' as ui;
 import 'package:path_provider/path_provider.dart';
@@ -44,10 +46,13 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
   ScreenshotController screenshotController = ScreenshotController();
   static GlobalKey previewContainer = GlobalKey();
   late Uint8List _imageFile;
-
+  late ARNode selectedNode;
   List<ARNode> nodes = [];
   List<ARAnchor> anchors = [];
-
+  final getController = Get.put(arManager());
+  String maxScale = '100';
+  String minScale = '10';
+  final List<String> _scales = ['10','20','30','40','50','60','70','80','90','100'];
   //핸드폰 뒤로가기 눌렀을 때 다이얼로그 표출 및 셋팅 저장
   Future<bool> _onWillPop() async {
     return (await showDialog(
@@ -177,6 +182,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
 
     this.arSessionManager.onPlaneOrPointTap = onPlaneOrPointTapped;
     this.arObjectManager.onNodeTap = onNodeTapped;
+    // this.arObjectManager.re
   }
 
   Future<void> onRemoveEverything() async {
@@ -231,8 +237,93 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
     return result['filePath'];
   }
 
+  void showBottomPopupSizing(ARNode selectedNode){
+    // String scaleSelectedValue = '50';
+    showModalBottomSheet(
+      backgroundColor: Colors.white,
+        context: context,
+        builder: (context) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              SizedBox(
+                child: Row(children: [
+                  Text('크기(50이 처음 주어진 사이즈입니다.) : '),
+                  Obx(()=>DropdownButton(
+
+                    value: getController.scaleSelectedValue.value,
+                    items: _scales.map((value) {
+                      return DropdownMenuItem(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        getController.setScale(value.toString());
+                        // scaleSelectedValue = value.toString();
+                        setState(() {
+                          final newTransform = Matrix4.identity();
+                          newTransform.scale(int.parse(getController.getScale())*0.004);
+                          selectedNode.transform = newTransform;
+                        });
+                      });
+                      },
+                  ),),
+
+                ],),
+              ),
+              ListTile(
+                leading: new Icon(Icons.music_note),
+                title: new Text('Music'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: new Icon(Icons.videocam),
+                title: new Text('Video'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: new Icon(Icons.share),
+                title: new Text('Share'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  //this will work when i touch it ok?
   Future<void> onNodeTapped(List<String> nodes) async {
     var number = nodes.length;
+
+    selectedNode = this.nodes.firstWhereOrNull((element) => element.name == nodes.first)!;
+    // showBottomPopupSizing(selectedNode); => bottom bar출력
+    var newScale = 0.1; //max 0.2 ~ >0
+    var newTranslationAxis = Random().nextInt(3); // 0 1 2
+    var newTranslationAmount = Random().nextDouble() / 3;
+    var newTranslation = vector.Vector3(0, 0, 0);
+    newTranslation[newTranslationAxis] = newTranslationAmount;
+    var newRotationAxisIndex = 0; // 0=>x축을 기준으로 yz평면에 회전 1y축을 기준으로 xz평면에 회전 2 z축을 기준으로 xy평면에 회전
+    var newRotationAmount = 3.0; //-6.27~6.27 (-시 x좌표기준 y의 음의 방향으로회전 +시 양의 방향으로회전)
+    var newRotationAxis = vector.Vector3(0, 0, 0);
+    newRotationAxis[newRotationAxisIndex] = 1.0;
+
+    final newTransform = Matrix4.identity();
+
+    // newTransform.setTranslation(newTranslation);
+    newTransform.rotate(newRotationAxis, newRotationAmount);
+    newTransform.scale(0.2);
+    selectedNode.transform = newTransform;
+    // this.arAnchorManager.removeAnchor(anchor);
+    arObjectManager.removeNode(selectedNode);
+    print("${nodes.first} hummfuck");
     // this.arSessionManager.onError("Tapped $number node(s)");
   }
 
@@ -240,11 +331,11 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
     var newScale = Random().nextDouble() / 3;
     var newTranslationAxis = Random().nextInt(3);
     var newTranslationAmount = Random().nextDouble() / 3;
-    var newTranslation = Vector3(0, 0, 0);
+    var newTranslation = vector.Vector3(0, 0, 0);
     newTranslation[newTranslationAxis] = newTranslationAmount;
     var newRotationAxisIndex = Random().nextInt(3);
     var newRotationAmount = Random().nextDouble();
-    var newRotationAxis = Vector3(0, 0, 0);
+    var newRotationAxis = vector.Vector3(0, 0, 0);
     newRotationAxis[newRotationAxisIndex] = 1.0;
 
     final newTransform = Matrix4.identity();
@@ -256,8 +347,8 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
     print(anchors.length);
     for(ARNode i in nodes){
       i.transform = newTransform;
-      // i.transformation = newTransform;
     }
+
     // this.localObjectNode.transform = newTransform;
   }
 
@@ -275,10 +366,11 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
         var newNode = ARNode(
             type: NodeType.webGLB,
             uri:
+                // "https://github.com/namhyo01/Boxiting/raw/master/temp.glb",
             "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF-Binary/Duck.glb",
-            scale: Vector3(0.2, 0.2, 0.2),
-            position: Vector3(0.0, 0.0, 0.0),
-            rotation: Vector4(1.0, 0.0, 0.0, 0.0));
+            scale: vector.Vector3(0.2, 0.2, 0.2),
+            position: vector.Vector3(0.0, 0.0, 0.0),
+            rotation: vector.Vector4(1.0, 0.0, 0.0, 0.0));
         bool? didAddNodeToAnchor =
         await this.arObjectManager.addNode(newNode, planeAnchor: newAnchor);
         if (didAddNodeToAnchor!) {
