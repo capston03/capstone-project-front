@@ -9,6 +9,7 @@ import 'package:image_crop/image_crop.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../sameArea/bottomBar.dart';
+import '../sameArea/newBottomBar.dart';
 
 
 class StickerUpload extends StatefulWidget {
@@ -66,7 +67,7 @@ class _StickerUploadState extends State<StickerUpload> {
           centerTitle: true,
           elevation: 0.0,
         ),
-        bottomNavigationBar: BottomBar(1),
+        bottomNavigationBar: newBottomBar(1,3),
         body: SafeArea(
           child: Container(
             color: Colors.black,

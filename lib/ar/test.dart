@@ -5,7 +5,9 @@ import 'package:ar_flutter_plugin/managers/ar_session_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_object_manager.dart';
 import 'package:ar_flutter_plugin/managers/ar_anchor_manager.dart';
 import 'package:ar_flutter_plugin/models/ar_anchor.dart';
+import 'package:capstone_android/ar/bleList.dart';
 import 'package:capstone_android/map/HeaderTile.dart';
+import 'package:capstone_android/sameArea/newBottomBar.dart';
 import 'package:flutter/material.dart';
 import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
 import 'package:ar_flutter_plugin/datatypes/config_planedetection.dart';
@@ -73,17 +75,19 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
   }
 
   void printPhotoList(){
+    Beacon beacon = new Beacon();
+
     //TODO: 나중에 정보 넣기
     Get.dialog(
         AlertDialog(
           content: Container(
             child: ListView.builder(
                 padding: const EdgeInsets.all(10),
-                itemCount: 10,
+                itemCount: beacon.scanResultList.length+1,
                 itemBuilder: (BuildContext context, int index){
                   if(index == 0) return HeaderTile();
                   //return showList();
-                  return const showList(title: "제목", info: "내용");
+                  return beacon.listItem(beacon.scanResultList[index-1]);
                 }),
             height: 400.h,
             width: 300.w,
@@ -124,7 +128,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
             ),
           ],
           ),
-        bottomNavigationBar: BottomBar(1),
+        bottomNavigationBar: newBottomBar(1, 0),
         body: Container(
             child: Stack(children: [
                 Screenshot(

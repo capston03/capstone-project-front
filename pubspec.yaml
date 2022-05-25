@@ -64,6 +64,8 @@ dependencies:
   flutter_archive:
 #  image_cropper:
   image_crop:
+  bottom_bar:
+  salomon_bottom_bar:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -85,6 +87,7 @@ flutter:
   assets:
     - asset/
     - asset/icons/
+    - asset/images/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

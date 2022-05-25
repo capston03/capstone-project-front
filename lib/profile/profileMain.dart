@@ -1,3 +1,4 @@
+import 'package:capstone_android/sameArea/newBottomBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,15 +7,26 @@ import 'profile_menu.dart';
 import 'profile_pic.dart';
 
 class profileMain extends StatelessWidget{
+  int type = 0;
+
+  profileMain(int type){
+    this.type = type;
+  }
 
   @override
   Widget build(BuildContext context) {
+    int index = 0;
+    if (type == 0){
+      index = 1;
+    }else {
+      index = 2;
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile"),
       ),
       body: body(),
-      bottomNavigationBar: BottomBar(1),
+      bottomNavigationBar: newBottomBar(type,index),
     );
   }
 

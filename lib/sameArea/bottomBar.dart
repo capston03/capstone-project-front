@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:path/path.dart';
 // make bottom bar
+
+
 class BottomBar extends StatelessWidget{
   int type = 0;
   late String route;
@@ -16,6 +18,7 @@ class BottomBar extends StatelessWidget{
       'stickerUpload' : Icon(Icons.work_outline)
     };
   BottomBar(this.type, {Key? key}) : super(key: key);
+
   Widget makeButton(String kind,{bool chose = false}){
     return Expanded(
       child: InkWell(
@@ -62,6 +65,7 @@ class BottomBar extends StatelessWidget{
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     route = Get.currentRoute;
