@@ -38,7 +38,7 @@ class BottomBar extends StatelessWidget{
             }
           }else if(kind =='profile'){
             if(!chose){
-              Get.toNamed('/profile');
+              Get.offAndToNamed('/profile');
             }
           }else if(kind == 'home'){
             if(!chose){
@@ -75,8 +75,8 @@ class BottomBar extends StatelessWidget{
           ] else ...[
             route=='/test'?makeButton("home",chose: true):makeButton("home",chose: false),
             route == '/upload'?makeButton("camera",chose: true):makeButton("camera",chose: false),
-            makeButton("profile"),
             route == '/stickerUpload'?makeButton("stickerUpload",chose: true):makeButton("stickerUpload",chose: false),
+            route == '/profile'?makeButton("profile",chose: true):makeButton("profile",chose: false),
           ]
 
         ],

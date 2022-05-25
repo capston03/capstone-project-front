@@ -67,7 +67,9 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
           ),
           TextButton(
             onPressed: () {
+              dispose();
               Get.offAndToNamed('/map');
+
             },
             child: Text('네'),
           ),
@@ -107,8 +109,8 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
 
   @override
   void dispose() {
-    super.dispose();
     arSessionManager.dispose();
+    super.dispose();
   }
   
   @override
@@ -273,26 +275,26 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
 
                 ],),
               ),
-              ListTile(
-                leading: new Icon(Icons.music_note),
-                title: new Text('Music'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
+              SizedBox(
+                child: Row(
+                  children: [
+
+                  ],
+                ),
               ),
-              ListTile(
-                leading: new Icon(Icons.videocam),
-                title: new Text('Video'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
+              SizedBox(
+                child: Row(
+                  children: [
+
+                  ],
+                ),
               ),
-              ListTile(
-                leading: new Icon(Icons.share),
-                title: new Text('Share'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
+              SizedBox(
+                child: Row(
+                  children: [
+
+                  ],
+                ),
               ),
             ],
           );
@@ -304,7 +306,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
     var number = nodes.length;
 
     selectedNode = this.nodes.firstWhereOrNull((element) => element.name == nodes.first)!;
-    // showBottomPopupSizing(selectedNode); => bottom bar출력
+    showBottomPopupSizing(selectedNode);//   => bottom bar출력
     var newScale = 0.1; //max 0.2 ~ >0
     var newTranslationAxis = Random().nextInt(3); // 0 1 2
     var newTranslationAmount = Random().nextDouble() / 3;
