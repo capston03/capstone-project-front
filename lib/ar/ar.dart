@@ -155,7 +155,7 @@ class _ArtWidgetState extends State<ArtWidget> {
                           child: Text("Remove Everything")),
                       ElevatedButton(
                           onPressed: () async {
-                            onTakeScreenshot();
+                            ShowCapturedWidget(context,_imageFile);
                             }, child: Text("Take Screenshot"),
                       ),
                     ]),
@@ -461,7 +461,8 @@ class _ArtWidgetState extends State<ArtWidget> {
             type: NodeType.webGLB,
             uri:
                 // "https://github.com/namhyo01/Boxiting/raw/master/temp.glb",
-            "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF-Binary/Duck.glb",
+                "https://github.com/namhyo01/Boxiting/blob/master/converted.glb?raw=true",
+            // "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF-Binary/Duck.glb",
             scale: vector.Vector3(0.2, 0.2, 0.2),
             position: vector.Vector3(0.0, 0.0, 0.0),
             rotation: vector.Vector4(1.0, 0.0, 0.0, 0.0));
