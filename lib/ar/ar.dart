@@ -177,23 +177,44 @@ class _ArtWidgetState extends State<ArtWidget> {
                   planeDetectionConfig:
                       PlaneDetectionConfig.horizontalAndVertical,
                 ),
-            Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                        onPressed: onRemoveEverything,
-                        child: Text("Remove Everything")),
-                    ElevatedButton(
-                      onPressed: () async {
-                        onTakeScreenshot();
-                      },
-                      child: Text("Take Screenshot"),
-                    ),
-                  ]),
-            )
-          ]))),
+                Positioned(child: FloatingActionButton( //캡쳐하기
+                  child: const Icon(Icons.photo_camera),
+                  heroTag: "btn1",
+                  onPressed: () async {
+                    await onTakeScreenshot();
+                  },
+                  // icon: const Icon(Icons.arrow_back_outlined),
+                ),
+                  bottom: 15.h,
+                  right: 20.w,
+                ),
+                Positioned(child: FloatingActionButton( //다 삭제하기
+                  child: const Icon(Icons.delete_forever_sharp),
+                  heroTag: "btn1",
+                  onPressed: onRemoveEverything,
+                  // icon: const Icon(Icons.arrow_back_outlined),
+                ),
+                  top: 15.h,
+                  right: 20.w,
+                ),
+            // Align(
+            //   alignment: FractionalOffset.bottomCenter,
+            //   child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //       children: [
+            //         ElevatedButton(
+            //             onPressed: onRemoveEverything,
+            //             child: Text("Remove Everything")),
+            //         ElevatedButton(
+            //           onPressed: () async {
+            //             onTakeScreenshot();
+            //           },
+            //           child: Text("Take Screenshot"),
+            //         ),
+            //       ]),
+            // )
+          ]))
+      ),
       onWillPop: _onWillPop,
     );
   }
@@ -232,57 +253,11 @@ class _ArtWidgetState extends State<ArtWidget> {
     anchors = [];
   }
 
-  _displayDialog(BuildContext context) {
-    showGeneralDialog(
-      context: context,
-      barrierDismissible: false,
-      transitionDuration: Duration(milliseconds: 2000),
-      transitionBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(
-          opacity: animation,
-          child: ScaleTransition(
-            scale: animation,
-            child: child,
-          ),
-        );
-      },
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return SafeArea(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            padding: EdgeInsets.all(20),
-            color: Colors.white,
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
-                    'Hai This Is Full Screen Dialog',
-                    style: TextStyle(color: Colors.red, fontSize: 20.0),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(
-                      "DISMISS",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
 
   // 스크린샷 버튼 눌렀을때 작동 되는 기능
   Future<void> onTakeScreenshot() async {
     var image = await arSessionManager.snapshot();
-
+    // Get.back();
     showGeneralDialog(
         context: context,
         pageBuilder: (context, animation, secondaryAnimation) {
