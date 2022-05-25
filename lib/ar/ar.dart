@@ -20,6 +20,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:http/http.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
@@ -32,13 +33,15 @@ import 'dart:math';
 import 'showList.dart';
 import '../sameArea/bottomBar.dart';
 
-class ScreenshotWidget extends StatefulWidget {
-  ScreenshotWidget({Key? key}) : super(key: key);
+
+
+class ArtWidget extends StatefulWidget {
+  ArtWidget({Key? key}) : super(key: key);
   @override
-  _ScreenshotWidgetState createState() => _ScreenshotWidgetState();
+  _ArtWidgetState createState() => _ArtWidgetState();
 }
 
-class _ScreenshotWidgetState extends State<ScreenshotWidget> {
+class _ArtWidgetState extends State<ArtWidget> {
   late ARSessionManager arSessionManager;
   late ARObjectManager arObjectManager;
   late ARAnchorManager arAnchorManager;
@@ -49,7 +52,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
   late ARNode selectedNode;
   List<ARNode> nodes = [];
   List<ARAnchor> anchors = [];
-  final getController = Get.put(arManager());
+  final getController = Get.put(ArManager());
   String maxScale = '100';
   String minScale = '10';
   final List<String> _scales = ['10','20','30','40','50','60','70','80','90','100'];
@@ -69,7 +72,6 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
             onPressed: () {
               dispose();
               Get.offAndToNamed('/map');
-
             },
             child: Text('네'),
           ),
@@ -154,7 +156,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
                           child: Text("Remove Everything")),
                       ElevatedButton(
                           onPressed: () async {
-                            onTakeScreenshot();
+                            ShowCapturedWidget(context,_imageFile);
                             }, child: Text("Take Screenshot"),
                       ),
                     ]),
@@ -194,6 +196,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
     anchors.forEach((anchor) {
       this.arAnchorManager.removeAnchor(anchor);
     });
+    getController.removeNodeData();
     anchors = [];
   }
 
@@ -220,7 +223,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
             child: Center(
                 child: capturedImage != null
                     ? Image.memory(capturedImage)
-                    : Container(child: Text('씨발'),)),
+                    : Container(child: Text('ho'),)),
           ));
         }
     );
@@ -239,8 +242,62 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
     return result['filePath'];
   }
 
+  Widget buildSlider({
+    required String angle,
+    required int divisions,
+    required String node,
+    Color color = Colors.green,
+    double enabledThumbRadius = 10.0,
+    double elevation = 1.0,
+  }){
+    String axisAngle = "rotate"+angle;
+    return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SliderTheme(
+            data: SliderThemeData(
+              activeTrackColor: color,
+              thumbColor: color,
+              activeTickMarkColor: color,
+              valueIndicatorColor: color,
+              thumbShape: RoundSliderThumbShape(
+                  enabledThumbRadius: enabledThumbRadius,
+                  elevation: elevation
+              ),
+              valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+
+            ),
+            child: Obx(()=>Slider(
+              value: getController.nodeData[node]![axisAngle]!.value,
+              min: 0.0,
+              max: 360.0,
+              divisions: divisions,
+              label: getController.nodeData[node]![axisAngle]!.value.round().toString(),
+              onChanged: (double newValue){
+                if(angle=='X'){
+                  getController.setRotateX(node, newValue);
+                }else if (angle=='Y'){
+                  getController.setRotateY(node, newValue);
+                }else if(angle=='Z'){
+                  getController.setRotateZ(node, newValue);
+                }
+                var newRotationAxisX = vector.Vector3(1.0, 0, 0);
+                var newRotationAxisY = vector.Vector3(0, 1.0, 0);
+                var newRotationAxisZ = vector.Vector3(0, 0, 1.0);
+                final newTransform = Matrix4.identity();
+                newTransform.scale(int.parse(getController.getScale(node))*0.004);
+                newTransform.rotate(newRotationAxisX, getController.getRotateX(node)*(6.27/360));
+                newTransform.rotate(newRotationAxisY, getController.getRotateY(node)*(6.27/360));
+                newTransform.rotate(newRotationAxisZ, getController.getRotateZ(node)*(6.27/360));
+                selectedNode.transform = newTransform;
+              },)
+            )
+        )
+    );
+  }
   void showBottomPopupSizing(ARNode selectedNode){
     // String scaleSelectedValue = '50';
+    String node = selectedNode.name;
+    // print("aaaaaaaaaaaaaaaaaaaaaaaaaaaa$node");
     showModalBottomSheet(
       backgroundColor: Colors.white,
         context: context,
@@ -250,10 +307,10 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
             children: <Widget>[
               SizedBox(
                 child: Row(children: [
+                  Padding(padding: EdgeInsets.only(left: 20.w)),
                   Text('크기(50이 처음 주어진 사이즈입니다.) : '),
                   Obx(()=>DropdownButton(
-
-                    value: getController.scaleSelectedValue.value,
+                    value: getController.nodeData[node]!["scaleSelectedValue"]!.value.toInt().toString(),
                     items: _scales.map((value) {
                       return DropdownMenuItem(
                         value: value,
@@ -261,41 +318,74 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
                       );
                     }).toList(),
                     onChanged: (value) {
-                      setState(() {
-                        getController.setScale(value.toString());
-                        // scaleSelectedValue = value.toString();
-                        setState(() {
-                          final newTransform = Matrix4.identity();
-                          newTransform.scale(int.parse(getController.getScale())*0.004);
-                          selectedNode.transform = newTransform;
-                        });
-                      });
+                      // setState(() {
+                        getController.setScale(node,value.toString());
+                        var newRotationAxisX = vector.Vector3(1.0, 0, 0);
+                        var newRotationAxisY = vector.Vector3(0, 1.0, 0);
+                        var newRotationAxisZ = vector.Vector3(0, 0, 1.0);
+                        final newTransform = Matrix4.identity();
+                        newTransform.scale(int.parse(getController.getScale(node))*0.004);
+                        newTransform.rotate(newRotationAxisX, getController.getRotateX(node)*(6.27/360));
+                        newTransform.rotate(newRotationAxisY, getController.getRotateY(node)*(6.27/360));
+                        newTransform.rotate(newRotationAxisZ, getController.getRotateZ(node)*(6.27/360));
+                        selectedNode.transform = newTransform;
+                      // });
                       },
                   ),),
 
                 ],),
               ),
               SizedBox(
-                child: Row(
+                child:Column(
                   children: [
+                    Row(
+                      children: [
+                        Padding(padding: EdgeInsets.only(left: 20.w)),
+                        Text('회전'),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Padding(padding: EdgeInsets.only(left: 20.w)),
+                        Text('양 옆 회전'),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(child:
+                        buildSlider(node: node, angle:'X', divisions: 36,),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Padding(padding: EdgeInsets.only(left: 20.w)),
+                        Text('제자리 회전'),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: buildSlider(node: node, angle:'Y', divisions: 36,),
 
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Padding(padding: EdgeInsets.only(left: 20.w)),
+                        Text('위 아래 회전'),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(child: buildSlider(node: node, angle:'Z', divisions: 36,),
+                        )
+                      ],
+                    ),
                   ],
                 ),
-              ),
-              SizedBox(
-                child: Row(
-                  children: [
-
-                  ],
-                ),
-              ),
-              SizedBox(
-                child: Row(
-                  children: [
-
-                  ],
-                ),
-              ),
+              )
             ],
           );
         });
@@ -304,28 +394,31 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
   //this will work when i touch it ok?
   Future<void> onNodeTapped(List<String> nodes) async {
     var number = nodes.length;
-
     selectedNode = this.nodes.firstWhereOrNull((element) => element.name == nodes.first)!;
-    showBottomPopupSizing(selectedNode);//   => bottom bar출력
+    showBottomPopupSizing(selectedNode);// => bottom bar출력
     var newScale = 0.1; //max 0.2 ~ >0
     var newTranslationAxis = Random().nextInt(3); // 0 1 2
     var newTranslationAmount = Random().nextDouble() / 3;
     var newTranslation = vector.Vector3(0, 0, 0);
     newTranslation[newTranslationAxis] = newTranslationAmount;
-    var newRotationAxisIndex = 0; // 0=>x축을 기준으로 yz평면에 회전 1y축을 기준으로 xz평면에 회전 2 z축을 기준으로 xy평면에 회전
-    var newRotationAmount = 3.0; //-6.27~6.27 (-시 x좌표기준 y의 음의 방향으로회전 +시 양의 방향으로회전)
+    var newRotationAxisIndex = 1; // 0=>x축을 기준으로 yz평면에 회전 1y축을 기준으로 xz평면에 회전 2 z축을 기준으로 xy평면에 회전
+    var newRotationAmount = 2.0; //-6.27~6.27 (-시 x좌표기준 y의 음의 방향으로회전 +시 양의 방향으로회전)
     var newRotationAxis = vector.Vector3(0, 0, 0);
+    var newRotationAxisX = vector.Vector3(0,0,0);
+    newRotationAxisX[0] = 1.0;
     newRotationAxis[newRotationAxisIndex] = 1.0;
 
-    final newTransform = Matrix4.identity();
+    // final newTransform = Matrix4.identity();
 
     // newTransform.setTranslation(newTranslation);
-    newTransform.rotate(newRotationAxis, newRotationAmount);
-    newTransform.scale(0.2);
-    selectedNode.transform = newTransform;
+
+    // newTransform.rotate(newRotationAxis, newRotationAmount);
+    // newTransform.rotate(newRotationAxisX, newRotationAmount);
+    // newTransform.scale(0.2);
+    // selectedNode.transform = newTransform;
     // this.arAnchorManager.removeAnchor(anchor);
-    arObjectManager.removeNode(selectedNode);
-    print("${nodes.first} hummfuck");
+    // arObjectManager.removeNode(selectedNode);
+    // print("${nodes.first} hummfuck");
     // this.arSessionManager.onError("Tapped $number node(s)");
   }
 
@@ -369,10 +462,12 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
             type: NodeType.webGLB,
             uri:
                 // "https://github.com/namhyo01/Boxiting/raw/master/temp.glb",
-            "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF-Binary/Duck.glb",
+                "https://github.com/namhyo01/Boxiting/blob/master/converted.glb?raw=true",
+            // "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF-Binary/Duck.glb",
             scale: vector.Vector3(0.2, 0.2, 0.2),
             position: vector.Vector3(0.0, 0.0, 0.0),
             rotation: vector.Vector4(1.0, 0.0, 0.0, 0.0));
+        getController.setNodeData(newNode.name);
         bool? didAddNodeToAnchor =
         await this.arObjectManager.addNode(newNode, planeAnchor: newAnchor);
         if (didAddNodeToAnchor!) {

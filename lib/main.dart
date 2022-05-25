@@ -11,10 +11,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'ar/ar.dart';
 import 'ar/hmm.dart';
 import 'ar/local.dart';
 import 'photo/photoUpload.dart';
-import 'ar/test.dart';
 import 'login/login.dart';
 import 'map/googlemap.dart';
 
@@ -84,7 +84,7 @@ class _MyApp extends State<MyApp> {
               '/signup': (context) => SignUp(),
               '/map': (context) => GMapSample(),
               '/ble': (context) => BLEPage(),
-              '/test':(context)=>ScreenshotWidget(),
+              '/test':(context)=> ArtWidget(),
               '/upload':(context)=>PhotoUpload(),
               '/local' :(context)=>LocalAndWebObjectsWidget(),
               '/hmm' : (context) =>ObjectsOnPlanesWidget(),
