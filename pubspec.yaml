@@ -63,6 +63,7 @@ dependencies:
   flutter_svg_provider:
   flutter_archive:
   image_crop:
+  gallery_saver:
 dev_dependencies:
   flutter_test:
     sdk: flutter
