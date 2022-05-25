@@ -56,6 +56,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:math';
 
+import '../sameArea/newBottomBar.dart';
 import 'showList.dart';
 import '../sameArea/bottomBar.dart';
 
@@ -169,7 +170,7 @@ class _ArtWidgetState extends State<ArtWidget> {
               ),
             ],
           ),
-          bottomNavigationBar: BottomBar(1),
+          bottomNavigationBar: newBottomBar(1,0),
           body: Container(
               child: Stack(children: [
                 ARView(
