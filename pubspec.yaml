@@ -62,10 +62,10 @@ dependencies:
   image_picker:
   flutter_svg_provider:
   flutter_archive:
-#  image_cropper:
   image_crop:
   bottom_bar:
   salomon_bottom_bar:
+  gallery_saver:
 dev_dependencies:
   flutter_test:
     sdk: flutter
