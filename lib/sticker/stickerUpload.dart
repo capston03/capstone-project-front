@@ -67,7 +67,7 @@ class _StickerUploadState extends State<StickerUpload> {
           centerTitle: true,
           elevation: 0.0,
         ),
-        bottomNavigationBar: newBottomBar(1,3),
+        bottomNavigationBar: newBottomBar(1,2),
         body: SafeArea(
           child: Container(
             color: Colors.black,

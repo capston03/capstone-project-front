@@ -49,7 +49,7 @@ class _newBottomBar extends State<newBottomBar>{
               Get.offAndToNamed('/map');
               break;
             case 1:
-              Get.toNamed('/profile');
+              Get.offAndToNamed('/profile');
               break;
           }
         }else{
@@ -61,10 +61,10 @@ class _newBottomBar extends State<newBottomBar>{
               Get.offAndToNamed('/upload');
               break;
             case 2:
-              Get.toNamed('/profile_in');
+              Get.offAndToNamed('/stickerUpload');
               break;
             case 3:
-              Get.offAndToNamed('/stickerUpload');
+              Get.offAndToNamed('/profile_in');
               break;
 
           }
@@ -104,20 +104,18 @@ class _newBottomBar extends State<newBottomBar>{
             title: Text("Camera"),
             selectedColor: Colors.pink,
           ),
-
+          /// Sticker
+          SalomonBottomBarItem(
+            icon: Icon(Icons.star),
+            title: Text("Sticker"),
+            selectedColor: Colors.teal,
+          ),
           /// Profile
           SalomonBottomBarItem(
             icon: Icon(Icons.person),
             title: Text("Profile"),
             selectedColor: Colors.orange,
           ),
-
-          /// Sticker
-          SalomonBottomBarItem(
-            icon: Icon(Icons.star),
-            title: Text("Sticker"),
-            selectedColor: Colors.teal,
-          )
         ],
       ],
     );
