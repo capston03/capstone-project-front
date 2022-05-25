@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../photo/photoDetail.dart';
+import '../sameArea/newBottomBar.dart';
 import 'BuildingTile.dart';
 import 'blefind.dart';
 import 'googleMapCalculate.dart';
@@ -249,7 +250,7 @@ class _GMapSample extends State<GMapSample> {
         centerTitle: true,
         elevation: 0.0,
       ),
-      bottomNavigationBar: BottomBar(0),
+      bottomNavigationBar: newBottomBar(0, 0),
       body: FutureBuilder<LatLng>(
         future: currentLocation,
         builder: (context, snapshot) {

@@ -8,6 +8,8 @@ import 'package:permission_handler/permission_handler.dart' as ph;
 import '../sameArea/bottomBar.dart';
 import 'dart:async';
 
+import '../sameArea/newBottomBar.dart';
+
 class PhotoUpload extends StatefulWidget {
   const PhotoUpload({Key? key}) : super(key: key);
 
@@ -78,7 +80,7 @@ class _PhotoUploadState extends State<PhotoUpload> {
           centerTitle: true,
           elevation: 0.0,
         ),
-        bottomNavigationBar: BottomBar(1),
+        bottomNavigationBar: newBottomBar(1,1),
         body: Container(
           decoration: BoxDecoration(color: Color(0xffFFFBD7)),
           // padding: EdgeInsets.fromLTRB(10.w, 5.h, 10.w, 5.h),

@@ -7,6 +7,7 @@ import 'package:ar_flutter_plugin/managers/ar_anchor_manager.dart';
 import 'package:ar_flutter_plugin/models/ar_anchor.dart';
 import 'package:capstone_android/ar/bleList.dart';
 import 'package:capstone_android/map/HeaderTile.dart';
+import 'package:capstone_android/sameArea/newBottomBar.dart';
 import 'package:flutter/material.dart';
 import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
 import 'package:ar_flutter_plugin/datatypes/config_planedetection.dart';
@@ -127,7 +128,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
             ),
           ],
           ),
-        bottomNavigationBar: BottomBar(1),
+        bottomNavigationBar: newBottomBar(1, 0),
         body: Container(
             child: Stack(children: [
                 Screenshot(
