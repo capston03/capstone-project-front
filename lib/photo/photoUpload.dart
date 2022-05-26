@@ -82,7 +82,7 @@ class _PhotoUploadState extends State<PhotoUpload> {
         ),
         bottomNavigationBar: newBottomBar(1,1),
         body: Container(
-          decoration: BoxDecoration(color: Color(0xffFFFBD7)),
+          decoration: BoxDecoration(color: Colors.white),
           // padding: EdgeInsets.fromLTRB(10.w, 5.h, 10.w, 5.h),
           child: SingleChildScrollView(
             child: Container(
@@ -107,9 +107,11 @@ class _PhotoUploadState extends State<PhotoUpload> {
                             constraints: const BoxConstraints(),
                             padding: const EdgeInsets.all(0),
                             icon: Image.asset(
-                              "asset/icons/imageUpload.png",
-                              width: 141.w,
-                              height: 108.h,
+                              "asset/icons/image_upload.png",
+                              color:const Color.fromRGBO(255, 255, 255, 0.5),
+                              colorBlendMode: BlendMode.modulate,
+                              width: 70.w,
+                              height: 54.h,
                             ),
                           )
                         : GestureDetector(
@@ -117,6 +119,8 @@ class _PhotoUploadState extends State<PhotoUpload> {
                               //그 이미지를 직접적으로 보여주어야 합니다.
                               imageFile1, //내가 고른 이미지
                               fit: BoxFit.fill,
+                              color:const Color.fromRGBO(255, 255, 255, 0.5),
+                              colorBlendMode: BlendMode.modulate,
                               // height: 216.h,
                             ),
                             onTap: () {
@@ -125,6 +129,10 @@ class _PhotoUploadState extends State<PhotoUpload> {
                           ),
                   ),
                   Padding(padding: EdgeInsets.only(top: 10.h)),
+                  Padding(
+                    padding: EdgeInsets.only(left: 50.h),
+                    child: Text('위 이미지를 클릭하여 사진을 업로드 해 주세요.'),
+                  ),
                   Row(
                     children: [
                       Padding(padding: EdgeInsets.only(left: 20.w)),
@@ -143,7 +151,7 @@ class _PhotoUploadState extends State<PhotoUpload> {
                         width: 38.w,
                       ),
                       Padding(padding: EdgeInsets.only(left: 10.w)),
-                      Text('즁앙대학교 310관 카페 앞')
+                      Text('중앙대학교 310관 카페 앞')
                     ],
                   ),
                   Padding(padding: EdgeInsets.only(top: 10.h)),
@@ -158,18 +166,18 @@ class _PhotoUploadState extends State<PhotoUpload> {
                           controller: controller[0],
                           decoration: InputDecoration(
                             hintText: '제목',
-                            hintStyle: TextStyle(fontSize: 20.sp),
+                            hintStyle: TextStyle(fontSize: 15.sp),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: const BorderRadius.all(
                                     Radius.circular(10.0)),
                                 borderSide: BorderSide(
-                                  width: 1,
+                                  width: 0.5,
                                 )),
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0)),
                               borderSide: BorderSide(
-                                width: 1,
+                                width: 0.5,
                               ),
                             ),
                           ),
@@ -189,19 +197,20 @@ class _PhotoUploadState extends State<PhotoUpload> {
                           maxLines: null,
                           controller: controller[1],
                           decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(left:15, bottom: 150),
                             hintText: '내용',
-                            hintStyle: TextStyle(fontSize: 20.sp),
+                            hintStyle: TextStyle(fontSize: 15.sp),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: const BorderRadius.all(
                                     Radius.circular(10.0)),
                                 borderSide: BorderSide(
-                                  width: 1,
+                                  width: 0.5,
                                 )),
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10.0)),
                               borderSide: BorderSide(
-                                width: 1,
+                                width: 0.5,
                               ),
                             ),
                           ),
@@ -218,15 +227,24 @@ class _PhotoUploadState extends State<PhotoUpload> {
                         child: GestureDetector(
                           child: Container(
                             decoration: BoxDecoration(
-                                border: Border.all(width: 1),
+                                border: Border.all(width: 0.5),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end:Alignment.bottomRight,
+                                  colors: [
+                                    Colors.lightGreenAccent,
+                                    Colors.lightGreen,
+                                  ],
+                                ),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                color: Color(0xffBFECA5)),
+                                    BorderRadius.all(Radius.circular(50.0)),
+                            ),
                             child: Center(
                               child: Text(
                                 '업로드',
                                 style: TextStyle(
-                                    fontSize: 20.sp,
+                                    fontSize: 15.sp,
+                                    color: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
