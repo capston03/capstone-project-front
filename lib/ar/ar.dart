@@ -379,12 +379,13 @@ class _ArtWidgetState extends State<ArtWidget> {
   }
 
   void showBottomPopupSizing(ARNode selectedNode) {
-    // String scaleSelectedValue = '50';
     String node = selectedNode.name;
-    // print("aaaaaaaaaaaaaaaaaaaaaaaaaaaa$node");
     showModalBottomSheet(
         backgroundColor: Colors.white,
         context: context,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0.r), topRight: Radius.circular(30.0.r))
+        ),
         builder: (context) {
           return Column(
             mainAxisSize: MainAxisSize.min,
@@ -567,7 +568,6 @@ class _ArtWidgetState extends State<ArtWidget> {
       if (didAddAnchor) {
         this.anchors.add(newAnchor);
         // Add note to anchor
-        print("assdafasdfsadfsadfd");
         var newNode = ARNode(
             type: NodeType.webGLB,
             uri:
@@ -581,11 +581,8 @@ class _ArtWidgetState extends State<ArtWidget> {
             position: vector.Vector3(0.0, 0.0, 0.0),
             rotation: vector.Vector4(1.0, 0.0, 0.0, 0.0));
         getController.setNodeData(newNode.name);
-        print("xxxxxxxxxxxxxxxxxxxxxx");
         bool? didAddNodeToAnchor =
             await arObjectManager.addNode(newNode, planeAnchor: newAnchor);
-        print("xxxxxxxxxxxxxxxxxxxxxx");
-
         if (didAddNodeToAnchor!) {
           nodes.add(newNode);
         } else {
