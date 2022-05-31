@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
 
@@ -8,9 +9,9 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:image_crop/image_crop.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../sameArea/bottomBar.dart';
+import '../app/data/provider/callApi.dart';
 import '../sameArea/newBottomBar.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class StickerUpload extends StatefulWidget {
   const StickerUpload({Key? key}) : super(key: key);
@@ -20,10 +21,12 @@ class StickerUpload extends StatefulWidget {
 }
 
 class _StickerUploadState extends State<StickerUpload> {
+
   final cropKey = GlobalKey<CropState>();
-  File? _file = null;
-  File? _sample = null;
-  File? _lastCropped = null;
+  File? _file;
+  File? _sample;
+  File? _lastCropped;
+  final storage = const FlutterSecureStorage();
 
   @override
   void dispose() {
@@ -156,26 +159,15 @@ class _StickerUploadState extends State<StickerUpload> {
       _file = file;
     });
   }
-
+  ///이미지 잘라 비율을 넘기는 함수
   Future<void> _cropImage() async {
-    final scale = cropKey.currentState!.scale;
-    final area = cropKey.currentState!.area;
+    final area = cropKey.currentState!.area!;
+    Map<String, dynamic> map = {};
+    List<double> rectangle = [area.topLeft.dx,area.topLeft.dy,area.topRight.dx - area.topLeft.dx,area.bottomLeft.dy - area.topLeft.dy];
+    map['rectangle'] = rectangle;
 
-    print(area);
-
-    print(area?.topLeft.dx);
-    print(area?.topLeft.dy);
-    print(area?.topRight.dx);
-    print(area?.topRight.dy);
-    print(area?.bottomLeft.dx);
-    print(area?.bottomLeft.dy);
-    print(area?.bottomRight.dx);
-    print(area?.bottomRight.dy);
-    // print(scale);
-    if (area == null) {
-      // cannot crop, widget is not setup
-      return;
-    }
+    CallApi post = CallApi();
+    var response = await post.RequestHttp('/user/account/login', json.encode(map));
 
     // scale up to use maximum possible number of pixels
     // this will sample image in higher resolution to make cropped image larger

@@ -46,16 +46,16 @@ class _newBottomBar extends State<newBottomBar>{
         }else{
           switch (i){
             case 0:
-              Get.offAndToNamed('/test');
+              Get.offAndToNamed('/test',arguments: Get.arguments);
               break;
             case 1:
-              Get.offAndToNamed('/upload');
+              Get.offAndToNamed('/upload',arguments: Get.arguments);
               break;
             case 2:
-              Get.offAndToNamed('/stickerUpload');
+              Get.offAndToNamed('/stickerUpload',arguments: Get.arguments);
               break;
             case 3:
-              Get.offAndToNamed('/profile_in');
+              Get.offAndToNamed('/profile_in',arguments: Get.arguments);
               break;
 
           }
