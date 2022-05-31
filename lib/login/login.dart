@@ -61,7 +61,7 @@ class _SignInDemo extends State<SignInDemo> {
     map['device_model'] = model; //이메일 앞글자만 보내기
     CallApi post = CallApi();
     try {
-      var response = await post.RequestHttp('/login', json.encode(map));
+      var response = await post.RequestHttp('/user/account/login', json.encode(map));
       String result = response['result'];
       loginAfter(id, result);
     }catch(e){
@@ -113,8 +113,8 @@ class _SignInDemo extends State<SignInDemo> {
       map['device_model'] = model;
       map['user_gmail_id'] = email;
       try {
-        await post.RequestHttp('/logout', json.encode(map));
-        await post.RequestHttp('/login', json.encode(map));
+        await post.RequestHttp('/user/account/logout', json.encode(map));
+        await post.RequestHttp('/user/account/login', json.encode(map));
         await storage.write(key: 'id', value: email);
         Get.dialog(
             AlertDialog(
@@ -212,7 +212,7 @@ class _SignInDemo extends State<SignInDemo> {
       map['device_model'] = model; //이메일 앞글자만 보내기
       CallApi post = CallApi();
       try {
-        var response = await post.RequestHttp('/login', json.encode(map));
+        var response = await post.RequestHttp('/user/account/login', json.encode(map));
         String result = response['result'];
         loginAfter(email, result);
       }catch(e){

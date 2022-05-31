@@ -50,7 +50,7 @@ class SignUp extends StatelessWidget {
     Map<String, dynamic> map = {};
     map['nickname'] = getController.controller[0].value.text; //닉네임을 받는다
     CallApi post = CallApi();
-    var response = await post.RequestHttp('/check_nickname', json.encode(map));
+    var response = await post.RequestHttp('/user/account/check_nickname', json.encode(map));
     response = response['result'];
     if (response == Nick.EXISTED.value) {
       getController.setFalseJungbok();
@@ -145,7 +145,7 @@ class SignUp extends StatelessWidget {
 
     CallApi post = CallApi();
     try {
-      var response = await post.RequestHttp('/signup', json.encode(map));
+      var response = await post.RequestHttp('/user/account/signup', json.encode(map));
 
       response = response['result'];
       print(response);

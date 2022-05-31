@@ -159,19 +159,14 @@ class _StickerUploadState extends State<StickerUpload> {
 
   Future<void> _cropImage() async {
     final scale = cropKey.currentState!.scale;
-    final area = cropKey.currentState!.area;
+    final area = cropKey.currentState!.area!;
 
     print(area);
 
-    print(area?.topLeft.dx);
-    print(area?.topLeft.dy);
-    print(area?.topRight.dx);
-    print(area?.topRight.dy);
-    print(area?.bottomLeft.dx);
-    print(area?.bottomLeft.dy);
-    print(area?.bottomRight.dx);
-    print(area?.bottomRight.dy);
-    // print(scale);
+    print(area.topLeft.dx);
+    print(area.topLeft.dy);
+    print(area.topRight.dx - area.topLeft.dx);
+    print(area.bottomLeft.dy - area.topLeft.dy);
     if (area == null) {
       // cannot crop, widget is not setup
       return;
