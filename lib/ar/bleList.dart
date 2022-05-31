@@ -14,10 +14,15 @@ class Beacon{
   List<ScanResult> scanResultList = [];
   bool _isScanning = false;
 
-  Beacon(){
-    getPermission();
-    initBle();
-    scan();
+  Beacon(int firstPage){
+    if(firstPage == 1){
+      getPermission();
+      initBle();
+      scan();
+    }else{
+      initBle();
+      scan();
+    }
   }
 
   /*@override
@@ -153,6 +158,23 @@ class Beacon{
       subtitle: deviceMACAddr(r),
       trailing: deviceSignal(r),
     );
+  }
+
+  getBeaconList() {
+    return scanResultList;
+  }
+
+  getDeviceName(ScanResult r){
+    String name = '';
+
+    if(r.device.name.isNotEmpty){
+      name = r.device.name;
+    }else if (r.advertisementData.localName.isNotEmpty){
+      name = r.advertisementData.localName;
+    }else{
+      name = 'N/A';
+    }
+    return name;
   }
 
 

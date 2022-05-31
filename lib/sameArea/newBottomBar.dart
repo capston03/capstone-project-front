@@ -21,15 +21,6 @@ class _newBottomBar extends State<newBottomBar>{
   int index = 0;
   late String route;
 
-  Map<String, Icon> _category =
-  {
-    'camera' : Icon(Icons.camera_alt),
-    'map' : Icon(Icons.map),
-    'profile' : Icon(Icons.account_circle),
-    'home' : Icon(Icons.home),
-    'stickerUpload' : Icon(Icons.work_outline)
-  };
-
   _newBottomBar(int type, int index){
     this.type = type;
     this.index = index;
@@ -76,7 +67,7 @@ class _newBottomBar extends State<newBottomBar>{
           /// Home
           SalomonBottomBarItem(
             icon: Icon(Icons.home),
-            title: Text("Home"),
+            title: Text("홈"),
             selectedColor: Colors.lightGreen,
 
           ),
@@ -84,7 +75,7 @@ class _newBottomBar extends State<newBottomBar>{
           /// Likes
           SalomonBottomBarItem(
             icon: Icon(Icons.person),
-            title: Text("Profile"),
+            title: Text("프로필"),
             selectedColor: Colors.lightGreen,
           ),
 
@@ -93,7 +84,7 @@ class _newBottomBar extends State<newBottomBar>{
           /// Home
           SalomonBottomBarItem(
             icon: Icon(Icons.home),
-            title: Text("Home"),
+            title: Text("홈"),
             selectedColor: Colors.purple,
 
           ),
@@ -101,19 +92,19 @@ class _newBottomBar extends State<newBottomBar>{
           /// Likes
           SalomonBottomBarItem(
             icon: Icon(Icons.camera_alt),
-            title: Text("Camera"),
+            title: Text("카메라"),
             selectedColor: Colors.pink,
           ),
           /// Sticker
           SalomonBottomBarItem(
             icon: Icon(Icons.star),
-            title: Text("Sticker"),
+            title: Text("스티커"),
             selectedColor: Colors.teal,
           ),
           /// Profile
           SalomonBottomBarItem(
             icon: Icon(Icons.person),
-            title: Text("Profile"),
+            title: Text("프로필"),
             selectedColor: Colors.orange,
           ),
         ],
