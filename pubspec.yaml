@@ -40,6 +40,9 @@ dependencies:
   flutter_blue:
   flutter_datetime_picker:
   flutter_secure_storage:
+  sqflite:
+  path:
+
 #  ar_flutter_plugin:
 #  arcore_flutter_plugin:
   # The following adds the Cupertino Icons font to your application.

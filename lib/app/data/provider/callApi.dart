@@ -14,7 +14,7 @@ import 'package:path/path.dart';
 class CallApi{
 
   // final String dns = 'https://wadis.go.kr/';
-  final String dns = 'http://ec2-3-39-232-21.ap-northeast-2.compute.amazonaws.com:8000';  //여기에 통신을 원하는 주소를 입력하시면 됩니다. 마지막에 '/' 붙이는 것은 필수입니다.
+  final String dns = 'http://ec2-3-36-253-81.ap-northeast-2.compute.amazonaws.com:8000';  //여기에 통신을 원하는 주소를 입력하시면 됩니다. 마지막에 '/' 붙이는 것은 필수입니다.
   // final String dns = 'http://210.113.102.147/';
 
   String getDns(){

@@ -10,20 +10,20 @@ extension LoginEnum on Login{
   String get value{
     switch(this){
       case Login.LOGIN_SUCCESS:
-        return 'LOGIN_SUCCESS';
+        return 'success';
       case Login.USER_IS_ALREADY_LOGGED_IN:
-        return 'ALREADY_LOGGED_IN';
+        return 'already_logged_in';
       case Login.USER_ACCOUNT_IS_NOT_EXISTED:
-        return 'ACCOUNT_NOT_EXISTED';
+        return 'account_not_existed';
     }
   }
   Login isIt(dynamic value){
     switch(value){
-      case 'LOGIN_SUCCESS':
+      case 'success':
         return Login.LOGIN_SUCCESS;
-      case 'ALREADY_LOGGED_IN':
+      case 'already_logged_in':
         return Login.USER_IS_ALREADY_LOGGED_IN;
-      case 'ACCOUNT_NOT_EXISTED':
+      case 'account_not_existed':
         return Login.USER_ACCOUNT_IS_NOT_EXISTED;
 
     }
