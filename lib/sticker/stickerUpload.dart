@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
 
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -9,7 +10,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:image_crop/image_crop.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../app/data/provider/callApi.dart';
+import '../network/callApi.dart';
 import '../sameArea/newBottomBar.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -24,15 +25,15 @@ class _StickerUploadState extends State<StickerUpload> {
 
   final cropKey = GlobalKey<CropState>();
   File? _file;
-  File? _sample;
+  File? sample;
   File? _lastCropped;
   final storage = const FlutterSecureStorage();
-
+  Map<String, dynamic> beacon = Get.arguments;
   @override
   void dispose() {
     super.dispose();
     _file?.delete();
-    _sample?.delete();
+    sample?.delete();
     _lastCropped?.delete();
   }
 
@@ -75,7 +76,7 @@ class _StickerUploadState extends State<StickerUpload> {
           child: Container(
             color: Colors.black,
             padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 20.0),
-            child: _sample == null ? _buildOpeningImage() : _buildCroppingImage(),
+            child: sample == null ? _buildOpeningImage() : _buildCroppingImage(),
           ),
         ),
       )
@@ -90,7 +91,7 @@ class _StickerUploadState extends State<StickerUpload> {
     return Column(
       children: <Widget>[
         Expanded(
-          child: Crop.file(_sample!, key: cropKey),
+          child: Crop.file(sample!, key: cropKey),
         ),
         Container(
           padding: const EdgeInsets.only(top: 20.0),
@@ -146,29 +147,72 @@ class _StickerUploadState extends State<StickerUpload> {
   Future<void> _openImage() async {
     final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
     final file = File(pickedFile!.path);
-    final sample = await ImageCrop.sampleImage(
+    final _sample = await ImageCrop.sampleImage(
       file: file,
       preferredSize: context.size!.longestSide.ceil(),
     );
 
-    _sample?.delete();
+    sample?.delete();
     _file?.delete();
 
     setState(() {
-      _sample = sample;
+      sample = _sample;
       _file = file;
     });
   }
   ///이미지 잘라 비율을 넘기는 함수
   Future<void> _cropImage() async {
+    Get.back();
+    CallApi.circularLoading(context, "전송중입니다");
     final area = cropKey.currentState!.area!;
+    String uploader_gmail_id = await storage.read(key: 'id')??"";
     Map<String, dynamic> map = {};
     List<double> rectangle = [area.topLeft.dx,area.topLeft.dy,area.topRight.dx - area.topLeft.dx,area.bottomLeft.dy - area.topLeft.dy];
     map['rectangle'] = rectangle;
+    map['beacon_mac'] = beacon['mac_addr'];
+    map['uploader_gmail_id'] = uploader_gmail_id;
+    // List<int> imageBytes = sample!.readAsBytesSync();
 
+    // String base64Image = Base64Encoder(imageBytes);
+    map['image'] = sample;
     CallApi post = CallApi();
-    var response = await post.RequestHttp('/user/account/login', json.encode(map));
-
+    var formData = dio.FormData.fromMap({
+      'rectangle[]': rectangle,
+      'beacon_mac': beacon['mac_addr'],
+      'uploader_gmail_id' : uploader_gmail_id,
+      'image': await dio.MultipartFile.fromFile(_file!.path, filename: 'temp.png'),
+    });
+    var response = await post.dioFileTransfer('/image/sticker/upload',formData);
+    String result = response["result"];
+    if(result=='success'){
+      Get.back();
+      Get.dialog(AlertDialog(
+        title: Text('성공'),
+        content: Text('전송 완료'),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Get.back();
+                // Get.to(GMapSample());
+              },
+              child: const Text("닫기"))
+        ],
+      ));
+    }else{
+      Get.back();
+      Get.dialog(AlertDialog(
+        title: Text('에러 발생'),
+        content: Text('다음에 시도해 주시기 바랍니다.'),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Get.back();
+                // Get.to(GMapSample());
+              },
+              child: const Text("닫기"))
+        ],
+      ));
+    }
     // scale up to use maximum possible number of pixels
     // this will sample image in higher resolution to make cropped image larger
     // final sample = await ImageCrop.sampleImage(

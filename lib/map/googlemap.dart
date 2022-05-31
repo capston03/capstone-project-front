@@ -87,7 +87,8 @@ class _GMapSample extends State<GMapSample> {
     userCurrentLocate['range_radius'] = func.rangeData;
     buildingList = await post.RequestHttp(
         '/building/nearby', json.encode(userCurrentLocate));
-    func.addMarker(buildingList['result']);
+    buildingList = buildingList['result'];
+    func.addMarker(buildingList);
     _getCurrentLocation();
     return LatLng(position.latitude, position.longitude);
   }
