@@ -30,6 +30,7 @@ class _newBottomBar extends State<newBottomBar>{
   Widget build(BuildContext context) {
     var _currentIndex = index;
     route = Get.currentRoute;
+    print(Get.arguments);
     return SalomonBottomBar(
       currentIndex: _currentIndex,
       onTap: (i){

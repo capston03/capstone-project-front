@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
@@ -20,7 +20,20 @@ class CallApi{
   String getDns(){
     return dns;
   }
-
+  Future<dynamic> dioFileTransfer(String uri, FormData data)async {
+    uri = dns+uri;
+    var options = BaseOptions(
+      connectTimeout: 20000,
+    );
+    Dio dio = Dio(options);
+    dio.options.headers["Content-Type"] = "multipart/form-data";
+    try {
+      var response = await dio.post(uri, data: data);
+      return response.data;
+    }catch(e){
+      Exception(e);
+    }
+  }
   /*
     uri : /없이 주소 넣기
     map : Map형식으로 데이터 넣기
@@ -208,6 +221,8 @@ class CallApi{
 
     );
   }
+
+
 
 
 }

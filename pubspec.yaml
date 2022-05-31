@@ -42,7 +42,7 @@ dependencies:
   flutter_secure_storage:
   sqflite:
   path:
-
+  dio:
 #  ar_flutter_plugin:
 #  arcore_flutter_plugin:
   # The following adds the Cupertino Icons font to your application.

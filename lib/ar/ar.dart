@@ -99,6 +99,7 @@ class _ArtWidgetState extends State<ArtWidget> {
 
   //핸드폰 뒤로가기 눌렀을 때 다이얼로그 표출 및 셋팅 저장
   Future<bool> _onWillPop() async {
+    print("asdasas${Get.arguments}");
     return (await showDialog(
           barrierDismissible: false,
           context: context,

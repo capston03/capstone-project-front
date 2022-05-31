@@ -22,6 +22,7 @@ class _PhotoUploadState extends State<PhotoUpload> {
   late File imageFile1; //이미지 파일 저장 변수
   bool image_pick1 = false; // 이미지를 골랐는지 안했는지를 체크
   List<File> imageFiles = [];
+  Map<String, dynamic> beacon = Get.arguments;
   final List<TextEditingController> controller = List.generate(
       2, (index) => TextEditingController()); // text edit controller부여
 
@@ -151,7 +152,7 @@ class _PhotoUploadState extends State<PhotoUpload> {
                         width: 38.w,
                       ),
                       Padding(padding: EdgeInsets.only(left: 10.w)),
-                      Text('중앙대학교 310관 카페 앞')
+                      Text(beacon['detail_location']),
                     ],
                   ),
                   Padding(padding: EdgeInsets.only(top: 10.h)),
