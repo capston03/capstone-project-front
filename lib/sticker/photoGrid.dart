@@ -1,6 +1,8 @@
 import 'package:capstone_android/sameArea/bottomBar.dart';
 import 'package:flutter/material.dart';
 
+import '../sameArea/newBottomBar.dart';
+
 class PhotoGrid extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -27,7 +29,7 @@ class _HomePageState extends State<PhotoGrid> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text("Home"),
+        title: Text("사진 부분 선택"),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.all(10.0),
@@ -73,7 +75,7 @@ class _HomePageState extends State<PhotoGrid> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomBar(1),
+      bottomNavigationBar: newBottomBar(1,2),
     );
   }
 }

@@ -63,7 +63,7 @@ class _StickerUploadState extends State<StickerUpload> {
       onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('StickerUpload'),
+          title: Text('스티커 업로드'),
           centerTitle: true,
           elevation: 0.0,
         ),
