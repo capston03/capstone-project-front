@@ -75,7 +75,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
   }
 
   void printPhotoList(){
-    Beacon beacon = new Beacon();
+    Beacon beacon = new Beacon(1);
 
     //TODO: 나중에 정보 넣기
     Get.dialog(
@@ -216,7 +216,7 @@ class _ScreenshotWidgetState extends State<ScreenshotWidget> {
             child: Center(
                 child: capturedImage != null
                     ? Image.memory(capturedImage)
-                    : Container(child: Text('씨발'),)),
+                    : Container(child: Text('ㅇㄴㅇㄹ'),)),
           ));
         }
     );

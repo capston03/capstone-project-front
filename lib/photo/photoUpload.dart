@@ -227,7 +227,6 @@ class _PhotoUploadState extends State<PhotoUpload> {
                         child: GestureDetector(
                           child: Container(
                             decoration: BoxDecoration(
-                                border: Border.all(width: 0.5),
                                 gradient: LinearGradient(
                                   begin: Alignment.topLeft,
                                   end:Alignment.bottomRight,
