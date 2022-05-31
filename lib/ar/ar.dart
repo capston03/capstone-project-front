@@ -22,6 +22,8 @@ import 'package:ar_flutter_plugin/models/ar_anchor.dart';
 import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
 import 'package:ar_flutter_plugin/models/ar_node.dart';
 import 'package:ar_flutter_plugin/widgets/ar_view.dart';
+import 'package:capstone_android/ar/bleList.dart';
+import 'package:capstone_android/map/googlemap.dart';
 import 'package:capstone_android/network/callApi.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 //
@@ -120,18 +122,22 @@ class _ArtWidgetState extends State<ArtWidget> {
         false;
   }
 
+
+
   void printPhotoList() {
     //TODO: 나중에 정보 넣기
+    Beacon beacon = Beacon(0);
+    var beaconList = beacon.getBeaconList();
     Get.dialog(
       AlertDialog(
         content: Container(
           child: ListView.builder(
               padding: const EdgeInsets.all(10),
-              itemCount: 10,
+              itemCount: beaconList.length + 1,
               itemBuilder: (BuildContext context, int index) {
                 if (index == 0) return HeaderTile();
                 //return showList();
-                return const showList(title: "제목", info: "내용");
+                return showList(title: beacon.getDeviceName(beaconList[index - 1]), info: "내용");
               }),
           height: 400.h,
           width: 300.w,

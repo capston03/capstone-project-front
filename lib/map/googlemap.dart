@@ -388,4 +388,5 @@ class _GMapSample extends State<GMapSample> {
       _getCurrentLocation();
     });
   }
+
 }
