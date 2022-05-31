@@ -87,7 +87,6 @@ class _GMapSample extends State<GMapSample> {
     userCurrentLocate['range_radius'] = func.rangeData;
     buildingList = await post.RequestHttp(
         '/building/nearby', json.encode(userCurrentLocate));
-    print('aaaaaaaaaaaaaaa$buildingList');
     func.addMarker(buildingList['result']);
     _getCurrentLocation();
     return LatLng(position.latitude, position.longitude);
@@ -120,7 +119,6 @@ class _GMapSample extends State<GMapSample> {
     Map<String, dynamic> request = await post.RequestHttp(
         '/beacon/nearby', json.encode(data));
     request = request['result'];
-    print(request.length);
     if (request.isNotEmpty) {
       Get.dialog(AlertDialog(
 

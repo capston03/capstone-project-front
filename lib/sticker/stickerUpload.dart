@@ -10,9 +10,8 @@ import 'package:image_crop/image_crop.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../app/data/provider/callApi.dart';
-import '../sameArea/bottomBar.dart';
 import '../sameArea/newBottomBar.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class StickerUpload extends StatefulWidget {
   const StickerUpload({Key? key}) : super(key: key);
@@ -24,9 +23,10 @@ class StickerUpload extends StatefulWidget {
 class _StickerUploadState extends State<StickerUpload> {
 
   final cropKey = GlobalKey<CropState>();
-  File? _file = null;
-  File? _sample = null;
-  File? _lastCropped = null;
+  File? _file;
+  File? _sample;
+  File? _lastCropped;
+  final storage = const FlutterSecureStorage();
 
   @override
   void dispose() {
@@ -168,14 +168,6 @@ class _StickerUploadState extends State<StickerUpload> {
 
     CallApi post = CallApi();
     var response = await post.RequestHttp('/user/account/login', json.encode(map));
-    // print(area.topLeft.dx);
-    // print(area.topLeft.dy);
-    // print(area.topRight.dx - area.topLeft.dx);
-    // print(area.bottomLeft.dy - area.topLeft.dy);
-    if (area == null) {
-      // cannot crop, widget is not setup
-      return;
-    }
 
     // scale up to use maximum possible number of pixels
     // this will sample image in higher resolution to make cropped image larger

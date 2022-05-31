@@ -71,7 +71,7 @@ class _ArtWidgetState extends State<ArtWidget> {
   late ARSessionManager arSessionManager;
   late ARObjectManager arObjectManager;
   late ARAnchorManager arAnchorManager;
-
+  Map<String, dynamic> beaconNow = Get.arguments;
   //Screenshot Controller
   ScreenshotController screenshotController = ScreenshotController();
   static GlobalKey previewContainer = GlobalKey();
