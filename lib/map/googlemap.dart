@@ -87,7 +87,7 @@ class _GMapSample extends State<GMapSample> {
     userCurrentLocate['range_radius'] = func.rangeData;
     buildingList = await post.RequestHttp(
         '/building/nearby', json.encode(userCurrentLocate));
-    // print('aaaaaaaaaaaaaaa$buildingList');
+    print('aaaaaaaaaaaaaaa$buildingList');
     func.addMarker(buildingList['result']);
     _getCurrentLocation();
     return LatLng(position.latitude, position.longitude);
@@ -119,12 +119,12 @@ class _GMapSample extends State<GMapSample> {
     }
     Map<String, dynamic> request = await post.RequestHttp(
         '/beacon/nearby', json.encode(data));
-    print(request);
+    request = request['result'];
     print(request.length);
-    if (request['result'] == null) {
+    if (request.isNotEmpty) {
       Get.dialog(AlertDialog(
 
-        title: Text('정보'),
+        title: const Text('정보'),
         content: Text(
             '근처 건물의 비콘을 찾았습니다.\n${request['0']['detail_location']}\n건물에 들어가시겠습니까?'),
         actions: [
@@ -136,7 +136,6 @@ class _GMapSample extends State<GMapSample> {
                 onPressed: () {
                   Get.back();
                   printBuildingList(request);
-                  // aa.showPhotoDetail();
                 },
                 child: const Text("다른 리스트 확인"))
           ],

@@ -54,15 +54,19 @@ class _SignInDemo extends State<SignInDemo> {
     if(id==""){
       return;
     }
-    print('autoLogin');
     Map<String, dynamic> map = {};
     map['user_gmail_id'] = id; //이메일 앞글자만 보내기
+    map['gmail_id'] = id; //이메일 앞글자만 보내기
     map['android_id'] = androidId; //이메일 앞글자만 보내기
     map['device_model'] = model; //이메일 앞글자만 보내기
     CallApi post = CallApi();
     try {
+      var test = await post.RequestHttp('/user/account/logout', json.encode(map));
       var response = await post.RequestHttp('/user/account/login', json.encode(map));
-      String result = response['result'];
+      print("aaaaaaa$response");
+      var result = response['result'];
+
+
       loginAfter(id, result);
     }catch(e){
       Get.dialog(AlertDialog(
@@ -80,10 +84,11 @@ class _SignInDemo extends State<SignInDemo> {
 
   }
 
-  Future<void> loginAfter(String email, String result) async {
-    print('result$result');
-    if (result == LoginEnum.Login.LOGIN_SUCCESS.value) {
+  Future<void> loginAfter(String email, dynamic result) async {
+    if (result['code'] == LoginEnum.Login.LOGIN_SUCCESS.value) {
       await storage.write(key: 'id', value: email);
+      await storage.write(key: 'nick', value: result['nick']);
+
       //login success
       Get.dialog(AlertDialog(
         title: const Text('성공'),
@@ -208,12 +213,16 @@ class _SignInDemo extends State<SignInDemo> {
       String email = user.email.split('@')[0];
       Map<String, dynamic> map = {};
       map['user_gmail_id'] = email; //이메일 앞글자만 보내기
+      map['gmail_id'] = email; //이메일 앞글자만 보내기
       map['android_id'] = androidId; //이메일 앞글자만 보내기
       map['device_model'] = model; //이메일 앞글자만 보내기
       CallApi post = CallApi();
       try {
+        await post.RequestHttp('/user/account/logout', json.encode(map));
         var response = await post.RequestHttp('/user/account/login', json.encode(map));
-        String result = response['result'];
+        var result = response['result'];
+
+        print(result);
         loginAfter(email, result);
       }catch(e){
         Get.dialog(AlertDialog(
