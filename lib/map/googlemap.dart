@@ -179,22 +179,36 @@ class _GMapSample extends State<GMapSample> {
     /// TODO
     /// 나중에 [0]이 메인 맥주소
     /// 이걸 기준으로 벤 or do something
-    Future.delayed(const Duration(seconds: 3)).then((_) async {
+    Future.delayed(const Duration(seconds: 6)).then((_) async {
       for (ScanResult beacon in scanResultList) {
         String name = beacon.device.name.isNotEmpty
             ? beacon.device.name
             : beacon.advertisementData.localName.isNotEmpty
-                ? beacon.advertisementData.localName
-                : 'N/A';
+            ? beacon.advertisementData.localName
+            : 'N/A';
         String mac = beacon.device.id.id;
+        print(name);
         if (name.startsWith('trc')) {
           candidateBeacon.add(mac);
         }
       }
+
+      print("candidateBeacon length : " + candidateBeacon.length.toString());
+
       if (candidateBeacon.isNotEmpty) {
+        print("callBLECheck called");
         await callBLECheck(candidateBeacon);
+      } else {
+        //beacon list 하나도 뜨지 않는 경우 dialog
+        Get.dialog(AlertDialog(
+          title: const Text('오류'),
+          content: const Text('비콘을 찾지 못하였습니다.\n\'비콘 찾기\'버튼을 다시 한번 눌러주세요.'),
+          actions: [
+            TextButton(onPressed: () => Get.back(), child: const Text("닫기"))
+          ],
+        ));
       }
-    });
+      });
     //
     // Future.delayed(const Duration(seconds: 3),() async {
     //   for(ScanResult beacon in scanResultList){
@@ -217,7 +231,7 @@ class _GMapSample extends State<GMapSample> {
       if (!_isScanning) {
         print('start');
         scanResultList.clear();
-        flutterBlue.startScan(timeout: const Duration(seconds: 2));
+        flutterBlue.startScan(timeout: const Duration(seconds: 5));
         flutterBlue.scanResults.listen((results) {
           scanResultList = results;
           // if(mounted) {
