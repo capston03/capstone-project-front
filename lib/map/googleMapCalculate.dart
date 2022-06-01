@@ -22,7 +22,7 @@ class GoogleMapFunctions{
         position: LatLng(my_latitude, my_longitude));
   }
 
-  /// add marker (with building List)
+  /// add marker (with building Sticker)
   void addMarker(LinkedHashMap<String, dynamic> buildingList) {
     bMarkers = [];
     for (final bBuilding in buildingList.values) {
