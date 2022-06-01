@@ -40,20 +40,20 @@ extension LogoutEnum on Logout{
   String get value{
     switch(this){
       case Logout.USER_ACCOUNT_IS_NOT_EXISTED:
-        return 'ACCOUNT_NOT_EXISTED';
+        return 'account_not_existed';
       case Logout.LOGOUT_SUCCESS:
-        return 'LOGOUT_SUCCESS';
+        return 'success';
       case Logout.USER_IS_ALREADY_LOGGED_OUT:
-        return 'ALREADY_LOGGED_OUT';
+        return 'already_logged_out';
     }
   }
   Logout isIt(dynamic value){
     switch(value){
-      case 'ACCOUNT_NOT_EXISTED':
+      case 'account_not_existed':
         return Logout.USER_ACCOUNT_IS_NOT_EXISTED;
-      case 'LOGOUT_SUCCESS':
+      case 'success':
         return Logout.LOGOUT_SUCCESS;
-      case 'ALREADY_LOGGED_OUT':
+      case 'already_logged_out':
         return Logout.USER_IS_ALREADY_LOGGED_OUT;
 
     }
@@ -71,24 +71,24 @@ extension SignupEnum on Signup{
   String get value{
     switch(this){
       case Signup.NICKNAME_IS_ALREADY_USED:
-        return 'NICKNAME_ALREADY_USED';
+        return 'nickname_already_used';
       case Signup.ACCOUNT_IS_ALREADY_EXISTED:
-        return 'GMAIL_ID_ALREADY_EXISTED';
+        return 'gmail_id_already_used';
       case Signup.NOT_VALID_USER_INFO:
-        return 'INVALID_INPUT';
+        return 'invalid_input';
       case Signup.SIGNUP_SUCCESS:
-        return 'SIGNUP_SUCCESS';
+        return 'success';
     }
   }
   Signup isIt(dynamic value){
     switch(value){
-      case 'GMAIL_ID_ALREADY_EXISTED':
+      case 'gmail_id_already_used':
         return Signup.ACCOUNT_IS_ALREADY_EXISTED;
-      case 'SIGNUP_SUCCESS':
+      case 'success':
         return Signup.SIGNUP_SUCCESS;
-      case 'NICKNAME_ALREADY_USED':
+      case 'nickname_already_used':
         return Signup.NICKNAME_IS_ALREADY_USED;
-      case 'INVALID_INPUT':
+      case 'invalid_input':
         return Signup.NOT_VALID_USER_INFO;
 
     }
@@ -106,21 +106,21 @@ extension NickEnum on Nick{
   String get value{
     switch(this){
       case Nick.EXISTED:
-        return 'NICKNAME_ALREADY_USED';
+        return 'already_used';
       case Nick.NOT_VALID_USER_INFO:
-        return 'INVALID_INPUT';
+        return 'invalid_input';
       case Nick.NOT_EXISTED:
-        return 'NICKNAME_VALID';
+        return 'valid';
 
     }
   }
   Nick isIt(dynamic value){
     switch(value){
-      case 'NICKNAME_VALID':
+      case 'valid':
         return Nick.NOT_EXISTED;
-      case 'INVALID_INPUT':
+      case 'invalid_input':
         return Nick.NOT_VALID_USER_INFO;
-      case 'NICKNAME_ALREADY_USED':
+      case 'already_used':
         return Nick.EXISTED;
 
     }

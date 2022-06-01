@@ -63,7 +63,6 @@ class _SignInDemo extends State<SignInDemo> {
     try {
       var test = await post.RequestHttp('/user/account/logout', json.encode(map));
       var response = await post.RequestHttp('/user/account/login', json.encode(map));
-      print("aaaaaaa$response");
       var result = response['result'];
 
 
@@ -102,11 +101,11 @@ class _SignInDemo extends State<SignInDemo> {
               child: const Text("닫기"))
         ],
       ),barrierDismissible: false);
-    } else if (result == LoginEnum.Login.USER_ACCOUNT_IS_NOT_EXISTED.value) {
-      //user 계정이 없는 경우
+    } else if (result['code'] == LoginEnum.Login.USER_ACCOUNT_IS_NOT_EXISTED.value) {
+      //user 계정이 없는 경우.
       await logout();
       Get.toNamed('/signup', arguments: email);
-    } else if (result == LoginEnum.Login.USER_IS_ALREADY_LOGGED_IN.value) {
+    } else if (result['code'] == LoginEnum.Login.USER_IS_ALREADY_LOGGED_IN.value) {
       //이미 로그인한경우
       //TODO 후에 서버에서 연결을 취소하고, 여기선 로그아웃 후 로그인을 보낸다(다이얼로그로 확인 요망)
       //지금은 임시로 성공이라고하겠다
@@ -221,8 +220,6 @@ class _SignInDemo extends State<SignInDemo> {
         await post.RequestHttp('/user/account/logout', json.encode(map));
         var response = await post.RequestHttp('/user/account/login', json.encode(map));
         var result = response['result'];
-
-        print(result);
         loginAfter(email, result);
       }catch(e){
         Get.dialog(AlertDialog(
