@@ -121,7 +121,6 @@ class _PhotoUploadState extends State<PhotoUpload> {
                               imageFile1, //내가 고른 이미지
                               fit: BoxFit.fill,
                               color:const Color.fromRGBO(255, 255, 255, 0.5),
-                              colorBlendMode: BlendMode.modulate,
                               // height: 216.h,
                             ),
                             onTap: () {
