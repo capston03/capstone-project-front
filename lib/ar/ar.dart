@@ -91,7 +91,6 @@ class _ArtWidgetState extends State<ArtWidget> {
 
   //핸드폰 뒤로가기 눌렀을 때 다이얼로그 표출 및 셋팅 저장
   Future<bool> _onWillPop() async {
-    print("asdasas${Get.arguments}");
     return (await showDialog(
           barrierDismissible: false,
           context: context,
@@ -156,17 +155,17 @@ class _ArtWidgetState extends State<ArtWidget> {
     return WillPopScope(
       child: Scaffold(
           appBar: AppBar(
-            actions: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(right: 20.0),
-                child: IconButton(
-                  icon: Icon(Icons.menu),
-                  onPressed: () {
-                    printPhotoList();
-                  },
-                ),
-              ),
-            ],
+            // actions: <Widget>[
+            //   Padding(
+            //     padding: EdgeInsets.only(right: 20.0),
+            //     child: IconButton(
+            //       icon: Icon(Icons.menu),
+            //       onPressed: () {
+            //         printPhotoList();
+            //       },
+            //     ),
+            //   ),
+            // ],
           ),
           bottomNavigationBar: newBottomBar(1,0),
           body: Container(
@@ -373,9 +372,15 @@ class _ArtWidgetState extends State<ArtWidget> {
 
   void showScreenMenu() async {
     String gmail_id = await storage.read(key: 'id')??'';
+    print("gggggggggggg${getController.episode}");
+    getController.episodes=-1;
+    print("gggggggggggg${getController.episode}");
+
     showModalBottomSheet(
         context: context,
-        builder: (context)=> StickerMenu(beacon_mac: beaconNow['mac_addr'],gmail_id: gmail_id));
+        builder: (context){
+          return StickerMenu(beacon_mac: beaconNow['mac_addr'],gmail_id: gmail_id);
+        });
   }
 
   void showBottomPopupSizing(ARNode selectedNode) {
@@ -416,7 +421,7 @@ class _ArtWidgetState extends State<ArtWidget> {
                           var newRotationAxisZ = vector.Vector3(0, 0, 1.0);
                           final newTransform = Matrix4.identity();
                           newTransform.scale(
-                              int.parse(getController.getScale(node)) * 0.004);
+                              int.parse(getController.getScale(node)) * 0.004*0.05);
                           newTransform.rotate(newRotationAxisX,
                               getController.getRotateX(node) * (6.27 / 360));
                           newTransform.rotate(newRotationAxisY,
@@ -571,15 +576,9 @@ class _ArtWidgetState extends State<ArtWidget> {
         // Add note to anchor
         var newNode = ARNode(
             type: NodeType.webGLB,
-            uri:
-                // "https://github.com/namhyo01/Boxiting/raw/master/temp.glb",
-                // "https://github.com/namhyo01/Boxiting/blob/master/converted.glb?raw=true",
-                // "https://github.com/namhyo01/Boxiting/blob/master/cub.glb?raw=true",
-                // "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF-Binary/Duck.glb",
-                // "https://github.com/namhyo01/Boxiting/blob/master/cub.gltf?raw=true",
-                // "https://github.com/namhyo01/Boxiting/blob/master/starbucks.glb?raw=true",
-            "https://github.com/namhyo01/Boxiting/blob/master/card.glb?raw=true",
-            scale: vector.Vector3(0.1, 0.1, 0.1),
+            uri: getController.glbUrl.value,
+            // "https://github.com/namhyo01/Boxiting/blob/master/card.glb?raw=true",
+            scale: vector.Vector3(0.005, 0.005, 0.005),
             position: vector.Vector3(0.0, 0.0, 0.0),
             rotation: vector.Vector4(1.0, 0.0, 0.0, 0.0));
         getController.setNodeData(newNode.name);
@@ -594,17 +593,10 @@ class _ArtWidgetState extends State<ArtWidget> {
       } else {
         // this.arSessionManager.onError("Adding Anchor failed");
       }
-      /*
-      // To add a node to the tapped position without creating an anchor, use the following code (Please mind: the function onRemoveEverything has to be adapted accordingly!):
-      var newNode = ARNode(
-          type: NodeType.localGLTF2,
-          uri: "Models/Chicken_01/Chicken_01.gltf",
-          scale: Vector3(0.2, 0.2, 0.2),
-          transformation: singleHitTestResult.worldTransform);
-      bool didAddWebNode = await this.arObjectManager.addNode(newNode);
-      if (didAddWebNode) {
-        this.nodes.add(newNode);
-      }*/
+
     }
   }
+
+
+
 }

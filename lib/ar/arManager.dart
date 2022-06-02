@@ -13,7 +13,13 @@ class ArManager extends GetxController{
   RxMap<String,RxMap<String, RxDouble>> nodeData = {"null":{"scaleSelectedValue":50.0.obs, "rotateX":0.0.obs,"rotateY":0.0.obs,"rotateZ":0.0.obs}.obs }.obs;
   var scaleSelectedValue = '50'.obs;
   var controller = SliderController(0.0).obs;
+  var glbUrl = "".obs;
+  RxInt episodeId = (-1).obs;
 
+  set episodes(int val)=>this.episodeId.value = val;
+  get episode => this.episodeId.value;
+  set glburl(String val)=>this.glbUrl.value = val;
+  get glburls => this.glbUrl.value;
   //erase or all Node data
   void removeNodeData(){
     nodeData.clear();
