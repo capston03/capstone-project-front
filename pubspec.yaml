@@ -73,6 +73,7 @@ dependencies:
   gallery_saver:
   syncfusion_flutter_sliders:
   flutter_launcher_icons:
+  photo_view:
 dev_dependencies:
   flutter_test:
     sdk: flutter
