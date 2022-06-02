@@ -10,16 +10,25 @@ class SliderController{
 
 class ArManager extends GetxController{
   // var transformationData = {"scaleSelectedValue":50, "rotateX":0,"rotateY":0,"rotateZ":0}.obs;
-  RxMap<String,RxMap<String, RxDouble>> nodeData = {"null":{"scaleSelectedValue":50.0.obs, "rotateX":0.0.obs,"rotateY":0.0.obs,"rotateZ":0.0.obs}.obs }.obs;
+  RxMap<String,RxMap<String, RxDouble>> nodeData = {"null":{"scaleSelectedValue":50.0.obs, "rotateX":0.0.obs,"rotateY":0.0.obs,"rotateZ":0.0.obs,"episode_id":(-1.0).obs}.obs }.obs;
   var scaleSelectedValue = '50'.obs;
   var controller = SliderController(0.0).obs;
+  var glbUrl = "".obs;
+  var isChangingSize = false.obs;
+  RxInt episodeId = (-1).obs;
 
+  set setSizing(bool val)=>this.isChangingSize.value = val;
+  get getSizing=>this.isChangingSize.value;
+  set episodes(int val)=>this.episodeId.value = val;
+  get episode => this.episodeId.value;
+  set glburl(String val)=>this.glbUrl.value = val;
+  get glburls => this.glbUrl.value;
   //erase or all Node data
   void removeNodeData(){
     nodeData.clear();
   }
-  void setNodeData(String node){
-    nodeData[node] = {"scaleSelectedValue":50.0.obs, "rotateX":0.0.obs,"rotateY":0.0.obs,"rotateZ":0.0.obs}.obs;
+  void setNodeData(String node,double episode){
+    nodeData[node] = {"scaleSelectedValue":50.0.obs, "rotateX":0.0.obs,"rotateY":0.0.obs,"rotateZ":0.0.obs,"episode_id":episode.obs}.obs;
   }
   Map<String, RxDouble> getNodeData(String node){
     return nodeData[node]!.value;
@@ -32,6 +41,15 @@ class ArManager extends GetxController{
   // String getScale(){
   //   return scaleSelectedValue.value;
   // }
+
+  int getEpisode(String node){
+    int data = nodeData[node]!["episode_id"]?.value.toInt()??-1;
+    return data;
+  }
+  void setEpisode(String node, double x){
+    nodeData[node]!["episode_id"]?.value = x;
+  }
+
   String getScale(String node){
     int data = nodeData[node]!["scaleSelectedValue"]?.value.toInt()??50;
     return data.toString();

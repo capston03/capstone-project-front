@@ -376,6 +376,7 @@ class _SignInDemo extends State<SignInDemo> {
                           ElevatedButton(
                             onPressed: () async => await signIn(),
                             style: ButtonStyle(
+                              padding:MaterialStateProperty.all(const EdgeInsets.all(10)),
                               elevation: MaterialStateProperty.all(2),
                               overlayColor:
                                   MaterialStateProperty.all(Colors.black12),
@@ -386,8 +387,7 @@ class _SignInDemo extends State<SignInDemo> {
                                       borderRadius: BorderRadius.circular(50))),
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.white),
-                              fixedSize: MaterialStateProperty.all(
-                                  const Size(412, 60)),
+
                             ),
                             child: Row(
                               children: [

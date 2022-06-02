@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:capstone_android/network/callApi.dart';
 import 'package:capstone_android/sameArea/bottomBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
@@ -256,111 +258,114 @@ class _GMapSample extends State<GMapSample> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Google Map with Beacon"),
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      bottomNavigationBar: newBottomBar(0, 0),
-      body: FutureBuilder<LatLng>(
-        future: currentLocation,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Stack(
-              children: [
-                GoogleMap(
-                  initialCameraPosition:
+    return WillPopScope(
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text("Google Map with Beacon"),
+            centerTitle: true,
+            elevation: 0.0,
+          ),
+          bottomNavigationBar: newBottomBar(0, 0),
+          body: FutureBuilder<LatLng>(
+            future: currentLocation,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Stack(
+                  children: [
+                    GoogleMap(
+                      initialCameraPosition:
                       CameraPosition(target: snapshot.data!, zoom: 18.0),
-                  markers: Set.from(func.bMarkers),
-                  onMapCreated: (GoogleMapController controller) {
-                    _controller.complete(controller);
-                  },
-                  circles: {
-                    Circle(
-                      circleId: CircleId('currentCircle'),
-                      center: LatLng(func.my_latitude, func.my_longitude),
-                      radius: func.rangeData,
-                      fillColor: Colors.blue.shade100.withOpacity(0.5),
-                      strokeColor: Colors.blue.shade100.withOpacity(0.1),
-                    )
-                  },
-                ),
-                Positioned(
-                  child: FloatingActionButton.extended(
-                    heroTag: "btn2",
-                    onPressed: () async {
-                      final GoogleMapController controller =
-                          await _controller.future;
-                      controller.animateCamera(CameraUpdate.newCameraPosition(
-                          CameraPosition(
-                              target: await getLocation(), zoom: 18.0)));
-                    },
-                    label: Text('현재 위치'),
-                    icon: Icon(Icons.gps_fixed),
-                  ),
-                  top: 10.h,
-                  right: 20.w,
-                ),
-                Positioned(
-                  child: Slider(
-                    activeColor: Colors.green,
-                    inactiveColor: Color(0xff8fb0c6),
-                    max: 500,
-                    value: func.rangeData,
-                    min: 100,
-                    divisions: 4,
-                    label: func.rangeData.round().toString(),
-                    onChanged: (double val) {
-                      setState(() {
-                        func.rangeData = val;
-                        func.addMarker(buildingList);
-                      });
-                    },
-                  ),
-                  right: 10.w,
-                  top: 50.h,
-                ),
-                Positioned(
-                    child: FloatingActionButton(
-                      heroTag: "btn3",
-                      onPressed: infiniteScan,
-                      child: Icon(
-                          _isScanning ? Icons.stop : Icons.bluetooth_audio),
+                      markers: Set.from(func.bMarkers),
+                      onMapCreated: (GoogleMapController controller) {
+                        _controller.complete(controller);
+                      },
+                      circles: {
+                        Circle(
+                          circleId: CircleId('currentCircle'),
+                          center: LatLng(func.my_latitude, func.my_longitude),
+                          radius: func.rangeData,
+                          fillColor: Colors.blue.shade100.withOpacity(0.5),
+                          strokeColor: Colors.blue.shade100.withOpacity(0.1),
+                        )
+                      },
                     ),
-                    left: 20.w,
-                    top: 5.h),
-              ],
-            );
-          } else if (snapshot.hasError) {
-            return SafeArea(
-                child: Center(
-                    child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [Text("구글 맵 연동 에러")],
-            )));
-          } else {
-            return SafeArea(
-                child: Center(
-                    child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                SizedBox(
-                  child: CircularProgressIndicator(),
-                  width: 60,
-                  height: 60,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 16),
-                  child: Text('구글 맵 데이터 불러오는 중...'),
-                )
-              ],
-            )));
-          }
-        },
-      ),
+                    Positioned(
+                      child: FloatingActionButton.extended(
+                        heroTag: "btn2",
+                        onPressed: () async {
+                          final GoogleMapController controller =
+                          await _controller.future;
+                          controller.animateCamera(CameraUpdate.newCameraPosition(
+                              CameraPosition(
+                                  target: await getLocation(), zoom: 18.0)));
+                        },
+                        label: Text('현재 위치'),
+                        icon: Icon(Icons.gps_fixed),
+                      ),
+                      top: 10.h,
+                      right: 20.w,
+                    ),
+                    Positioned(
+                      child: Slider(
+                        activeColor: Colors.green,
+                        inactiveColor: Color(0xff8fb0c6),
+                        max: 500,
+                        value: func.rangeData,
+                        min: 100,
+                        divisions: 4,
+                        label: func.rangeData.round().toString(),
+                        onChanged: (double val) {
+                          setState(() {
+                            func.rangeData = val;
+                            func.addMarker(buildingList);
+                          });
+                        },
+                      ),
+                      right: 10.w,
+                      top: 50.h,
+                    ),
+                    Positioned(
+                        child: FloatingActionButton(
+                          heroTag: "btn3",
+                          onPressed: infiniteScan,
+                          child: Icon(
+                              _isScanning ? Icons.stop : Icons.bluetooth_audio),
+                        ),
+                        left: 20.w,
+                        top: 5.h),
+                  ],
+                );
+              } else if (snapshot.hasError) {
+                return SafeArea(
+                    child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [Text("구글 맵 연동 에러")],
+                        )));
+              } else {
+                return SafeArea(
+                    child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            SizedBox(
+                              child: CircularProgressIndicator(),
+                              width: 60,
+                              height: 60,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 16),
+                              child: Text('구글 맵 데이터 불러오는 중...'),
+                            )
+                          ],
+                        )));
+              }
+            },
+          ),
+        ),
+        onWillPop: _onWillPop,
     );
   }
 
@@ -402,4 +407,29 @@ class _GMapSample extends State<GMapSample> {
     });
   }
 
+  //핸드폰 뒤로가기 눌렀을 때 다이얼로그 표출 및 셋팅 저장
+  Future<bool> _onWillPop() async {
+    print("asdasas${Get.arguments}");
+    return (await showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("종료하시겠습니까?"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('아니오'),
+          ),
+          TextButton(
+            onPressed: () {
+              dispose();
+              exit(0);
+            },
+            child: Text('네'),
+          ),
+        ],
+      ),
+    )) ??
+        false;
+  }
 }
