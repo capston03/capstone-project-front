@@ -6,6 +6,7 @@
 
 import 'dart:async';
 import 'dart:convert' show json, jsonEncode;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -325,15 +326,34 @@ class _SignInDemo extends State<SignInDemo> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 620),
+                      padding: const EdgeInsets.only(bottom: 500),
                       child: const Text(
-                        'Tracer',
+                        'SwB',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 60,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 90,
+                          fontFamily: 'vanilla_twilight'
                         ),
                         textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(85.h,100.h,85.h,370.h),
+                      child: Divider(
+                        color: Colors.white,
+                        thickness: 4.0,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.fromLTRB(0, 100.h, 0, 330.h),
+                      child: Text(
+                        'Sticker with Beacon',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 45,
+                          fontFamily: 'vanilla_twilight'
+                        ),
                       ),
                     ),
                     Padding(

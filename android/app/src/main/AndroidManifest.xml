@@ -12,9 +12,9 @@
     <uses-feature android:name="android.hardware.camera.ar"/>
 
     <application
-            android:label="capstone_android"
+        android:label="SwB"
             android:name="${applicationName}"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/launcher_icon"
             android:usesCleartextTraffic="true"
             android:requestLegacyExternalStorage="true"
             android:networkSecurityConfig="@xml/network_security_config" tools:targetApi="m">
