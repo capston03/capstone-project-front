@@ -21,10 +21,10 @@ Flutter 2.10.5, Dart 2.16.2
 #### AR Page
 
 #### Photo to Sticker
-![Sticker_Upload](https://user-images.githubusercontent.com/48765232/171727165-0e28911f-345a-4c44-999f-08ae95197a5c.jpg)
+<img src="https://user-images.githubusercontent.com/48765232/171727165-0e28911f-345a-4c44-999f-08ae95197a5c.jpg" width="270" height="600">
 
 #### Profile
-![Profile](https://user-images.githubusercontent.com/48765232/171727154-1ef8aa3a-00c7-492d-8bca-97eb1781dad5.jpg)
+<img src="https://user-images.githubusercontent.com/48765232/171727165-0e28911f-345a-4c44-999f-08ae95197a5c.jpg" width="270" height="600">
 
 ### 어플리케이션 실행 방법
 
