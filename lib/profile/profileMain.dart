@@ -27,7 +27,7 @@ class profileMain extends StatelessWidget{
     if (type == 0){
       index = 1;
     }else {
-      index = 3;
+      index = 2;
     }
     return Scaffold(
       appBar: AppBar(

@@ -50,13 +50,10 @@ class _newBottomBar extends State<newBottomBar>{
               Get.offAndToNamed('/test',arguments: Get.arguments);
               break;
             case 1:
-              Get.offAndToNamed('/upload',arguments: Get.arguments);
-              break;
-            case 2:
               Get.offAndToNamed('/stickerUpload',arguments: Get.arguments);
               break;
-            case 3:
-              Get.offAndToNamed('/profile_in',arguments: Get.arguments);
+            case 2:
+                Get.offAndToNamed('/profile_in',arguments: Get.arguments);
               break;
 
           }
@@ -88,13 +85,6 @@ class _newBottomBar extends State<newBottomBar>{
             title: Text("홈"),
             selectedColor: Colors.purple,
 
-          ),
-
-          /// Likes
-          SalomonBottomBarItem(
-            icon: Icon(Icons.camera_alt),
-            title: Text("카메라"),
-            selectedColor: Colors.pink,
           ),
           /// Sticker
           SalomonBottomBarItem(
