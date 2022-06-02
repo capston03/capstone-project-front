@@ -62,7 +62,15 @@ class _StickerUploadState extends State<StickerUpload> {
         )) ??
         false;
   }
-
+  Future<int> validateTitleCheck() async{
+    if (controller[0].value.text == ""){
+      return 0;
+    }
+    if (controller[1].value.text == ""){
+      return 1;
+    }
+    return 2;
+  }
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -75,7 +83,23 @@ class _StickerUploadState extends State<StickerUpload> {
             leading: IconButton(icon: Icon(Icons.arrow_back),onPressed: ()=>_onWillPop(),),
             actions: _file==null?null:<Widget>[
               IconButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    int result = await validateTitleCheck();
+                    print(result);
+                    if(result==0){
+                      Get.dialog(AlertDialog(title: Text('제목을 입력해주세요'),actions: [TextButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: const Text("닫기")),],));
+                    }
+                    else if(result==1){
+                      Get.dialog(AlertDialog(title: Text('내용을 입력해주세요'),actions: [TextButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: const Text("닫기")),],));
+                    }else{
                     Get.dialog(AlertDialog(
                       title: Text('이 화면으로 스티커를 만드시겠습니까?'),
                       actions: [
@@ -91,6 +115,7 @@ class _StickerUploadState extends State<StickerUpload> {
                             child: const Text("닫기"))
                       ],
                     ));
+                    }
                   }, icon: const Icon(Icons.send))
             ],
           ),
@@ -277,30 +302,49 @@ class _StickerUploadState extends State<StickerUpload> {
     map['image'] = sample;
     CallApi post = CallApi();
     var formData = dio.FormData.fromMap({
-      'rectangle[]': rectangle,
+      'foreground_rectangle[]': rectangle,
       'beacon_mac': beacon['mac_addr'],
       'uploader_gmail_id': uploader_gmail_id,
       'image':
           await dio.MultipartFile.fromFile(_file!.path, filename: 'temp.png'),
+      'title' : controller[0].value.text,
+      'content' : controller[1].value.text,
     });
-    var response =
-        await post.dioFileTransfer('/image/sticker/upload', formData);
-    String result = response["result"];
-    if (result == 'success') {
-      Get.back();
-      Get.dialog(AlertDialog(
-        title: Text('성공'),
-        content: Text('전송 완료'),
-        actions: [
-          TextButton(
-              onPressed: () {
-                Get.back();
-                // Get.to(GMapSample());
-              },
-              child: const Text("닫기"))
-        ],
-      ));
-    } else {
+    try {
+      var response =
+      await post.dioFileTransfer('/episode/upload', formData);
+      String result = response["result"];
+      if (result == 'success') {
+        Get.back();
+        Get.dialog(AlertDialog(
+          title: Text('성공'),
+          content: Text('전송 완료'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Get.back();
+                  // Get.to(GMapSample());
+                },
+                child: const Text("닫기"))
+          ],
+        ));
+      } else {
+        Get.back();
+        Get.dialog(AlertDialog(
+          title: Text('에러 발생'),
+          content: Text('다음에 시도해 주시기 바랍니다.'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Get.back();
+                  // Get.to(GMapSample());
+                },
+                child: const Text("닫기"))
+          ],
+        ));
+      }
+
+    }catch(e){
       Get.back();
       Get.dialog(AlertDialog(
         title: Text('에러 발생'),
@@ -315,6 +359,7 @@ class _StickerUploadState extends State<StickerUpload> {
         ],
       ));
     }
+
     // scale up to use maximum possible number of pixels
     // this will sample image in higher resolution to make cropped image larger
     // final sample = await ImageCrop.sampleImage(

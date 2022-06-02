@@ -381,6 +381,7 @@ class _ArtWidgetState extends State<ArtWidget> {
   void showBottomPopupSizing(ARNode selectedNode) {
     String node = selectedNode.name;
     showModalBottomSheet(
+        isScrollControlled: true,
         backgroundColor: Colors.white,
         context: context,
         shape: RoundedRectangleBorder(
