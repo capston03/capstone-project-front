@@ -53,11 +53,6 @@ class body extends StatelessWidget {
           ProfilePic(),
           SizedBox(height: 20),
           ProfileMenu(
-            text: "My Account",
-            icon: Icons.account_box,
-            press: () => {},
-          ),
-          ProfileMenu(
             text: "My Photo",
             icon: Icons.photo,
             press: () {},

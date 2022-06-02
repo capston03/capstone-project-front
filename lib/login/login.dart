@@ -70,7 +70,7 @@ class _SignInDemo extends State<SignInDemo> {
     }catch(e){
       Get.dialog(AlertDialog(
         title: const Text('오류'),
-        content: const Text('서버와의 연결이 끊겼습니다'),
+        content: const Text('서버와의 연결이 끊겼습니다.'),
         actions: [
           TextButton(
               onPressed: () {
@@ -107,7 +107,7 @@ class _SignInDemo extends State<SignInDemo> {
       Get.toNamed('/signup', arguments: email);
     } else if (result['code'] == LoginEnum.Login.USER_IS_ALREADY_LOGGED_IN.value) {
       //이미 로그인한경우
-      //TODO 후에 서버에서 연결을 취소하고, 여기선 로그아웃 후 로그인을 보낸다(다이얼로그로 확인 요망)
+      //TODO 후에 서logout버에서 연결을 취소하고, 여기선 로그아웃 후 로그인을 보낸다(다이얼로그로 확인 요망)
       //지금은 임시로 성공이라고하겠다
 
       CallApi post = CallApi();

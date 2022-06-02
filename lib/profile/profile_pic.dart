@@ -16,6 +16,8 @@ class ProfilePic extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           CircleAvatar(
+            backgroundColor: Colors.lightGreen,
+            backgroundImage: NetworkImage("https://media.healthyfood.com/wp-content/uploads/2017/03/What-to-do-with-lemons.jpg"),
           ),
           Positioned(
             right: -16,
