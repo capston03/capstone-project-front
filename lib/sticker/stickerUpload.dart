@@ -119,7 +119,7 @@ class _StickerUploadState extends State<StickerUpload> {
                   }, icon: const Icon(Icons.send))
             ],
           ),
-          bottomNavigationBar: newBottomBar(1, 2),
+          bottomNavigationBar: newBottomBar(1, 1),
           body: SafeArea(
             child: Container(
               color: Colors.white,

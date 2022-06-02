@@ -1,4 +1,6 @@
-import 'package:capstone_android/app/data/provider/callApi.dart';
+import 'dart:convert';
+
+import 'package:capstone_android/network/callApi.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,13 +22,20 @@ class StickerMenu extends StatelessWidget {
   Future<List<Map<String,dynamic>>> apiImage() async{
     CallApi post = CallApi();
     var map = <String, dynamic>{};
-    print("gmail_asdasdid $gmail_id");
-    print("beacon_mac $beacon_mac");
     map['gmail_id'] = gmail_id;
     map['beacon_mac'] = beacon_mac;
-    var response = await post.RequestHttp('/image/sticker/download_thumbnail', map);
-    print("aaaaaaaaaaaaa$response");
-    return response['result'];
+    try {
+      var response = await post.RequestHttp(
+          '/episode/find_episodes_nearby_beacon', jsonEncode(map));
+      response = response['result'];
+      print("aaaaaaaaaaaaaaaaaa$response");
+      print("bbbbbbbbbbbbbb${response.length}");
+      return response;
+    }catch(e){
+      print(e);
+      return [];
+    }
+
   }
   _getImage() => FutureBuilder(
       future: apiImage(),

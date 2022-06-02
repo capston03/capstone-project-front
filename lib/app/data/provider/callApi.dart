@@ -30,22 +30,27 @@ class CallApi {
    */
   Future<dynamic> RequestHttp(uri, map) async {
     uri = dns + uri;
+    try {
+      var response = await http
+          .post(Uri.parse(uri),
+          headers: {"Content-Type": "application/json"}, body: map)
+          .timeout(const Duration(seconds: 20), onTimeout: () {
+        throw Exception('네트워크 접속 지연');
 
-    var response = await http
-        .post(Uri.parse(uri),
-            headers: {"Content-Type": "application/json"}, body: map)
-        .timeout(const Duration(seconds: 20), onTimeout: () {
-      throw Exception('네트워크 접속 지연');
-    }); // 통신
-
-    final int statusCode = response.statusCode;
-    if (statusCode < 200 || statusCode > 400) {
-      print(uri);
-      print(statusCode);
-      print('통신 오류 statusCode 확인 부탁');
+      }); // 통신
+      final int statusCode = response.statusCode;
+      if (statusCode < 200 || statusCode > 400) {
+        print(uri);
+        print(statusCode);
+        print('통신 오류 statusCode 확인 부탁');
+      }
+      print(response);
+      return json.decode(utf8.decode(response.bodyBytes));
+    }catch(e){
+      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa$e");
+      Exception(e);
     }
-    print(response);
-    return json.decode(utf8.decode(response.bodyBytes));
+
   }
 
   /*
