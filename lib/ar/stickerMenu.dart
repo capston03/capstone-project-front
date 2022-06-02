@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
 import '../db/manageSqlflite.dart';
 import '../db/thumbnail.dart';
 
@@ -49,7 +48,7 @@ class StickerMenu extends StatelessWidget {
       return image;
     }catch(e){
 
-      print("ccccccccccccccccccccccccccc$e");
+      print("$e");
       return [];
     }
 
@@ -65,10 +64,12 @@ class StickerMenu extends StatelessWidget {
               return CachedNetworkImage(
                 errorWidget: (context, url, error) => Icon(Icons.error),
                 placeholder: (context, url) => CircularProgressIndicator(),
-                imageUrl: snapshot.data![itemIdx],);
+                imageUrl: snapshot.data![itemIdx],
+
+              );
               // return Image.network(images[itemIdx], width: double.infinity, height: 200, fit: BoxFit.fill);
             }, options: CarouselOptions(
-              height: 200.h,
+              // height: 200.h,
               aspectRatio: 16/9,
               initialPage: 0, viewportFraction: 0.9,
               reverse: false,
