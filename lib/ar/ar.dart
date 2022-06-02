@@ -1,16 +1,6 @@
 import 'dart:typed_data';
 
-// import './ar_flutter_plugin-0.6.4/lib/datatypes/config_planedetection.dart';
-// import './ar_flutter_plugin-0.6.4/lib/datatypes/hittest_result_types.dart';
-// import './ar_flutter_plugin-0.6.4/lib/datatypes/node_types.dart';
-// import './ar_flutter_plugin-0.6.4/lib/managers/ar_anchor_manager.dart';
-// import './ar_flutter_plugin-0.6.4/lib/managers/ar_location_manager.dart';
-// import './ar_flutter_plugin-0.6.4/lib/managers/ar_object_manager.dart';
-// import './ar_flutter_plugin-0.6.4/lib/managers/ar_session_manager.dart';
-// import './ar_flutter_plugin-0.6.4/lib/models/ar_anchor.dart';
-// import './ar_flutter_plugin-0.6.4/lib/models/ar_hittest_result.dart';
-// import './ar_flutter_plugin-0.6.4/lib/models/ar_node.dart';
-// import './ar_flutter_plugin-0.6.4/lib/widgets/ar_view.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ar_flutter_plugin/datatypes/config_planedetection.dart';
 import 'package:ar_flutter_plugin/datatypes/hittest_result_types.dart';
 import 'package:ar_flutter_plugin/datatypes/node_types.dart';
@@ -23,6 +13,7 @@ import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
 import 'package:ar_flutter_plugin/models/ar_node.dart';
 import 'package:ar_flutter_plugin/widgets/ar_view.dart';
 import 'package:capstone_android/ar/bleList.dart';
+import 'package:capstone_android/ar/stickerMenu.dart';
 import 'package:capstone_android/map/googlemap.dart';
 import 'package:capstone_android/network/callApi.dart';
 import 'package:gallery_saver/gallery_saver.dart';
@@ -70,6 +61,7 @@ class ArtWidget extends StatefulWidget {
 }
 
 class _ArtWidgetState extends State<ArtWidget> {
+  var storage = FlutterSecureStorage();
   late ARSessionManager arSessionManager;
   late ARObjectManager arObjectManager;
   late ARAnchorManager arAnchorManager;
@@ -164,7 +156,6 @@ class _ArtWidgetState extends State<ArtWidget> {
     return WillPopScope(
       child: Scaffold(
           appBar: AppBar(
-            title: Text("Screenshot"),
             actions: <Widget>[
               Padding(
                 padding: EdgeInsets.only(right: 20.0),
@@ -193,6 +184,17 @@ class _ArtWidgetState extends State<ArtWidget> {
                   },
                   // icon: const Icon(Icons.arrow_back_outlined),
                 ),
+                  bottom: 70.h,
+                  right: 20.w,
+                ),
+                Positioned(child: FloatingActionButton( //캡쳐하기
+                  child: const Icon(Icons.menu_sharp),
+                  heroTag: "btn1",
+                  onPressed: () async {
+                    showScreenMenu();
+                  },
+                  // icon: const Icon(Icons.arrow_back_outlined),
+                ),
                   bottom: 15.h,
                   right: 20.w,
                 ),
@@ -205,22 +207,6 @@ class _ArtWidgetState extends State<ArtWidget> {
                   top: 15.h,
                   right: 20.w,
                 ),
-            // Align(
-            //   alignment: FractionalOffset.bottomCenter,
-            //   child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //       children: [
-            //         ElevatedButton(
-            //             onPressed: onRemoveEverything,
-            //             child: Text("Remove Everything")),
-            //         ElevatedButton(
-            //           onPressed: () async {
-            //             onTakeScreenshot();
-            //           },
-            //           child: Text("Take Screenshot"),
-            //         ),
-            //       ]),
-            // )
           ]))
       ),
       onWillPop: _onWillPop,
@@ -293,7 +279,7 @@ class _ArtWidgetState extends State<ArtWidget> {
                       Get.back();
                       // ShowCapturedWidget(context, capturedImage!);
                     }).catchError((onError) {
-                      print("ccccccccccccc$onError");
+                      print("$onError");
                     });
                   },
                   label: Text('저장하기'),
@@ -383,6 +369,13 @@ class _ArtWidgetState extends State<ArtWidget> {
                     selectedNode.transform = newTransform;
                   },
                 ))));
+  }
+
+  void showScreenMenu() async {
+    String gmail_id = await storage.read(key: 'id')??'';
+    showModalBottomSheet(
+        context: context,
+        builder: (context)=> StickerMenu(beacon_mac: beaconNow['mac_addr'],gmail_id: gmail_id));
   }
 
   void showBottomPopupSizing(ARNode selectedNode) {
@@ -583,8 +576,9 @@ class _ArtWidgetState extends State<ArtWidget> {
                 // "https://github.com/namhyo01/Boxiting/blob/master/cub.glb?raw=true",
                 // "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF-Binary/Duck.glb",
                 // "https://github.com/namhyo01/Boxiting/blob/master/cub.gltf?raw=true",
-                "https://github.com/namhyo01/Boxiting/blob/master/cub4.glb?raw=true",
-            scale: vector.Vector3(0.2, 0.2, 0.2),
+                // "https://github.com/namhyo01/Boxiting/blob/master/starbucks.glb?raw=true",
+            "https://github.com/namhyo01/Boxiting/blob/master/card.glb?raw=true",
+            scale: vector.Vector3(0.1, 0.1, 0.1),
             position: vector.Vector3(0.0, 0.0, 0.0),
             rotation: vector.Vector4(1.0, 0.0, 0.0, 0.0));
         getController.setNodeData(newNode.name);

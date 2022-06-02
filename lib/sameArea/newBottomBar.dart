@@ -56,7 +56,7 @@ class _newBottomBar extends State<newBottomBar>{
               Get.offAndToNamed('/stickerUpload',arguments: Get.arguments);
               break;
             case 3:
-              Get.offAndToNamed('/profile_in',arguments: Get.arguments);
+                Get.offAndToNamed('/profile_in',arguments: Get.arguments);
               break;
 
           }
@@ -93,7 +93,7 @@ class _newBottomBar extends State<newBottomBar>{
           /// Likes
           SalomonBottomBarItem(
             icon: Icon(Icons.camera_alt),
-            title: Text("카메라"),
+            title: Text("업로드"),
             selectedColor: Colors.pink,
           ),
           /// Sticker
