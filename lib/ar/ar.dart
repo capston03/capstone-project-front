@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:capstone_android/db/thumbnail.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ar_flutter_plugin/datatypes/config_planedetection.dart';
 import 'package:ar_flutter_plugin/datatypes/hittest_result_types.dart';
@@ -49,6 +50,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:math';
 
+import '../db/manageSqlflite.dart';
 import '../sameArea/newBottomBar.dart';
 import 'showList.dart';
 import '../sameArea/bottomBar.dart';
@@ -186,6 +188,19 @@ class _ArtWidgetState extends State<ArtWidget> {
                   bottom: 70.h,
                   right: 20.w,
                 ),
+                Obx(()=>Positioned(child: FloatingActionButton( //캡쳐하기
+                  child: getController.isChangingSize.value?const Icon(Icons.toggle_off):const Icon(Icons.toggle_on),
+                  heroTag: "btn1",
+                  onPressed: () async {
+                    getController.setSizing=!getController.getSizing;
+                    print("asdasdasdasdasd${getController.isChangingSize.value}");
+                    // await onTakeScreenshot();
+                  },
+                  // icon: const Icon(Icons.arrow_back_outlined),
+                ),
+                  bottom: 125.h,
+                  right: 20.w,
+                )),
                 Positioned(child: FloatingActionButton( //캡쳐하기
                   child: const Icon(Icons.menu_sharp),
                   heroTag: "btn1",
@@ -358,7 +373,7 @@ class _ArtWidgetState extends State<ArtWidget> {
                     var newRotationAxisZ = vector.Vector3(0, 0, 1.0);
                     final newTransform = Matrix4.identity();
                     newTransform
-                        .scale(int.parse(getController.getScale(node)) * 0.004);
+                        .scale(int.parse(getController.getScale(node)) * 0.004 * 0.025);
                     newTransform.rotate(newRotationAxisX,
                         getController.getRotateX(node) * (6.27 / 360));
                     newTransform.rotate(newRotationAxisY,
@@ -382,6 +397,33 @@ class _ArtWidgetState extends State<ArtWidget> {
           return StickerMenu(beacon_mac: beaconNow['mac_addr'],gmail_id: gmail_id);
         });
   }
+
+  void showBottomPopupEpisodes(ARNode selectedNode) async{
+    String node = selectedNode.name;
+    int episodeId = getController.nodeData[node]!['episode_id']!.value.toInt();
+    List<ThumbNail> temp = await ManageSqlflite.singleton.selectOne(episodeId);
+    ThumbNail data = temp[0];
+    showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.white,
+        context: context,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0.r), topRight: Radius.circular(30.0.r))
+        ),
+        builder: (context) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const SizedBox(child: Text('제목'),),
+              SizedBox(child: Text(data.title),),
+              const SizedBox(child:Text('내용')),
+              SizedBox(child: Text(data.content),),
+
+            ],
+          );
+        });
+  }
+
 
   void showBottomPopupSizing(ARNode selectedNode) {
     String node = selectedNode.name;
@@ -421,7 +463,7 @@ class _ArtWidgetState extends State<ArtWidget> {
                           var newRotationAxisZ = vector.Vector3(0, 0, 1.0);
                           final newTransform = Matrix4.identity();
                           newTransform.scale(
-                              int.parse(getController.getScale(node)) * 0.004*0.05);
+                              int.parse(getController.getScale(node)) * 0.004*0.025);
                           newTransform.rotate(newRotationAxisX,
                               getController.getRotateX(node) * (6.27 / 360));
                           newTransform.rotate(newRotationAxisY,
@@ -509,7 +551,8 @@ class _ArtWidgetState extends State<ArtWidget> {
     var number = nodes.length;
     selectedNode =
         this.nodes.firstWhereOrNull((element) => element.name == nodes.first)!;
-    showBottomPopupSizing(selectedNode); // => bottom bar출력
+    
+    getController.isChangingSize.value?showBottomPopupSizing(selectedNode):showBottomPopupEpisodes(selectedNode); // => bottom bar출력
     var newScale = 0.1; //max 0.2 ~ >0
     var newTranslationAxis = Random().nextInt(3); // 0 1 2
     var newTranslationAmount = Random().nextDouble() / 3;
@@ -565,6 +608,7 @@ class _ArtWidgetState extends State<ArtWidget> {
 
   Future<void> onPlaneOrPointTapped(
       List<ARHitTestResult> hitTestResults) async {
+    print("ggggggggggggggggg${getController.glbUrl}");
     var singleHitTestResult = hitTestResults.firstWhere(
         (hitTestResult) => hitTestResult.type == ARHitTestResultType.plane);
     if (singleHitTestResult != null) {
@@ -581,7 +625,7 @@ class _ArtWidgetState extends State<ArtWidget> {
             scale: vector.Vector3(0.005, 0.005, 0.005),
             position: vector.Vector3(0.0, 0.0, 0.0),
             rotation: vector.Vector4(1.0, 0.0, 0.0, 0.0));
-        getController.setNodeData(newNode.name);
+        getController.setNodeData(newNode.name,getController.episodeId.value.toDouble());
         bool? didAddNodeToAnchor =
             await arObjectManager.addNode(newNode, planeAnchor: newAnchor);
         if (didAddNodeToAnchor!) {

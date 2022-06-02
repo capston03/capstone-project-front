@@ -39,7 +39,6 @@ class StickerMenu extends GetView<ArManager> {
           '/episode/find_episodes_nearby_beacon', jsonEncode(map));
       var data = response['result'] as Map<String, dynamic>;
       await ManageSqlflite.singleton.remove();
-
       for (int i = 0; i < data.length; i++) {
         ThumbNail info = ThumbNail(
             title: data[i.toString()]['title'],
@@ -75,6 +74,7 @@ class StickerMenu extends GetView<ArManager> {
           '/image/sticker/download', jsonEncode(map));
       String data = response['result']['download_url'];
       controller.glburl=data;
+      print(controller.glbUrl);
     }catch(e){
       print(e);
     }
