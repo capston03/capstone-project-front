@@ -6,6 +6,7 @@
 
 import 'dart:async';
 import 'dart:convert' show json, jsonEncode;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -70,7 +71,7 @@ class _SignInDemo extends State<SignInDemo> {
     }catch(e){
       Get.dialog(AlertDialog(
         title: const Text('오류'),
-        content: const Text('서버와의 연결이 끊겼습니다'),
+        content: const Text('서버와의 연결이 끊겼습니다.'),
         actions: [
           TextButton(
               onPressed: () {
@@ -107,7 +108,7 @@ class _SignInDemo extends State<SignInDemo> {
       Get.toNamed('/signup', arguments: email);
     } else if (result['code'] == LoginEnum.Login.USER_IS_ALREADY_LOGGED_IN.value) {
       //이미 로그인한경우
-      //TODO 후에 서버에서 연결을 취소하고, 여기선 로그아웃 후 로그인을 보낸다(다이얼로그로 확인 요망)
+      //TODO 후에 서logout버에서 연결을 취소하고, 여기선 로그아웃 후 로그인을 보낸다(다이얼로그로 확인 요망)
       //지금은 임시로 성공이라고하겠다
 
       CallApi post = CallApi();
@@ -325,15 +326,34 @@ class _SignInDemo extends State<SignInDemo> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 620),
+                      padding: const EdgeInsets.only(bottom: 500),
                       child: const Text(
-                        'Tracer',
+                        'SwB',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 60,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 90,
+                          fontFamily: 'vanilla_twilight'
                         ),
                         textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(85.h,100.h,85.h,370.h),
+                      child: Divider(
+                        color: Colors.white,
+                        thickness: 4.0,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.fromLTRB(0, 100.h, 0, 330.h),
+                      child: Text(
+                        'Sticker with Beacon',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 45,
+                          fontFamily: 'vanilla_twilight'
+                        ),
                       ),
                     ),
                     Padding(

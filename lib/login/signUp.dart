@@ -187,180 +187,221 @@ class SignUp extends StatelessWidget {
             },
           ),
           title: Text('회원가입'),
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.green,
         ),
         body: SafeArea(
             child: Container(
           // padding: EdgeInsets.fromLTRB(20.w, 40.h, 20.w, 0),
-          child: Column(
-            children: [
-              Padding(padding: EdgeInsets.only(top: 40.h)),
-              Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(padding: EdgeInsets.only(left: 20.w)),
-                  makeLeftLine("닉네임"),
-                  Obx(
-                    () => Expanded(
-                      child: TextField(
-                        maxLength: 15,
-                        controller: getController.controller[0].value,
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  width: 1,
-                                  color: getController.isjungbok.value
-                                      ? Colors.blueAccent
-                                      : Colors.black)),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                  width: 1,
-                                  color: getController.isjungbok.value
-                                      ? Colors.blueAccent
-                                      : Colors.black)),
-                          counterText: "",
-                        ),
+                  Padding(padding: EdgeInsets.only(top: 40.h)),
+                  Text("Sign Up",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold
                       ),
-                    ),
                   ),
-                  Padding(padding: EdgeInsets.only(left: 5.w)),
-                  Obx(
-                    () => GestureDetector(
-                      child: Container(
-                        child: Center(
-                          child: Text(
-                            '중복검사',
-                            style: TextStyle(fontSize: 15.sp),
+                  Padding(padding: EdgeInsets.only(top: 20.h)),
+                  Text("회원 가입을 진행해 주세요.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 15,
+                        color:Colors.grey[700])
+                    ),
+                  Padding(padding: EdgeInsets.only(top: 20.h)),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    padding: EdgeInsets.only(left: 20.h),
+                    child: Text("닉네임",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                      ),)
+                  ),
+                  Padding(padding: EdgeInsets.only(top:10.h)),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.h, 0, 10.h, 0),
+                    child: Obx(
+                          () => Expanded(
+                        child: TextField(
+                          maxLength: 15,
+                          controller: getController.controller[0].value,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                const BorderRadius.all(Radius.circular(40.0)),
+                                borderSide: BorderSide(
+                                    width: 1,
+                                    color: getController.isjungbok.value
+                                        ? Colors.green
+                                        : Colors.black)),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(40.0)),
+                                borderSide: BorderSide(
+                                    width: 1,
+                                    color: getController.isjungbok.value
+                                        ? Colors.green
+                                        : Colors.black)),
+                            counterText: "",
                           ),
                         ),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 1.w,
-                                color: getController.tryToJungbok.value
-                                    ? Colors.lightBlueAccent
-                                    : Colors.grey),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.r)),
-                            color: getController.tryToJungbok.value
-                                ? Colors.lightBlueAccent
-                                : Colors.grey),
-                        height: 40.h,
                       ),
-                      onTap: () {
-                        if (getController.tryToJungbok.value) {
-                          //중복검사 클릭가능
-                          checkDuplicateNick();
-                        } else {
-                          Get.dialog(AlertDialog(
-                            title: const Text(''),
-                            content: const Text('닉네임을 5~15글자로 입력해주시기 바랍니다'),
-                            actions: [
-                              TextButton(
-                                  onPressed: () => Get.back(),
-                                  child: const Text("닫기"))
-                            ],
-                          ));
-                        }
-                      },
                     ),
                   ),
-                  Padding(padding: EdgeInsets.only(left: 20.w)),
-                ],
-              ),
-              Padding(padding: EdgeInsets.only(top: 20.h)),
-              Row(
-                children: [
-                  Padding(padding: EdgeInsets.only(left: 20.w)),
-                  makeLeftLine("생년월일"),
-                  Obx(
-                    () => Expanded(
-                      child: InkWell(
-                        child: IgnorePointer(
-                          child: TextField(
-                            readOnly: true,
-                            controller: getController.controller[1].value,
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(10.0)),
-                                  borderSide: BorderSide(
-                                      width: 1,
-                                      color: getController.isOkayBirth.value
-                                          ? Colors.blueAccent
-                                          : Colors.black)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(
-                                      width: 1,
-                                      color: getController.isOkayBirth.value
-                                          ? Colors.blueAccent
-                                          : Colors.black)),
-                              disabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(
-                                      width: 1,
-                                      color: getController.isOkayBirth.value
-                                          ? Colors.blueAccent
-                                          : Colors.black)),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.h, 10.h, 10.h, 0),
+                    child: Obx(
+                          () => GestureDetector(
+                        child: Container(
+                          child: Center(
+                            child: Text(
+                              '중복검사',
+                              style: TextStyle(
+                                  fontSize: 15.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
                             ),
                           ),
+                          decoration: BoxDecoration(
+                              gradient: getController.tryToJungbok.value
+                              ?  LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: <Color>[Colors.greenAccent, Colors.lightGreen])
+                              : LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: <Color>[Colors.grey, Colors.black12]),
+
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(40.r))),
+                          height: 40.h,
                         ),
                         onTap: () {
-                          showDatePickerPop(context);
+                          if (getController.tryToJungbok.value) {
+                            //중복검사 클릭가능
+                            checkDuplicateNick();
+                          } else {
+                            Get.dialog(AlertDialog(
+                              title: const Text(''),
+                              content: const Text('닉네임을 5~15글자로 입력해주시기 바랍니다'),
+                              actions: [
+                                TextButton(
+                                    onPressed: () => Get.back(),
+                                    child: const Text("닫기"))
+                              ],
+                            ));
+                          }
                         },
                       ),
                     ),
                   ),
-                  Padding(padding: EdgeInsets.only(left: 20.w)),
-                ],
-              ),
-              Padding(padding: EdgeInsets.only(top: 20.h)),
-              Row(
-                children: [
-                  Padding(padding: EdgeInsets.only(left: 20.w)),
-                  makeLeftLine("신분"),
-                  Obx(
-                    () => Expanded(
-                      child: Container(
-                        padding: EdgeInsets.only(left: 10.w),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton(
-                            isExpanded: true,
-                            items: _menuList.map((value) {
-                              return DropdownMenuItem(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            value: getController.selectedValue.value,
-                            onChanged: (String? value) {
-                              getController.setValue(value ?? 'Select');
-                              value == 'Select'
-                                  ? getController.setFalsePos()
-                                  : getController
-                                      .setTruePos(); //Select일땐 False, 그 외엔 True
-                            },
+                  Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.fromLTRB(20.h, 20.h, 0, 10.h),
+                      child: Text("생년월일",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),)
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.h, 0, 10.h, 0),
+                    child: Obx(
+                          () => Expanded(
+                        child: InkWell(
+                          child: IgnorePointer(
+                            child: TextField(
+                              readOnly: true,
+                              controller: getController.controller[1].value,
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(10.0)),
+                                    borderSide: BorderSide(
+                                        width: 1,
+                                        color: getController.isOkayBirth.value
+                                            ? Colors.green
+                                            : Colors.black)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(40.0)),
+                                    borderSide: BorderSide(
+                                        width: 1,
+                                        color: getController.isOkayBirth.value
+                                            ? Colors.green
+                                            : Colors.black)),
+                                disabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(40.0)),
+                                    borderSide: BorderSide(
+                                        width: 1,
+                                        color: getController.isOkayBirth.value
+                                            ? Colors.green
+                                            : Colors.black)),
+                              ),
+                            ),
                           ),
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 1,
-                              color: getController.isOkayPos.value
-                                  ? Colors.blueAccent
-                                  : Colors.black),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
+                          onTap: () {
+                            showDatePickerPop(context);
+                          },
                         ),
                       ),
                     ),
                   ),
-                  Padding(padding: EdgeInsets.only(left: 20.w)),
-                ],
+              Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.fromLTRB(20.h, 20.h, 0, 10.h),
+                child: Text("신분",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(10.h, 0, 10.h, 0),
+                child: Obx(
+                      () => Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10.w),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton(
+                          isExpanded: true,
+                          items: _menuList.map((value) {
+                            return DropdownMenuItem(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          value: getController.selectedValue.value,
+                          onChanged: (String? value) {
+                            getController.setValue(value ?? 'Select');
+                            value == 'Select'
+                                ? getController.setFalsePos()
+                                : getController
+                                .setTruePos(); //Select일땐 False, 그 외엔 True
+                          },
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 1,
+                            color: getController.isOkayPos.value
+                                ? Colors.green
+                                : Colors.black),
+                        borderRadius:
+                        const BorderRadius.all(Radius.circular(40)),
+                      ),
+                    ),
+                  ),
+                ),
               ),
               const Spacer(),
               Obx(
@@ -371,14 +412,22 @@ class SignUp extends StatelessWidget {
                     child: Center(
                       child: Text(
                         '회원가입',
-                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                        style: TextStyle(color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    color: getController.isOkayPos.value &&
-                            getController.isOkayBirth.value &&
-                            getController.isjungbok.value
-                        ? Colors.blue
-                        : Colors.grey,
+                    decoration: BoxDecoration(
+                      gradient: getController.isOkayPos.value &&
+                          getController.isOkayBirth.value &&
+                          getController.isjungbok.value
+                        ?LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: <Color>[Colors.greenAccent, Colors.lightGreen])
+                          : LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: <Color>[Colors.grey, Colors.black12]),
+                    ),
                   ),
                   onTap: () {
                     //회원가입 신청

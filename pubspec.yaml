@@ -43,6 +43,8 @@ dependencies:
   sqflite:
   path:
   dio:
+  carousel_slider:
+  cached_network_image:
 #  ar_flutter_plugin:
 #  arcore_flutter_plugin:
   # The following adds the Cupertino Icons font to your application.
@@ -69,6 +71,8 @@ dependencies:
   bottom_bar:
   salomon_bottom_bar:
   gallery_saver:
+  syncfusion_flutter_sliders:
+  flutter_launcher_icons:
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -87,10 +91,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-  assets:
-    - asset/
-    - asset/icons/
-    - asset/images/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -125,5 +125,10 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
+  fonts:
+    - family: vanilla_twilight
+      fonts:
+        - asset: asset/fonts/VanillaTwilight.otf
+          weight: 200
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
