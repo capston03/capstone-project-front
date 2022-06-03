@@ -93,6 +93,7 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
+    - asset/s3d_logo.png
     - asset/g_logo.png
     - asset/sd3.png
 #  assets:

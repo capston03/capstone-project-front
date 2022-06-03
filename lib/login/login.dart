@@ -343,7 +343,7 @@ class _SignInDemo extends State<SignInDemo> {
                       child: Image(
                         width: 60,
                         height: 60,
-                        image: AssetImage('asset/sd3.png'),
+                        image: AssetImage('asset/s3d_logo.png'),
                       ),
                     ),
                     Container(
