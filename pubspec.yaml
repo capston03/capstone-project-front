@@ -92,7 +92,9 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
+#  assets:
+#    - asset/g_logo.png
+#    - asset/sd3.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -130,6 +132,10 @@ flutter:
     - family: vanilla_twilight
       fonts:
         - asset: asset/fonts/VanillaTwilight.otf
+          weight: 200
+    - family: Cera
+      fonts:
+        - asset: asset/fonts/CeraProBold.otf
           weight: 200
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

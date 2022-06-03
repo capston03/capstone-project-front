@@ -328,31 +328,24 @@ class _SignInDemo extends State<SignInDemo> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 500),
                       child: const Text(
-                        'SwB',
+                        'Sticker ',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 90,
-                          fontFamily: 'vanilla_twilight'
+                          fontSize: 45,
+                          fontFamily: 'Cera'
                         ),
                         textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(85.h,100.h,85.h,370.h),
-                      child: Divider(
-                        color: Colors.white,
-                        thickness: 4.0,
                       ),
                     ),
                     Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.fromLTRB(0, 100.h, 0, 330.h),
                       child: Text(
-                        'Sticker with Beacon',
+                        'place dot sticker',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 45,
-                          fontFamily: 'vanilla_twilight'
+                          fontSize: 30,
+                          fontFamily: 'Cera'
                         ),
                       ),
                     ),
