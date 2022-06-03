@@ -328,20 +328,29 @@ class _SignInDemo extends State<SignInDemo> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 500),
                       child: const Text(
-                        'Sticker ',
+                        'Sticker   3D',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 45,
+                          fontSize: 70,
                           fontFamily: 'Cera'
                         ),
                         textAlign: TextAlign.center,
                       ),
                     ),
                     Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.fromLTRB(177.h, 0.h, 20.h, 375.h),
+                      child: Image(
+                        width: 60,
+                        height: 60,
+                        image: AssetImage('asset/sd3.png'),
+                      ),
+                    ),
+                    Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.fromLTRB(0, 100.h, 0, 330.h),
                       child: Text(
-                        'place dot sticker',
+                        'Sticker dot 3D',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 30,
