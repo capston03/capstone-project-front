@@ -50,11 +50,9 @@ AR페이지에서 메뉴 버튼을 클릭하면 자신이 올린 스티커와 �
 3D 모델 크기 조정 및 회전이 가능합니다.
 
 다운로드 후 3D 스티커를 배치할 수 있습니다. 또한 스티커를 업로드하면서 유저가 올린 글을 확인할 수 있습니다.
+
 <img src="https://user-images.githubusercontent.com/48765232/172564233-7f2542fe-5ea1-4b3f-9033-86b8b1dd38c7.jpeg" width="270" height="600"> <img src="https://user-images.githubusercontent.com/48765232/172564340-fa7d1af6-5fb0-4822-b438-acc050f21b58.jpeg" width="270" height="600"> <img src="https://user-images.githubusercontent.com/48765232/172564361-3af694e4-24b4-4684-a2b0-4c95197f4a3f.jpeg" width="270" height="600"> <img src="https://user-images.githubusercontent.com/48765232/172564547-1857fb68-4785-44b0-8b3c-bbda39a4085e.jpeg" width="270" height="600"> <img src="https://user-images.githubusercontent.com/48765232/172564565-bc681b6f-e042-4a33-bee6-524d832f6e93.jpeg" width="270" height="600"> 
 
-
-#### Photo to Sticker
-<img src="https://user-images.githubusercontent.com/48765232/171727165-0e28911f-345a-4c44-999f-08ae95197a5c.jpg" width="270" height="600">
 
 #### Profile
 <img src="https://user-images.githubusercontent.com/48765232/171727154-1ef8aa3a-00c7-492d-8bca-97eb1781dad5.jpg" width="270" height="600">
@@ -81,6 +79,24 @@ flutter pub run flutter_launcher_icons:main
 ### 기술 스택
 
 ---
+
+Backend: 
+
+- 서버: Flask
+
+- 이미지 처리: OpenCV(물체), MediaPipe(사람)
+
+- 3D 모델링: Open3D
+
+Frontend:
+
+- 앱 프레임워크: Flutter
+
+- Beacon: iBeacon
+
+- AR: ar_flutter_plugin  
+
+<img src="https://user-images.githubusercontent.com/48765232/172565884-f4973bd3-9af7-4bc4-8ca3-324282d3b4d9.png" width="800" height="400">
 
 
 ### 팀원 
