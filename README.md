@@ -26,10 +26,18 @@ Dart와 Flutter를 프론트로 하여 제작된 안드로이드 어플 입니�
 ---
 
 #### Map Page
+유저 주위 500m의 반경까지 비콘이 설치 되어있는 건물을 확인합니다.
+비콘이 설치된 건물을 찾으면 그 건물의 비콘들의 정보를 출력합니다.
+이후 AR 페이지로 이동합니다.
+
+<img src="https://user-images.githubusercontent.com/48765232/172561708-40d67ef0-159b-4d8c-8810-63bd3b3a7052.jpeg" width="270" height="600">
+<img src="https://user-images.githubusercontent.com/48765232/172561909-0d9be0fe-6a80-48eb-a8b5-71a74f56386f.jpeg" width="270" height="600">
 
 #### Episode Page
 
 #### AR Page
+
+
 
 #### Photo to Sticker
 <img src="https://user-images.githubusercontent.com/48765232/171727165-0e28911f-345a-4c44-999f-08ae95197a5c.jpg" width="270" height="600">
