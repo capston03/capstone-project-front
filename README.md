@@ -27,20 +27,30 @@ Dart와 Flutter를 프론트로 하여 제작된 안드로이드 어플 입니�
 
 #### Map Page
 유저 주위 500m의 반경까지 비콘이 설치 되어있는 건물을 확인합니다.
+
 비콘이 설치된 건물을 찾으면 그 건물의 비콘들의 정보를 출력합니다.
+
 이후 AR 페이지로 이동합니다.
 
 <img src="https://user-images.githubusercontent.com/48765232/172561708-40d67ef0-159b-4d8c-8810-63bd3b3a7052.jpeg" width="270" height="600"> <img src="https://user-images.githubusercontent.com/48765232/172561909-0d9be0fe-6a80-48eb-a8b5-71a74f56386f.jpeg" width="270" height="600"> <img src="https://user-images.githubusercontent.com/48765232/172562793-521b3bbf-e975-49e9-b08a-ec526a5b6c0b.jpeg" width="270" height="600">
 
 #### Episode Page
 
-### Sticker Uploade Page
+#### Sticker Uploade Page
 스티커 업로드 시 이미지와 제목, 내용을 입력 받습니다.
+
 물체의 영역을 선택한 후, 선택한 영역만 3D 스티커로 변환되게 서버로 전송됩니다.
 <img src="https://user-images.githubusercontent.com/48765232/172563328-a11b7522-3ae3-4b84-8baa-7fc78cd4f124.jpeg" width="270" height="600"> <img src="https://user-images.githubusercontent.com/48765232/172563482-e4a999d6-4afd-4e98-985d-417ad0f3c832.jpeg" width="270" height="600"> <img src="https://user-images.githubusercontent.com/48765232/172563608-eac3ba54-c7fd-41a3-a407-a3f5ff76bddc.jpeg" width="270" height="600"> 
 
 #### AR Page
+AR페이지에서 메뉴 버튼을 클릭하면 자신이 올린 스티커와 다른 사용자들이 올린 스티커 썸네일 사진을 볼 수 있습니다.
 
+썸네일을 보고 어떤 3D 모델을 사용할 지 선택할 수 있으며,
+
+3D 모델 크기 조정 및 회전이 가능합니다.
+
+다운로드 후 3D 스티커를 배치할 수 있습니다. 또한 스티커를 업로드하면서 유저가 올린 글을 확인할 수 있습니다.
+<img src="https://user-images.githubusercontent.com/48765232/172564233-7f2542fe-5ea1-4b3f-9033-86b8b1dd38c7.jpeg" width="270" height="600"> <img src="https://user-images.githubusercontent.com/48765232/172564340-fa7d1af6-5fb0-4822-b438-acc050f21b58.jpeg" width="270" height="600"> <img src="https://user-images.githubusercontent.com/48765232/172564361-3af694e4-24b4-4684-a2b0-4c95197f4a3f.jpeg" width="270" height="600"> <img src="https://user-images.githubusercontent.com/48765232/172564547-1857fb68-4785-44b0-8b3c-bbda39a4085e.jpeg" width="270" height="600"> <img src="https://user-images.githubusercontent.com/48765232/172564565-bc681b6f-e042-4a33-bee6-524d832f6e93.jpeg" width="270" height="600"> 
 
 
 #### Photo to Sticker
