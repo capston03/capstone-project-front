@@ -97,7 +97,7 @@ Frontend:
 
 - AR: ar_flutter_plugin  
 
-<img src="https://user-images.githubusercontent.com/48765232/172565884-f4973bd3-9af7-4bc4-8ca3-324282d3b4d9.png" width="800" height="400">
+<img src="https://user-images.githubusercontent.com/48765232/172565884-f4973bd3-9af7-4bc4-8ca3-324282d3b4d9.png" width="" height="400">
 
 
 ### 기능 구현
@@ -112,7 +112,7 @@ Frontend:
 
 - 기능 4: 배경이 제거된 2D 이미지를 3D 모델로 변환 (렌더링)
 
-<img src="https://user-images.githubusercontent.com/48765232/172566931-272effe3-1574-4dec-aa8b-1d34f877ba18.png" width="1775" height="920">
+<img src="https://user-images.githubusercontent.com/48765232/172566931-272effe3-1574-4dec-aa8b-1d34f877ba18.png" width="887" height="460">
 
 - 기능 1: 비콘으로 사용자의 정확한 위치 탐지 (Flutter blue 패키지 사용)
 
@@ -136,7 +136,7 @@ Frontend:
 
 그런 다음 3D 모델을 촬영할 수 있습니다. 촬영된 사진은 스마트폰 갤러리에 저장됩니다.
 
-<img src="https://user-images.githubusercontent.com/48765232/172567203-bbd54af1-9fe6-428d-acae-6d0c169651f8.png" width="1775" height="920">
+<img src="https://user-images.githubusercontent.com/48765232/172567203-bbd54af1-9fe6-428d-acae-6d0c169651f8.png" width="938" height="348">
 
 - 기능 3: 2D 이미지에서 배경 제거
 
