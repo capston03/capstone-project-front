@@ -31,7 +31,7 @@ class StickerMenu extends GetView<ArManager> {
   Future<List<List<dynamic>>> apiImage() async {
     List<ThumbNail> dbThumbnail = await ManageSqlflite.singleton.findBeaconList(beacon_mac);
 
-    if(dbThumbnail.isEmpty) {
+    if(dbThumbnail.isEmpty) { //처음 받을떄
       CallApi post = CallApi();
       List<List<dynamic>> images = [];
       var map = <String, dynamic>{};
@@ -44,7 +44,6 @@ class StickerMenu extends GetView<ArManager> {
         await ManageSqlflite.singleton.remove();
         for (int i = 0; i < data.length; i++) {
           map['episode_id'] = data[i.toString()]['identifier'];
-          print("4444444444$i${data[i.toString()]['identifier']}");
           var response_thumbnail = await post.RequestHttp(
               '/image/thumbnail/download', jsonEncode(map));
           List<dynamic> image = [];
@@ -62,15 +61,28 @@ class StickerMenu extends GetView<ArManager> {
           image.add(map['episode_id']);
           images.add(image);
         }
-        print("ddddddddddddddddddddd${images.length}");
-        print(images);
         return images;
-      } catch (e) {
+      } catch (e) { //한번이라도 받은 적이 있는 case
         print("$e");
         return [];
       }
     }else{ //
-    return [];
+      List<List<dynamic>> images = [];
+      List<dynamic> episode_id = [];
+      for(ThumbNail a in dbThumbnail){
+        List<dynamic> image = [];
+        image.add(a.download_url);
+        image.add(a.identifier);
+        episode_id.add(a.identifier);
+        images.add(image);
+      }
+
+      //episode id 네트워크 호출
+
+
+
+
+      return [];
     }
   }
 

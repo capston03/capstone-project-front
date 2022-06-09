@@ -12,12 +12,14 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'ar/ar.dart';
+import 'ar/test.dart';
 import 'photo/photoUpload.dart';
 import 'login/login.dart';
 import 'map/googlemap.dart';
-
+import 'package:flutter_downloader/flutter_downloader.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); //arcore is ok?
+  await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarBrightness: Brightness.dark,
@@ -69,6 +71,7 @@ class _MyApp extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final platform = Theme.of(context).platform;
     return ScreenUtilInit(
         designSize: Size(360, 640),
         minTextAdapt: true,
@@ -87,6 +90,7 @@ class _MyApp extends State<MyApp> {
               GetPage(name: '/profile', page: ()=>profileMain(0),transition: Transition.rightToLeft),
               GetPage(name: '/profile_in', page: ()=>profileMain(1),transition: Transition.rightToLeft),
               GetPage(name: '/photoGrid', page: ()=>PhotoGrid(),transition: Transition.rightToLeft),
+              GetPage(name: '/test123', page: ()=>MyHomePage(title:'sex',platform:platform),transition: Transition.rightToLeft),
             ],
             // routes: {
             //   // '/' : (context) => const MyApp(),
