@@ -29,53 +29,64 @@ class StickerMenu extends GetView<ArManager> {
   }
 
   Future<List<List<dynamic>>> apiImage() async {
-    CallApi post = CallApi();
-    List<List<dynamic>> images = [];
-    var map = <String, dynamic>{};
-    map['gmail_id'] = gmail_id;
-    map['beacon_mac'] = beacon_mac;
-    try {
-      var response = await post.RequestHttp(
-          '/episode/find_episodes_nearby_beacon', jsonEncode(map));
-      var data = response['result'] as Map<String, dynamic>;
-      await ManageSqlflite.singleton.remove();
-      for (int i = 0; i < data.length; i++) {
-        ThumbNail info = ThumbNail(
-            title: data[i.toString()]['title'],
-            content: data[i.toString()]['content'],
-            uploader_gmail_id: data[i.toString()]['uploader_gmail_id'],
-            upload_time: data[i.toString()]['upload_time'],
-            beacon_mac: data[i.toString()]['beacon_mac'],
-            identifier: data[i.toString()]['identifier'],
-            heart_rate: data[i.toString()]['heart_rate']);
-        await ManageSqlflite.singleton.insert(info);
-        map['episode_id'] = data[i.toString()]['identifier'];
-        var response_thumbnail = await post.RequestHttp(
-            '/image/thumbnail/download', jsonEncode(map));
-        List<dynamic> image = [];
-        image.add(response_thumbnail["result"]["download_url"]);
-        image.add(map['episode_id']);
-        images.add(image);
+    List<ThumbNail> dbThumbnail = await ManageSqlflite.singleton.findBeaconList(beacon_mac);
+
+    if(dbThumbnail.isEmpty) {
+      CallApi post = CallApi();
+      List<List<dynamic>> images = [];
+      var map = <String, dynamic>{};
+      map['gmail_id'] = gmail_id;
+      map['beacon_mac'] = beacon_mac;
+      try {
+        var response = await post.RequestHttp(
+            '/episode/find_episodes_nearby_beacon', jsonEncode(map));
+        var data = response['result'] as Map<String, dynamic>;
+        await ManageSqlflite.singleton.remove();
+        for (int i = 0; i < data.length; i++) {
+          map['episode_id'] = data[i.toString()]['identifier'];
+          print("4444444444$i${data[i.toString()]['identifier']}");
+          var response_thumbnail = await post.RequestHttp(
+              '/image/thumbnail/download', jsonEncode(map));
+          List<dynamic> image = [];
+          ThumbNail info = ThumbNail(
+              title: data[i.toString()]['title'],
+              content: data[i.toString()]['content'],
+              uploader_gmail_id: data[i.toString()]['uploader_gmail_id'],
+              upload_time: data[i.toString()]['upload_time'],
+              beacon_mac: data[i.toString()]['beacon_mac'],
+              identifier: data[i.toString()]['identifier'],
+              heart_rate: data[i.toString()]['heart_rate'],
+              download_url: response_thumbnail["result"]["download_url"]);
+          await ManageSqlflite.singleton.insert(info);
+          image.add(response_thumbnail["result"]["download_url"]);
+          image.add(map['episode_id']);
+          images.add(image);
+        }
+        print("ddddddddddddddddddddd${images.length}");
+        print(images);
+        return images;
+      } catch (e) {
+        print("$e");
+        return [];
       }
-      print("ddddddddddddddddddddd${images.length}");
-      return images;
-    } catch (e) {
-      print("$e");
-      return [];
+    }else{ //
+    return [];
     }
   }
 
-  downloadSticker(int episode_id) async{
+  downloadSticker(int episode_id) async {
     CallApi post = CallApi();
     var map = <String, dynamic>{};
     map['episode_id'] = episode_id;
-    try{
-      var response = await post.RequestHttp(
-          '/image/sticker/download', jsonEncode(map));
+    try {
+      var response =
+          await post.RequestHttp('/image/sticker/download', jsonEncode(map));
+
       String data = response['result']['download_url'];
-      controller.glburl=data;
-      print(controller.glbUrl);
-    }catch(e){
+      print("asdjlsdjfilsjdlkfjslkd$data");
+      controller.glburl = data;
+    } catch (e) {
+      print("fdjligasflkdhgkdfskghd");
       print(e);
     }
   }
@@ -84,31 +95,70 @@ class StickerMenu extends GetView<ArManager> {
       future: apiImage(),
       builder: (context, AsyncSnapshot<List<List<dynamic>>> snapshot) {
         if (snapshot.hasData) {
-          return CarouselSlider.builder(
-            itemCount: snapshot.data!.length,
-            carouselController: _controller,
-            itemBuilder: (BuildContext context, int itemIdx, int pageViewIdx) {
-              return GestureDetector(
-                  child: CachedNetworkImage(
-                errorWidget: (context, url, error) => Icon(Icons.error),
-                placeholder: (context, url) => CircularProgressIndicator(),
-                imageUrl: snapshot.data![itemIdx][0].toString(),
+          if (snapshot.data!.length == 0) {
+            return Container(
+              child: Center(
+                child: Text(
+                  '업로드 된 스티커가 없습니다',
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                  ),
+                ),
               ),
-              onTap: ()async{
-                    controller.episodes=snapshot.data![itemIdx][1];
-                    await downloadSticker(controller.episode);
-                    print("yes sex$itemIdx");
-                    Get.back();
-              },);
-              // return Image.network(images[itemIdx], width: double.infinity, height: 200, fit: BoxFit.fill);
-            },
-            options: CarouselOptions(
-                // height: 200.h,
-                aspectRatio: 16 / 9,
-                initialPage: 0,
-                viewportFraction: 0.9,
-                reverse: false,
-                scrollDirection: Axis.horizontal),
+            );
+          }
+          return Stack(
+            children: [
+              CarouselSlider.builder(
+                itemCount: snapshot.data!.length,
+                carouselController: _controller,
+                itemBuilder:
+                    (BuildContext context, int itemIdx, int pageViewIdx) {
+                  return GestureDetector(
+                    child: CachedNetworkImage(
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                      placeholder: (context, url) =>
+                          CircularProgressIndicator(),
+                      imageUrl: snapshot.data![itemIdx][0].toString(),
+                    ),
+                    onTap: () async {
+                      controller.episodes = snapshot.data![itemIdx][1];
+                      await downloadSticker(controller.episode);
+                      Get.back();
+                    },
+                  );
+                  // return Image.network(images[itemIdx], width: double.infinity, height: 200, fit: BoxFit.fill);
+                },
+                options: CarouselOptions(
+                    // height: 200.h,
+                    aspectRatio: 16 / 9,
+                    initialPage: 0,
+                    viewportFraction: 0.9,
+                    reverse: false,
+                    scrollDirection: Axis.horizontal),
+              ),
+              Positioned(
+                // top: 10.h,
+
+                right: 10.w,
+                child:GestureDetector(child:  Container(
+                  padding: EdgeInsets.fromLTRB(8.w, 6.h, 8.w, 6.h),
+                  child: const IconButton(
+                    constraints: BoxConstraints(),
+                    padding: EdgeInsets.all(0),
+                    icon: Icon(Icons.refresh),
+                    onPressed: null,
+                    iconSize: 30,
+                  ),
+                  height: 30.h,
+                ),
+                  onTap: (){
+                    //여기에 새로고침 기술 넣자
+                  },
+
+                ),
+              ),
+            ],
           );
         } else if (snapshot.hasError) {
           return SafeArea(

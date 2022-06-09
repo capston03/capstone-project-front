@@ -390,23 +390,23 @@ class _SignInDemo extends State<SignInDemo> {
 
                             ),
                             child: Row(
-                              children: [
-                                ImageIcon(
-                                  AssetImage('asset/g_logo.png'),
-                                  size: 30,
-                                  color: Colors.black87,
-                                ),
-                                const Spacer(),
+                              children: const [
+                                // Expanded(child:ImageIcon(
+                                //   AssetImage('asset/icons/googleLogo.png'),
+                                //   size: 10,
+                                //   color: Colors.black87,
+                                // ),),
+                                Spacer(),
                                 Text(
                                   'Sign In with Google',
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.black87,
                                     fontSize: 17,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                const Spacer(),
+                                Spacer(),
                               ],
                             ),
                           ),

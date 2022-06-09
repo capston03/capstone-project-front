@@ -387,9 +387,7 @@ class _ArtWidgetState extends State<ArtWidget> {
 
   void showScreenMenu() async {
     String gmail_id = await storage.read(key: 'id')??'';
-    print("gggggggggggg${getController.episode}");
     getController.episodes=-1;
-    print("gggggggggggg${getController.episode}");
 
     showModalBottomSheet(
         context: context,
@@ -397,7 +395,7 @@ class _ArtWidgetState extends State<ArtWidget> {
           return StickerMenu(beacon_mac: beaconNow['mac_addr'],gmail_id: gmail_id);
         });
   }
-
+  // 제목과 내용이 들어가 있는 메소드
   void showBottomPopupEpisodes(ARNode selectedNode) async{
     String node = selectedNode.name;
     int episodeId = getController.nodeData[node]!['episode_id']!.value.toInt();
