@@ -12,7 +12,7 @@
     <uses-feature android:name="android.hardware.camera.ar"/>
 
     <application
-        android:label="SwB"
+        android:label="Sticker.3D"
             android:name="${applicationName}"
             android:icon="@mipmap/launcher_icon"
             android:usesCleartextTraffic="true"

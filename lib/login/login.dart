@@ -328,31 +328,33 @@ class _SignInDemo extends State<SignInDemo> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 500),
                       child: const Text(
-                        'SwB',
+                        'Sticker   3D',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 90,
-                          fontFamily: 'vanilla_twilight'
+                          fontSize: 70,
+                          fontFamily: 'Cera'
                         ),
                         textAlign: TextAlign.center,
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(85.h,100.h,85.h,370.h),
-                      child: Divider(
-                        color: Colors.white,
-                        thickness: 4.0,
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.fromLTRB(177.h, 0.h, 20.h, 375.h),
+                      child: Image(
+                        width: 60,
+                        height: 60,
+                        image: AssetImage('asset/s3d_logo.png'),
                       ),
                     ),
                     Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.fromLTRB(0, 100.h, 0, 330.h),
                       child: Text(
-                        'Sticker with Beacon',
+                        'Sticker dot 3D',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 45,
-                          fontFamily: 'vanilla_twilight'
+                          fontSize: 30,
+                          fontFamily: 'Cera'
                         ),
                       ),
                     ),
