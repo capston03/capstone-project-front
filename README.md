@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Flutter 2.10.5, Dart 2.16.2
+Flutter 2.10.4, Dart 2.16.2
 
 ### 프로젝트 설명
 SwB (Sticker with Beacon) 는 사용자가 기억하고자 하는 에피소드를 맵에서 사진으로 확인할 수 있는 어플 입니다.
