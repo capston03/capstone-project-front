@@ -1,4 +1,4 @@
-import 'package:capstone_android/sameArea/bottomBar.dart';
+import 'package:Sticker3D/sameArea/bottomBar.dart';
 import 'package:flutter/material.dart';
 
 import '../sameArea/newBottomBar.dart';

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart' as dio;
-import 'package:capstone_android/login/manageSignUp.dart';
-import 'package:capstone_android/network/callApi.dart';
+import 'package:Sticker3D/login/manageSignUp.dart';
+import 'package:Sticker3D/network/callApi.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -192,27 +192,7 @@ class StickerMenu extends GetView<ArManager> {
                     reverse: false,
                     scrollDirection: Axis.horizontal),
               ),
-              Positioned(
-                // top: 10.h,
 
-                right: 10.w,
-                child:GestureDetector(child:  Container(
-                  padding: EdgeInsets.fromLTRB(8.w, 6.h, 8.w, 6.h),
-                  child: const IconButton(
-                    constraints: BoxConstraints(),
-                    padding: EdgeInsets.all(0),
-                    icon: Icon(Icons.refresh),
-                    onPressed: null,
-                    iconSize: 30,
-                  ),
-                  height: 30.h,
-                ),
-                  onTap: (){
-                    //여기에 새로고침 기술 넣자
-                  },
-
-                ),
-              ),
             ],
           );
         } else if (snapshot.hasError) {

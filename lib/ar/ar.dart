@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 //2.10.4
-import 'package:capstone_android/db/thumbnail.dart';
+import 'package:Sticker3D/db/thumbnail.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ar_flutter_plugin/datatypes/config_planedetection.dart';
 import 'package:ar_flutter_plugin/datatypes/hittest_result_types.dart';
@@ -13,10 +13,10 @@ import 'package:ar_flutter_plugin/models/ar_anchor.dart';
 import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
 import 'package:ar_flutter_plugin/models/ar_node.dart';
 import 'package:ar_flutter_plugin/widgets/ar_view.dart';
-import 'package:capstone_android/ar/bleList.dart';
-import 'package:capstone_android/ar/stickerMenu.dart';
-import 'package:capstone_android/map/googlemap.dart';
-import 'package:capstone_android/network/callApi.dart';
+import 'package:Sticker3D/ar/bleList.dart';
+import 'package:Sticker3D/ar/stickerMenu.dart';
+import 'package:Sticker3D/map/googlemap.dart';
+import 'package:Sticker3D/network/callApi.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 
 //
@@ -26,8 +26,8 @@ import 'package:gallery_saver/gallery_saver.dart';
 // import './arPackage/managers/ar_object_manager.dart';
 // import './arPackage/managers/ar_anchor_manager.dart';
 // import './arPackage/models/ar_anchor.dart';
-import 'package:capstone_android/ar/arManager.dart';
-import 'package:capstone_android/map/HeaderTile.dart';
+import 'package:Sticker3D/ar/arManager.dart';
+import 'package:Sticker3D/map/HeaderTile.dart';
 import 'package:flutter/material.dart';
 
 // import './arPackage/ar_flutter_plugin.dart';

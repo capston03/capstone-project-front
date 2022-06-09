@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:capstone_android/sameArea/newBottomBar.dart';
+import 'package:Sticker3D/sameArea/newBottomBar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

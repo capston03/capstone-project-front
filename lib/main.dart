@@ -1,10 +1,10 @@
 import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
-import 'package:capstone_android/ble.dart';
-import 'package:capstone_android/login/signUp.dart';
-import 'package:capstone_android/photo/photoDetail.dart';
-import 'package:capstone_android/sticker/photoGrid.dart';
-import 'package:capstone_android/sticker/stickerUpload.dart';
-import 'package:capstone_android/profile/profileMain.dart';
+import 'package:Sticker3D/ble.dart';
+import 'package:Sticker3D/login/signUp.dart';
+import 'package:Sticker3D/photo/photoDetail.dart';
+import 'package:Sticker3D/sticker/photoGrid.dart';
+import 'package:Sticker3D/sticker/stickerUpload.dart';
+import 'package:Sticker3D/profile/profileMain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

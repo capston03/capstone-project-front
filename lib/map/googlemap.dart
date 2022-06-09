@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 
-import 'package:capstone_android/network/callApi.dart';
-import 'package:capstone_android/sameArea/bottomBar.dart';
+import 'package:Sticker3D/network/callApi.dart';
+import 'package:Sticker3D/sameArea/bottomBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
