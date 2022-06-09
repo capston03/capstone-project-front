@@ -131,7 +131,7 @@ class _GMapSample extends State<GMapSample> {
         actions: [
           TextButton(
           // Get.offAllNamed();
-              onPressed: () => Get.offAllNamed('/test123', arguments: request['0']),
+              onPressed: () => Get.offAllNamed('/test', arguments: request['0']),
               child: const Text("확인")),
           if (request.length > 1) ...[
             TextButton(

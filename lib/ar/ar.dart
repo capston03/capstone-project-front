@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-
+//2.10.4
 import 'package:capstone_android/db/thumbnail.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ar_flutter_plugin/datatypes/config_planedetection.dart';
@@ -148,6 +148,7 @@ class _ArtWidgetState extends State<ArtWidget> {
 
   @override
   void dispose() {
+    print("asdashdkajshflkakhfasjkhfkshkf");
     arSessionManager.dispose();
     super.dispose();
   }
