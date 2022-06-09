@@ -130,7 +130,8 @@ class _GMapSample extends State<GMapSample> {
             '근처 건물의 비콘을 찾았습니다.\n${request['0']['detail_location']}\n건물에 들어가시겠습니까?'),
         actions: [
           TextButton(
-              onPressed: () => Get.offNamed('/test', arguments: request['0']),
+          // Get.offAllNamed();
+              onPressed: () => Get.offAllNamed('/test', arguments: request['0']),
               child: const Text("확인")),
           if (request.length > 1) ...[
             TextButton(

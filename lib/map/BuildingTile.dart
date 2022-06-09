@@ -18,7 +18,7 @@ class BuildingTile extends StatelessWidget {
       ),
       onTap: (){
         //page 이동
-        Get.offNamed('/test', arguments: info);
+        Get.offAllNamed('/test', arguments: info);
       },
     );
   }
