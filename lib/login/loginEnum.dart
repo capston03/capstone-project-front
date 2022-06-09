@@ -1,4 +1,4 @@
-import 'package:capstone_android/login/signUp.dart';
+import 'package:Sticker3D/login/signUp.dart';
 
 enum Login {LOGIN_SUCCESS, USER_IS_ALREADY_LOGGED_IN, USER_ACCOUNT_IS_NOT_EXISTED}
 enum Logout {LOGOUT_SUCCESS, USER_IS_ALREADY_LOGGED_OUT, USER_ACCOUNT_IS_NOT_EXISTED}

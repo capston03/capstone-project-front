@@ -292,7 +292,7 @@ class _StickerUploadState extends State<StickerUpload> {
       area.topRight.dx - area.topLeft.dx,
       area.bottomLeft.dy - area.topLeft.dy
     ];
-    print(rectangle);
+    print("rectangle$rectangle");
     map['rectangle'] = rectangle;
     map['beacon_mac'] = beacon['mac_addr'];
     map['uploader_gmail_id'] = uploader_gmail_id;
@@ -323,6 +323,7 @@ class _StickerUploadState extends State<StickerUpload> {
             TextButton(
                 onPressed: () {
                   Get.back();
+                  Get.offAndToNamed('/test',arguments: Get.arguments);
                   // Get.to(GMapSample());
                 },
                 child: const Text("닫기"))

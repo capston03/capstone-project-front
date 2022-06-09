@@ -1,4 +1,4 @@
-name: capstone_android
+name: Sticker3D
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -42,6 +42,9 @@ dependencies:
   flutter_secure_storage:
   sqflite:
   path:
+  flutter_downloader:
+  android_path_provider:
+
   dio:
   carousel_slider:
   cached_network_image:
@@ -92,12 +95,18 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
+  assets:
+    - asset/s3d_logo.png
+#    - asset/g_logo.png
+    - asset/sd3.png
+#    - icons/
+#  assets:
+#    - asset/g_logo.png
+#    - asset/sd3.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -130,6 +139,10 @@ flutter:
     - family: vanilla_twilight
       fonts:
         - asset: asset/fonts/VanillaTwilight.otf
+          weight: 200
+    - family: Cera
+      fonts:
+        - asset: asset/fonts/CeraProBold.otf
           weight: 200
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

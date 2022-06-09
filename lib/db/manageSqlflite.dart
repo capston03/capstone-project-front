@@ -1,7 +1,8 @@
 import 'dart:async';
+import 'dart:core';
 import 'dart:io';
 import 'dart:math';
-import 'package:capstone_android/db/thumbnail.dart';
+import 'package:Sticker3D/db/thumbnail.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -33,7 +34,8 @@ class ManageSqlflite {
           uploader_gmail_id TEXT,
           upload_time TEXT,
           beacon_mac TEXT,
-          heart_rate INT
+          heart_rate INT,
+          download_url TEXT
         )
       ''');
   }
@@ -48,7 +50,13 @@ class ManageSqlflite {
     Database db = await singleton.database;
     return db.rawQuery('SELECT * FROM thumbnail');
   }
-
+  Future<List<ThumbNail>> findBeaconList(String beacon_mac) async{
+    Database db = await singleton.database;
+    var result = await db.rawQuery('SELECT * FROM thumbnail WHERE beacon_mac=?',[beacon_mac]);
+    List<ThumbNail> data = result.isNotEmpty
+        ? result.map((c)=>ThumbNail.fromMap(c)).toList():[];
+    return data;
+  }
   //read
   Future<List<ThumbNail>> select() async{
     Database db = await singleton.database;
@@ -68,6 +76,12 @@ class ManageSqlflite {
 
   }
 
+  // Future int count(String beacon_mac) async{
+  //   Database db = await singleton.database;
+  //   var result = await db.rawQuery('SELECT * FROM thumbnail WHERE beacon_mac=?',[beacon_mac]);
+  //   return result.length
+  // }
+
   // //업데이트 -> 추후 수정예정
   // Future<int> update(ThumbNail userInfo) async {
   //   Database db = await singleton.database;
@@ -78,7 +92,10 @@ class ManageSqlflite {
     Database db = await singleton.database;
     await db.rawDelete("DELETE FROM thumbnail");
   }
-
+  Future removeBeaconImage(String beaconMac) async {
+    Database db = await singleton.database;
+    await db.rawDelete("DELETE FROM thumbnail WHERE beacon_mac=?",[beaconMac]);
+  }
   // Future<int> updateImageTime(DateTime time, String googleID) async{
   //   Database db = await singleton.database;
   //   String updatingTime = time.toIso8601String(); //decoding DateTime.parse(time);

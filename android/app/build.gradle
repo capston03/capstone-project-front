@@ -36,7 +36,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
+    lintOptions {
+        disable 'InvalidPackage'
+        disable "Instantiatable"
+        checkReleaseBuilds false
+        abortOnError false
+    }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -56,8 +61,8 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
-
-            minifyEnabled true
+            shrinkResources false    // this line
+            minifyEnabled false       // this line
             useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

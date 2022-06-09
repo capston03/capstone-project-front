@@ -1,5 +1,5 @@
 
-import 'package:capstone_android/sameArea/bottomBar.dart';
+import 'package:Sticker3D/sameArea/bottomBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';

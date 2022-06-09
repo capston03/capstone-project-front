@@ -1,10 +1,10 @@
 import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
-import 'package:capstone_android/ble.dart';
-import 'package:capstone_android/login/signUp.dart';
-import 'package:capstone_android/photo/photoDetail.dart';
-import 'package:capstone_android/sticker/photoGrid.dart';
-import 'package:capstone_android/sticker/stickerUpload.dart';
-import 'package:capstone_android/profile/profileMain.dart';
+import 'package:Sticker3D/ble.dart';
+import 'package:Sticker3D/login/signUp.dart';
+import 'package:Sticker3D/photo/photoDetail.dart';
+import 'package:Sticker3D/sticker/photoGrid.dart';
+import 'package:Sticker3D/sticker/stickerUpload.dart';
+import 'package:Sticker3D/profile/profileMain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,12 +12,14 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'ar/ar.dart';
+import 'ar/test.dart';
 import 'photo/photoUpload.dart';
 import 'login/login.dart';
 import 'map/googlemap.dart';
-
+import 'package:flutter_downloader/flutter_downloader.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); //arcore is ok?
+  // await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarBrightness: Brightness.dark,
@@ -69,6 +71,7 @@ class _MyApp extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final platform = Theme.of(context).platform;
     return ScreenUtilInit(
         designSize: Size(360, 640),
         minTextAdapt: true,
@@ -76,20 +79,33 @@ class _MyApp extends State<MyApp> {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             initialRoute: '/',
-            routes: {
-              // '/' : (context) => const MyApp(),
-              '/': (context) => SignInDemo(),
-              '/signup': (context) => SignUp(),
-              '/map': (context) => GMapSample(),
-              '/ble': (context) => BLEPage(),
-              '/test':(context)=> ArtWidget(),
-              '/upload':(context)=>PhotoUpload(),
-              '/stickerUpload' : (context) =>StickerUpload(),
-              '/profile' : (context) => profileMain(0),
-              '/profile_in' : (context) => profileMain(1),
-              // '/photoDetail': (context)=>PhotoDetail(),
-              '/photoGrid' : (context) => PhotoGrid(),
-            },
+            getPages: [
+              GetPage(name: '/', page: ()=>SignInDemo(),transition: Transition.rightToLeft),
+              GetPage(name: '/signup', page: ()=>SignUp(),transition: Transition.rightToLeft),
+              GetPage(name: '/map', page: ()=>GMapSample(),transition: Transition.rightToLeft),
+              GetPage(name: '/ble', page: ()=>BLEPage(),transition: Transition.rightToLeft),
+              GetPage(name: '/test', page: ()=>ArtWidget(),transition: Transition.rightToLeft),
+              GetPage(name: '/upload', page: ()=>PhotoUpload(),transition: Transition.rightToLeft),
+              GetPage(name: '/stickerUpload', page: ()=>StickerUpload(),transition: Transition.rightToLeft),
+              GetPage(name: '/profile', page: ()=>profileMain(0),transition: Transition.rightToLeft),
+              GetPage(name: '/profile_in', page: ()=>profileMain(1),transition: Transition.rightToLeft),
+              GetPage(name: '/photoGrid', page: ()=>PhotoGrid(),transition: Transition.rightToLeft),
+              GetPage(name: '/test123', page: ()=>MyHomePage(title:'sex',platform:platform),transition: Transition.rightToLeft),
+            ],
+            // routes: {
+            //   // '/' : (context) => const MyApp(),
+            //   '/': (context) => SignInDemo(),
+            //   '/signup': (context) => SignUp(),
+            //   '/map': (context) => GMapSample(),
+            //   '/ble': (context) => BLEPage(),
+            //   '/test':(context)=> ArtWidget(),
+            //   '/upload':(context)=>PhotoUpload(),
+            //   '/stickerUpload' : (context) =>StickerUpload(),
+            //   '/profile' : (context) => profileMain(0),
+            //   '/profile_in' : (context) => profileMain(1),
+            //   // '/photoDetail': (context)=>PhotoDetail(),
+            //   '/photoGrid' : (context) => PhotoGrid(),
+            // },
             title: 'TRACER',
             theme: ThemeData(
               primarySwatch: Colors.green,
