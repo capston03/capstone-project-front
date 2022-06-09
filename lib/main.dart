@@ -19,7 +19,7 @@ import 'map/googlemap.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); //arcore is ok?
-  await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
+  // await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarBrightness: Brightness.dark,
