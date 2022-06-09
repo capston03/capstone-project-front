@@ -323,6 +323,7 @@ class _StickerUploadState extends State<StickerUpload> {
             TextButton(
                 onPressed: () {
                   Get.back();
+                  Get.offAndToNamed('/test',arguments: Get.arguments);
                   // Get.to(GMapSample());
                 },
                 child: const Text("닫기"))
