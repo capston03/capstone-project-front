@@ -292,6 +292,7 @@ class _StickerUploadState extends State<StickerUpload> {
       area.topRight.dx - area.topLeft.dx,
       area.bottomLeft.dy - area.topLeft.dy
     ];
+    print("rectangle$rectangle");
     map['rectangle'] = rectangle;
     map['beacon_mac'] = beacon['mac_addr'];
     map['uploader_gmail_id'] = uploader_gmail_id;
