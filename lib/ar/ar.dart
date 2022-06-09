@@ -94,25 +94,25 @@ class _ArtWidgetState extends State<ArtWidget> {
   //핸드폰 뒤로가기 눌렀을 때 다이얼로그 표출 및 셋팅 저장
   Future<bool> _onWillPop() async {
     return (await showDialog(
-          barrierDismissible: false,
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text("지도 화면으로 이동하시겠습니까?"),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text('아니오'),
-              ),
-              TextButton(
-                onPressed: () {
-                  dispose();
-                  Get.offAndToNamed('/map');
-                },
-                child: Text('네'),
-              ),
-            ],
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("지도 화면으로 이동하시겠습니까?"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('아니오'),
           ),
-        )) ??
+          TextButton(
+            onPressed: () {
+              dispose();
+              Get.offAndToNamed('/map');
+            },
+            child: Text('네'),
+          ),
+        ],
+      ),
+    )) ??
         false;
   }
 
@@ -175,7 +175,7 @@ class _ArtWidgetState extends State<ArtWidget> {
                 ARView(
                   onARViewCreated: onARViewCreated,
                   planeDetectionConfig:
-                      PlaneDetectionConfig.horizontalAndVertical,
+                  PlaneDetectionConfig.horizontalAndVertical,
                 ),
                 Positioned(child: FloatingActionButton( //캡쳐하기
                   child: const Icon(Icons.photo_camera),
@@ -221,7 +221,7 @@ class _ArtWidgetState extends State<ArtWidget> {
                   top: 15.h,
                   right: 20.w,
                 ),
-          ]))
+              ]))
       ),
       onWillPop: _onWillPop,
     );
@@ -237,11 +237,11 @@ class _ArtWidgetState extends State<ArtWidget> {
     this.arAnchorManager = arAnchorManager;
 
     this.arSessionManager.onInitialize(
-          showFeaturePoints: false,
-          showPlanes: false, //하얀색점
-          customPlaneTexturePath: "Images/triangle.png",
-          showWorldOrigin: false,
-        );
+      showFeaturePoints: false,
+      showPlanes: false, //하얀색점
+      customPlaneTexturePath: "Images/triangle.png",
+      showWorldOrigin: false,
+    );
 
     this.arObjectManager.onInitialize();
 
@@ -271,50 +271,50 @@ class _ArtWidgetState extends State<ArtWidget> {
         pageBuilder: (context, animation, secondaryAnimation) {
           return SafeArea(
               child: Stack(
-            children: <Widget>[
-              Screenshot(child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(
-                    image: DecorationImage(image: image, fit: BoxFit.cover)),
-              ),
-                  controller: screenshotController),
-              Positioned(
-                child: FloatingActionButton.extended(
-                  heroTag: "btn2",
-                  onPressed: () async {
-                    // await saveImage(storeImage);
-                    CallApi.circularLoading(context, "저장중...");
-                    screenshotController
-                        .capture()
-                        .then((capturedImage) async {
-                      await saveImage(capturedImage!);
+                children: <Widget>[
+                  Screenshot(child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(image: image, fit: BoxFit.cover)),
+                  ),
+                      controller: screenshotController),
+                  Positioned(
+                    child: FloatingActionButton.extended(
+                      heroTag: "btn2",
+                      onPressed: () async {
+                        // await saveImage(storeImage);
+                        CallApi.circularLoading(context, "저장중...");
+                        screenshotController
+                            .capture()
+                            .then((capturedImage) async {
+                          await saveImage(capturedImage!);
+                          Get.back();
+                          Get.back();
+                          // ShowCapturedWidget(context, capturedImage!);
+                        }).catchError((onError) {
+                          print("$onError");
+                        });
+                      },
+                      label: Text('저장하기'),
+                      icon: const Icon(Icons.save_outlined),
+                    ),
+                    bottom: 10.h,
+                    right: 20.w,
+                  ),
+                  Positioned(child: FloatingActionButton( //뒤로가기
+                    child: const Icon(Icons.arrow_back_outlined),
+                    heroTag: "btn1",
+                    onPressed: () {
                       Get.back();
-                      Get.back();
-                      // ShowCapturedWidget(context, capturedImage!);
-                    }).catchError((onError) {
-                      print("$onError");
-                    });
-                  },
-                  label: Text('저장하기'),
-                  icon: const Icon(Icons.save_outlined),
-                ),
-                bottom: 10.h,
-                right: 20.w,
-              ),
-              Positioned(child: FloatingActionButton( //뒤로가기
-                child: const Icon(Icons.arrow_back_outlined),
-                heroTag: "btn1",
-                onPressed: () {
-                  Get.back();
-                },
-                // icon: const Icon(Icons.arrow_back_outlined),
-              ),
-                bottom: 10.h,
-                left: 20.w,
-              ),
-            ],
-          ));
+                    },
+                    // icon: const Icon(Icons.arrow_back_outlined),
+                  ),
+                    bottom: 10.h,
+                    left: 20.w,
+                  ),
+                ],
+              ));
         });
   }
 
@@ -353,41 +353,43 @@ class _ArtWidgetState extends State<ArtWidget> {
               valueIndicatorShape: PaddleSliderValueIndicatorShape(),
             ),
             child: Obx(() => Slider(
-                  value: getController.nodeData[node]![axisAngle]!.value,
-                  min: 0.0,
-                  max: 360.0,
-                  divisions: divisions,
-                  label: getController.nodeData[node]![axisAngle]!.value
-                      .round()
-                      .toString(),
-                  onChanged: (double newValue) {
-                    if (angle == 'X') {
-                      getController.setRotateX(node, newValue);
-                    } else if (angle == 'Y') {
-                      getController.setRotateY(node, newValue);
-                    } else if (angle == 'Z') {
-                      getController.setRotateZ(node, newValue);
-                    }
-                    var newRotationAxisX = vector.Vector3(1.0, 0, 0);
-                    var newRotationAxisY = vector.Vector3(0, 1.0, 0);
-                    var newRotationAxisZ = vector.Vector3(0, 0, 1.0);
-                    final newTransform = Matrix4.identity();
-                    newTransform
-                        .scale(int.parse(getController.getScale(node)) * 0.004 * 0.025);
-                    newTransform.rotate(newRotationAxisX,
-                        getController.getRotateX(node) * (6.27 / 360));
-                    newTransform.rotate(newRotationAxisY,
-                        getController.getRotateY(node) * (6.27 / 360));
-                    newTransform.rotate(newRotationAxisZ,
-                        getController.getRotateZ(node) * (6.27 / 360));
-                    selectedNode.transform = newTransform;
-                  },
-                ))));
+              value: getController.nodeData[node]![axisAngle]!.value,
+              min: 0.0,
+              max: 360.0,
+              divisions: divisions,
+              label: getController.nodeData[node]![axisAngle]!.value
+                  .round()
+                  .toString(),
+              onChanged: (double newValue) {
+                if (angle == 'X') {
+                  getController.setRotateX(node, newValue);
+                } else if (angle == 'Y') {
+                  getController.setRotateY(node, newValue);
+                } else if (angle == 'Z') {
+                  getController.setRotateZ(node, newValue);
+                }
+                var newRotationAxisX = vector.Vector3(1.0, 0, 0);
+                var newRotationAxisY = vector.Vector3(0, 1.0, 0);
+                var newRotationAxisZ = vector.Vector3(0, 0, 1.0);
+                final newTransform = Matrix4.identity();
+                newTransform
+                    .scale(int.parse(getController.getScale(node)) * 0.004 * 0.025);
+                newTransform.rotate(newRotationAxisX,
+                    getController.getRotateX(node) * (6.27 / 360));
+                newTransform.rotate(newRotationAxisY,
+                    getController.getRotateY(node) * (6.27 / 360));
+                newTransform.rotate(newRotationAxisZ,
+                    getController.getRotateZ(node) * (6.27 / 360));
+                selectedNode.transform = newTransform;
+              },
+            ))));
   }
 
   void showScreenMenu() async {
     String gmail_id = await storage.read(key: 'id')??'';
+    print("gggggggggggg${getController.episode}");
     getController.episodes=-1;
+    print("gggggggggggg${getController.episode}");
 
     showModalBottomSheet(
         context: context,
@@ -395,7 +397,7 @@ class _ArtWidgetState extends State<ArtWidget> {
           return StickerMenu(beacon_mac: beaconNow['mac_addr'],gmail_id: gmail_id);
         });
   }
-  // 제목과 내용이 들어가 있는 메소드
+
   void showBottomPopupEpisodes(ARNode selectedNode) async{
     String node = selectedNode.name;
     int episodeId = getController.nodeData[node]!['episode_id']!.value.toInt();
@@ -430,7 +432,7 @@ class _ArtWidgetState extends State<ArtWidget> {
         backgroundColor: Colors.white,
         context: context,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0.r), topRight: Radius.circular(30.0.r))
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0.r), topRight: Radius.circular(30.0.r))
         ),
         builder: (context) {
           return Column(
@@ -442,7 +444,7 @@ class _ArtWidgetState extends State<ArtWidget> {
                     Padding(padding: EdgeInsets.only(left: 20.w)),
                     Text('크기(50이 처음 주어진 사이즈입니다.) : '),
                     Obx(
-                      () => DropdownButton(
+                          () => DropdownButton(
                         value: getController
                             .nodeData[node]!["scaleSelectedValue"]!.value
                             .toInt()
@@ -548,8 +550,8 @@ class _ArtWidgetState extends State<ArtWidget> {
   Future<void> onNodeTapped(List<String> nodes) async {
     var number = nodes.length;
     selectedNode =
-        this.nodes.firstWhereOrNull((element) => element.name == nodes.first)!;
-    
+    this.nodes.firstWhereOrNull((element) => element.name == nodes.first)!;
+
     getController.isChangingSize.value?showBottomPopupSizing(selectedNode):showBottomPopupEpisodes(selectedNode); // => bottom bar출력
     var newScale = 0.1; //max 0.2 ~ >0
     var newTranslationAxis = Random().nextInt(3); // 0 1 2
@@ -557,9 +559,9 @@ class _ArtWidgetState extends State<ArtWidget> {
     var newTranslation = vector.Vector3(0, 0, 0);
     newTranslation[newTranslationAxis] = newTranslationAmount;
     var newRotationAxisIndex =
-        1; // 0=>x축을 기준으로 yz평면에 회전 1y축을 기준으로 xz평면에 회전 2 z축을 기준으로 xy평면에 회전
+    1; // 0=>x축을 기준으로 yz평면에 회전 1y축을 기준으로 xz평면에 회전 2 z축을 기준으로 xy평면에 회전
     var newRotationAmount =
-        2.0; //-6.27~6.27 (-시 x좌표기준 y의 음의 방향으로회전 +시 양의 방향으로회전)
+    2.0; //-6.27~6.27 (-시 x좌표기준 y의 음의 방향으로회전 +시 양의 방향으로회전)
     var newRotationAxis = vector.Vector3(0, 0, 0);
     var newRotationAxisX = vector.Vector3(0, 0, 0);
     newRotationAxisX[0] = 1.0;
@@ -608,10 +610,10 @@ class _ArtWidgetState extends State<ArtWidget> {
       List<ARHitTestResult> hitTestResults) async {
     print("ggggggggggggggggg${getController.glbUrl}");
     var singleHitTestResult = hitTestResults.firstWhere(
-        (hitTestResult) => hitTestResult.type == ARHitTestResultType.plane);
+            (hitTestResult) => hitTestResult.type == ARHitTestResultType.plane);
     if (singleHitTestResult != null) {
       var newAnchor =
-          ARPlaneAnchor(transformation: singleHitTestResult.worldTransform);
+      ARPlaneAnchor(transformation: singleHitTestResult.worldTransform);
       bool didAddAnchor = await arAnchorManager.addAnchor(newAnchor) ?? false;
       if (didAddAnchor) {
         this.anchors.add(newAnchor);
@@ -625,7 +627,7 @@ class _ArtWidgetState extends State<ArtWidget> {
             rotation: vector.Vector4(1.0, 0.0, 0.0, 0.0));
         getController.setNodeData(newNode.name,getController.episodeId.value.toDouble());
         bool? didAddNodeToAnchor =
-            await arObjectManager.addNode(newNode, planeAnchor: newAnchor);
+        await arObjectManager.addNode(newNode, planeAnchor: newAnchor);
         if (didAddNodeToAnchor!) {
           nodes.add(newNode);
         } else {
