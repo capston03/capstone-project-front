@@ -131,7 +131,8 @@ class body extends StatelessWidget {
           actions: [
             TextButton(
                 onPressed: (){
-                  Get.toNamed('/');
+                  Get.offAllNamed('/');
+                  // Get.toNamed('/');
                 },
                 child: const Text("닫기"))
           ],
