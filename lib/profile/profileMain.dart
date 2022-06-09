@@ -54,11 +54,6 @@ class body extends StatelessWidget {
           ProfilePic(),
           SizedBox(height: 20),
           ProfileMenu(
-            text: "My Photo",
-            icon: Icons.photo,
-            press: () {},
-          ),
-          ProfileMenu(
             text: "My Place",
             icon: Icons.place,
             press: () {},
