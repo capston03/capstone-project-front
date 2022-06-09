@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:dio/dio.dart' as dio;
 import 'package:capstone_android/login/manageSignUp.dart';
 import 'package:capstone_android/network/callApi.dart';
 import 'package:flutter/material.dart';
@@ -30,21 +30,28 @@ class StickerMenu extends GetView<ArManager> {
 
   Future<List<List<dynamic>>> apiImage() async {
     List<ThumbNail> dbThumbnail = await ManageSqlflite.singleton.findBeaconList(beacon_mac);
-
-    if(dbThumbnail.isEmpty) {
-      CallApi post = CallApi();
-      List<List<dynamic>> images = [];
+    print("sadhfjkshadkjfhsakjdhfksdf$dbThumbnail");
+    CallApi post = CallApi();
+    List<List<dynamic>> images = [];
+    if(dbThumbnail.isEmpty) { //처음 받을떄
       var map = <String, dynamic>{};
-      map['gmail_id'] = gmail_id;
-      map['beacon_mac'] = beacon_mac;
+      // map['gmail_id'] = gmail_id;
+      // map['beacon_mac'] = beacon_mac;
+      // map['already_downloaded_episode_id[]']=[];
+      List<int> temp = [-1];
+      var formData = dio.FormData.fromMap({
+        'gmail_id':gmail_id,
+        'beacon_mac':beacon_mac,
+        'already_downloaded_episode_id[]':temp,
+      });
       try {
-        var response = await post.RequestHttp(
-            '/episode/find_episodes_nearby_beacon', jsonEncode(map));
+        var response = await post.dioFileTransfer(
+            '/episode/find_episodes_nearby_beacon', formData);
         var data = response['result'] as Map<String, dynamic>;
-        await ManageSqlflite.singleton.remove();
+        print("ashjlkdashlkdjalsd$data");
+        // await ManageSqlflite.singleton.remove();
         for (int i = 0; i < data.length; i++) {
           map['episode_id'] = data[i.toString()]['identifier'];
-          print("4444444444$i${data[i.toString()]['identifier']}");
           var response_thumbnail = await post.RequestHttp(
               '/image/thumbnail/download', jsonEncode(map));
           List<dynamic> image = [];
@@ -62,16 +69,64 @@ class StickerMenu extends GetView<ArManager> {
           image.add(map['episode_id']);
           images.add(image);
         }
-        print("ddddddddddddddddddddd${images.length}");
-        print(images);
-        return images;
-      } catch (e) {
-        print("$e");
-        return [];
+      } catch (e) { //한번이라도 받은 적이 있는 case
+        print("asdasjldalsjdlasjdjlasjd$e");
+        images = [];
+        // return [];
       }
     }else{ //
-    return [];
+
+      print("ashdflflkdhlfkshdalkf");
+      List<dynamic> episode_id = [];
+      for(ThumbNail a in dbThumbnail){
+        List<dynamic> image = [];
+        image.add(a.download_url);
+        image.add(a.identifier);
+        episode_id.add(a.identifier);
+        images.add(image);
+      }
+      var map = <String, dynamic>{};
+      // map['gmail_id'] = gmail_id;
+      // map['beacon_mac'] = beacon_mac;
+      // map['already_downloaded_episode_id[]'] = episode_id;
+      var formData = dio.FormData.fromMap({
+        'gmail_id':gmail_id,
+        'beacon_mac':beacon_mac,
+        'already_downloaded_episode_id[]':episode_id,
+      });
+      try{
+        var response = await post.dioFileTransfer(
+            '/episode/find_episodes_nearby_beacon', formData);
+        var data = response['result'] as Map<String, dynamic>;
+        for (int i = 0; i < data.length; i++) {
+          map['episode_id'] = data[i.toString()]['identifier'];
+          var response_thumbnail = await post.RequestHttp(
+              '/image/thumbnail/download', jsonEncode(map));
+          List<dynamic> image = [];
+          ThumbNail info = ThumbNail(
+              title: data[i.toString()]['title'],
+              content: data[i.toString()]['content'],
+              uploader_gmail_id: data[i.toString()]['uploader_gmail_id'],
+              upload_time: data[i.toString()]['upload_time'],
+              beacon_mac: data[i.toString()]['beacon_mac'],
+              identifier: data[i.toString()]['identifier'],
+              heart_rate: data[i.toString()]['heart_rate'],
+              download_url: response_thumbnail["result"]["download_url"]);
+          await ManageSqlflite.singleton.insert(info);
+          image.add(response_thumbnail["result"]["download_url"]);
+          image.add(map['episode_id']);
+          images.add(image);
+        }
+        // await ManageSqlflite.singleton.remove();
+
+      }catch(e){
+        print(e);
+        images = [];
+      }
+      //episode id 네트워크 호출
     }
+    return images;
+
   }
 
   downloadSticker(int episode_id) async {

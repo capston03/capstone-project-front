@@ -42,6 +42,9 @@ dependencies:
   flutter_secure_storage:
   sqflite:
   path:
+  flutter_downloader:
+  android_path_provider:
+
   dio:
   carousel_slider:
   cached_network_image:
@@ -92,10 +95,11 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-#  assets:
-#    - asset/s3d_logo.png
+  assets:
+    - asset/s3d_logo.png
 #    - asset/g_logo.png
-#    - asset/sd3.png
+    - asset/sd3.png
+#    - icons/
 #  assets:
 #    - asset/g_logo.png
 #    - asset/sd3.png
@@ -103,7 +107,6 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
